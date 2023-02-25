@@ -29,8 +29,8 @@ struct Home: View {
                         let size = proxy.size
                         Image(movie.artwork)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: size.width, height: size.height)
+                            .aspectRatio(contentMode: .fit)
+                            //.frame(width: size.width, height: size.height)
                             .cornerRadius(15)
                     }
                 }
@@ -43,7 +43,7 @@ struct Home: View {
     @ViewBuilder
     func NavBar()-> some View{
         HStack(spacing: 0){
-            ForEach(["Films", "Music"], id: \.self) { tab in
+            ForEach(["Films", "Music", "Comics"], id: \.self) { tab in
                 Button{
                     withAnimation{
                         currentTab = tab

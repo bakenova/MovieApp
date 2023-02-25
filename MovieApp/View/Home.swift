@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Home: View {
-// MARK: - Animated View Properties
+    // MARK: Animated View Properties
     @State var currentIndex: Int = 0
     
     //Environment values
@@ -17,10 +17,16 @@ struct Home: View {
         ZStack{
             //Background
             BGView()
+            //MARK: Main View COntent
+            VStack{
+                SnapCarousel(spacing: 20, trailingSpace: 110, index: $currentIndex, items: movies) { movie in
+                    
+                }
+            }
         }
     }
     
-    // MARK: - Blurred Background
+// MARK: - Blurred Background
     @ViewBuilder
     func BGView() -> some View{
         GeometryReader{ proxy in

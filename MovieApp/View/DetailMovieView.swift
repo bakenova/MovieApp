@@ -71,7 +71,16 @@ struct DetailMovieView: View {
             }
         }
         .onChange(of: offset) { newValue in
-            print(newValue)
+            if newValue > 120 {
+                withAnimation(.easeInOut){
+                    showDetailViewContent = false
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                    withAnimation(.easeInOut){
+                        showDetailView = false
+                    }
+                }
+            }
         }
     }
 }

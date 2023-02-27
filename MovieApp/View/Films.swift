@@ -12,6 +12,11 @@ struct Films: View {
     @State var currentIndex: Int = 0
     @State var currentTab: String = "Films"
     
+    //MARK: Detail View Properties
+    @State var detailMovie: Movie?
+    @State var showDetailView: Bool = false
+    @State var currentCardSize: CGSize = .zero
+    
     //Environment values
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
@@ -33,6 +38,14 @@ struct Films: View {
                                 .aspectRatio(contentMode: .fit)
                             //.frame(width: size.width, height: size.height)
                                 .cornerRadius(15)
+                                .matchedGeometryEffect(id: movie.id, in: animation)
+                                .onTapGesture {
+                                    currentCardSize = size
+                                    detailMovie = movie
+                                    withAnimation(.easeInOut){
+                                        showDetailView = true
+                                    }
+                                }
                         }
                     }
                     .padding(.top, 70)
@@ -44,6 +57,11 @@ struct Films: View {
                     
                     customBlock(name: "Popular")
                     customBlock(name: "Recently published")
+                }
+            }
+            .overlay{
+                if let movie = detailMovie, showDetailView {
+                     DetailMovieView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
                 }
             }
         }

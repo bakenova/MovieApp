@@ -44,7 +44,7 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
             .offset(x: (CGFloat(currentIndex) * -width) + (currentIndex != 0 ? adjustmentWidth : 0) + offset)
             .gesture(
                 DragGesture().updating($offset, body: { value, out, _ in
-                    out = (value.translation.width / 1.5) 
+                    out = (value.translation.width / 1.5)
                 })
                 .onEnded({ value in
                     let offsetX = value.translation.width
@@ -89,6 +89,6 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
 
 struct SnapCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        Films()
     }
 }

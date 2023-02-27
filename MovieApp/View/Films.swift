@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Home: View {
+struct Films: View {
     // MARK: Animated View Properties
     @State var currentIndex: Int = 0
     @State var currentTab: String = "Films"
@@ -23,23 +23,76 @@ struct Home: View {
             VStack{
                 //NavBar
                 NavBar()
-                //Custum carousel
-                SnapCarousel(spacing: 20, trailingSpace: 110, index: $currentIndex, items: movies) { movie in
-                    GeometryReader { proxy in
-                        let size = proxy.size
-                        Image(movie.artwork)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                ScrollView(.vertical, showsIndicators: false){
+                    //Custum carousel
+                    SnapCarousel(spacing: 20, trailingSpace: 110, index: $currentIndex, items: movies) { movie in
+                        GeometryReader { proxy in
+                            let size = proxy.size
+                            Image(movie.artwork)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
                             //.frame(width: size.width, height: size.height)
-                            .cornerRadius(15)
+                                .cornerRadius(15)
+                        }
                     }
+                    .padding(.top, 70)
+                    .frame(width: UIScreen.main.bounds.size.width, height: 450)
+                    
+                    
+                    //Custom indicator
+                    customIndicator()
+                    
+                    customBlock(name: "Popular")
+                    customBlock(name: "Recently published")
                 }
-                .padding(.top, 70)
             }
         }
     }
-
-//MARK: - Custom NAvigation Bar
+    
+    //MARK: - Custom Blocks
+    @ViewBuilder
+    func customBlock(name: String) -> some View{
+        HStack(){
+            Text(name)
+                .font(.title3.bold())
+            Spacer()
+            Button("See More"){}
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(.yellow)
+        }
+        .padding(.top, 30)
+        .padding(.horizontal, 20)
+        
+        ScrollView(.horizontal, showsIndicators: false){
+            HStack(spacing: 15){
+                ForEach(movies){ movie in
+                    Image(movie.artwork)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(15)
+                        .frame(width: 100, height: 150)
+                }
+            }
+            .padding(.top, 0)
+            .padding(.horizontal, 20)
+        }
+    }
+    
+    //MARK: - Custom indicator
+    @ViewBuilder
+    func customIndicator() -> some View{
+        HStack(spacing: 5){
+            ForEach(movies.indices, id: \.self){ index in
+                Rectangle()
+                    .fill(currentIndex == index ? .yellow : .gray.opacity(0.5))
+                    .frame(width: currentIndex == index ? 10 : 6, height: currentIndex == index ? 10 : 6)
+                    .cornerRadius(25)
+            }
+        }
+        .animation(.easeInOut, value: currentIndex)
+    }
+    
+    //MARK: - Custom Navigation Bar
     @ViewBuilder
     func NavBar()-> some View{
         HStack(spacing: 0){
@@ -67,7 +120,7 @@ struct Home: View {
         .padding()
     }
     
-// MARK: - Blurred Background
+    // MARK: - Blurred Background
     @ViewBuilder
     func BGView() -> some View{
         GeometryReader{ proxy in
@@ -83,6 +136,8 @@ struct Home: View {
                         .tag(index)
                 }
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(.easeInOut, value: currentIndex)
             
             // Custom Gradient
             let color: Color = (scheme == .dark ? .black : .white)
@@ -107,7 +162,7 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        Films()
             .preferredColorScheme(.dark)
     }
 }

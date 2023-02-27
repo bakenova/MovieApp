@@ -12,7 +12,7 @@
 		3052683029AA1D9300DA7678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3052682F29AA1D9300DA7678 /* Assets.xcassets */; };
 		3052683329AA1D9300DA7678 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3052683229AA1D9300DA7678 /* Preview Assets.xcassets */; };
 		3052683C29AA3C8100DA7678 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683B29AA3C8100DA7678 /* Movie.swift */; };
-		3052683E29AA453900DA7678 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Home.swift */; };
+		3052683E29AA453900DA7678 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Films.swift */; };
 		3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683F29AA53C900DA7678 /* SnapCarousel.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +23,7 @@
 		3052682F29AA1D9300DA7678 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3052683229AA1D9300DA7678 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3052683B29AA3C8100DA7678 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		3052683D29AA453900DA7678 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		3052683D29AA453900DA7678 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		3052683F29AA53C900DA7678 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +86,7 @@
 		3052683A29AA1FD200DA7678 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3052683D29AA453900DA7678 /* Home.swift */,
+				3052683D29AA453900DA7678 /* Films.swift */,
 				3052683F29AA53C900DA7678 /* SnapCarousel.swift */,
 			);
 			path = View;
@@ -164,7 +164,7 @@
 			files = (
 				3052682E29AA1D9100DA7678 /* ContentView.swift in Sources */,
 				3052682C29AA1D9100DA7678 /* MovieAppApp.swift in Sources */,
-				3052683E29AA453900DA7678 /* Home.swift in Sources */,
+				3052683E29AA453900DA7678 /* Films.swift in Sources */,
 				3052683C29AA3C8100DA7678 /* Movie.swift in Sources */,
 				3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */,
 			);

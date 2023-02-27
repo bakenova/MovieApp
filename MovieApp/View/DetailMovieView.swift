@@ -25,7 +25,7 @@ struct DetailMovieView: View {
                 Image(movie.artwork)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: currentCardSize.width / 1.2, height: currentCardSize.height / 1.2, alignment: .center)
+                    .frame(width: currentCardSize.width, height: currentCardSize.height, alignment: .center)
                     .cornerRadius(15)
                     .matchedGeometryEffect(id: movie.id, in: animation)
                 

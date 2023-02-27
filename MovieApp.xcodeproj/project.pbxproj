@@ -15,6 +15,7 @@
 		3052683E29AA453900DA7678 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Films.swift */; };
 		3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683F29AA53C900DA7678 /* SnapCarousel.swift */; };
 		3052684229AD32FC00DA7678 /* DetailMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684129AD32FC00DA7678 /* DetailMovieView.swift */; };
+		3052684429AD448500DA7678 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684329AD448500DA7678 /* OffsetModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		3052683D29AA453900DA7678 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		3052683F29AA53C900DA7678 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
 		3052684129AD32FC00DA7678 /* DetailMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieView.swift; sourceTree = "<group>"; };
+		3052684329AD448500DA7678 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				3052683D29AA453900DA7678 /* Films.swift */,
 				3052683F29AA53C900DA7678 /* SnapCarousel.swift */,
 				3052684129AD32FC00DA7678 /* DetailMovieView.swift */,
+				3052684329AD448500DA7678 /* OffsetModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				3052684229AD32FC00DA7678 /* DetailMovieView.swift in Sources */,
 				3052682E29AA1D9100DA7678 /* ContentView.swift in Sources */,
 				3052682C29AA1D9100DA7678 /* MovieAppApp.swift in Sources */,
+				3052684429AD448500DA7678 /* OffsetModifier.swift in Sources */,
 				3052683E29AA453900DA7678 /* Films.swift in Sources */,
 				3052683C29AA3C8100DA7678 /* Movie.swift in Sources */,
 				3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */,

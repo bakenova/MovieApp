@@ -30,22 +30,22 @@ struct Films: View {
                 NavBar()
                 ScrollView(.vertical, showsIndicators: false){
                     //Custum carousel
-                    SnapCarousel(spacing: 20, trailingSpace: 110, index: $currentIndex, items: movies) { movie in
+                    SnapCarousel(spacing: 20, trailingSpace: 150, index: $currentIndex, items: movies) { movie in
                         GeometryReader { proxy in
                             let size = proxy.size
                             Image(movie.artwork)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                            //.frame(width: size.width, height: size.height)
                                 .cornerRadius(15)
+                                .frame(width: size.width, height: size.height)
                                 .matchedGeometryEffect(id: movie.id, in: animation)
-                                .onTapGesture {
+                                .onLongPressGesture(perform: {
                                     currentCardSize = size
                                     detailMovie = movie
                                     withAnimation(.easeInOut){
                                         showDetailView = true
                                     }
-                                }
+                                })
                         }
                     }
                     .padding(.top, 70)

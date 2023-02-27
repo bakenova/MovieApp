@@ -23,3 +23,5 @@ var movies: [Movie] = [
     Movie(movieTitle: "Shal", artwork: "Movie5"),
     Movie(movieTitle: "Amre", artwork: "Movie6")
 ]
+
+var sampleDescription = "Here should be decription. Unfortunately, I could not care less"

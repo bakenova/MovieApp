@@ -15,6 +15,10 @@ struct DetailMovieView: View {
     @Binding var currentCardSize: CGSize
     
     var animation: Namespace.ID
+    
+    @State var showDetailViewContent: Bool = false
+    @State var offset: CGFloat = 0
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
             VStack{
@@ -24,14 +28,50 @@ struct DetailMovieView: View {
                     .frame(width: currentCardSize.width / 1.2, height: currentCardSize.height / 1.2, alignment: .center)
                     .cornerRadius(15)
                     .matchedGeometryEffect(id: movie.id, in: animation)
+                
+                VStack(spacing: 15){
+                    Text("Story Plot")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 24)
+                    Text(sampleDescription)
+                        .multilineTextAlignment(.leading)
+                    Button(){
+                        
+                    } label: {
+                        Text("Learn More")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical)
+                            .background{
+                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                    .fill(.yellow)
+                            }
+                    }
+                    .padding(.top, 20)
+                }
+                .opacity(showDetailViewContent ? 1 : 0)
+                .offset(y: showDetailViewContent ? 1 : 0)
             }
             .padding()
+            .modifier(OffsetModifier(offset: $offset))
         }
+        .coordinateSpace(name: "SCROLL")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background{
             Rectangle()
                 .fill(.ultraThinMaterial)
                 .ignoresSafeArea()
+        }
+        .onAppear{
+            withAnimation(.easeIn){
+                showDetailViewContent = true
+            }
+        }
+        .onChange(of: offset) { newValue in
+            print(newValue)
         }
     }
 }

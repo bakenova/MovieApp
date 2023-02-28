@@ -22,48 +22,52 @@ struct Films: View {
     @Environment(\.colorScheme) var scheme
     var body: some View {
         ZStack{
-            //Background
-            BGView()
-            //MARK: Main View COntent
-            VStack{
-                //NavBar
-                NavBar()
-                ScrollView(.vertical, showsIndicators: false){
-                    //Custum carousel
-                    SnapCarousel(spacing: 20, trailingSpace: 150, index: $currentIndex, items: movies) { movie in
-                        GeometryReader { proxy in
-                            let size = proxy.size
-                            Image(movie.artwork)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(15)
-                                .frame(width: size.width, height: size.height)
-                                .matchedGeometryEffect(id: movie.id, in: animation)
-                                .onLongPressGesture(perform: {
-                                    currentCardSize = size
-                                    detailMovie = movie
-                                    withAnimation(.easeInOut){
-                                        showDetailView = true
-                                    }
-                                })
+            ZStack{
+                //Background
+                BGView()
+                //MARK: Main View Content
+                VStack{
+                    ScrollView(.vertical, showsIndicators: false){
+                        //NavBar
+                        //NavBar(currentTab: self.$currentTab)
+                        //Custum carousel
+                        SnapCarousel(spacing: 20, trailingSpace: 150, index: $currentIndex, items: movies) { movie in
+                            GeometryReader { proxy in
+                                let size = proxy.size
+                                Image(movie.artwork)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(15)
+                                    .frame(width: size.width, height: size.height)
+                                    .matchedGeometryEffect(id: movie.id, in: animation)
+                                    .onLongPressGesture(perform: {
+                                        currentCardSize = size
+                                        detailMovie = movie
+                                        withAnimation(.easeInOut){
+                                            showDetailView = true
+                                        }
+                                    })
+                            }
                         }
+                        .padding(.top, 100)
+                        .frame(width: UIScreen.main.bounds.size.width, height: 450)
+                        
+                        
+                        //Custom indicator
+                        customIndicator()
+                        
+                        customBlock(name: "Popular")
+                        customBlock(name: "Recently published")
                     }
-                    .padding(.top, 70)
-                    .frame(width: UIScreen.main.bounds.size.width, height: 450)
-                    
-                    
-                    //Custom indicator
-                    customIndicator()
-                    
-                    customBlock(name: "Popular")
-                    customBlock(name: "Recently published")
                 }
-            }
-            .overlay{
-                if let movie = detailMovie, showDetailView {
-                    DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
+                .overlay{
+                    if let movie = detailMovie, showDetailView {
+                        DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
+                    }
                 }
-            }
+            }.opacity(self.currentTab == "Films" ? 1 : 0)
+            Music().opacity(self.currentTab == "Music" ? 1 : 0)
+            Comics().opacity(self.currentTab == "Comics" ? 1 : 0)
         }
     }
     
@@ -92,7 +96,7 @@ struct Films: View {
                             .frame(width: 100, height: 150)
                         Text(movie.movieTitle)
                             .font(.body)
-                            .fontWeight(.medium)
+                            .fontWeight(.semibold)
                             .frame(width: 100, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .padding(.top, 5)
@@ -116,37 +120,6 @@ struct Films: View {
             }
         }
         .animation(.easeInOut, value: currentIndex)
-    }
-    
-    //MARK: - Custom Navigation Bar
-    @ViewBuilder
-    func NavBar()-> some View{
-        HStack(spacing: 0){
-            ForEach(["Films", "Music", "Comics"], id: \.self) { tab in
-                Button{
-                    if tab == "Music" {
-                        Music__()
-                    }
-                    withAnimation{
-                        currentTab = tab
-                    }
-                } label: {
-                    Text(tab)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 20)
-                        .background{
-                            if currentTab == tab{
-                                Capsule()
-                                    .fill(.ultraThinMaterial)
-                                    .environment(\.colorScheme, .dark)
-                                    .matchedGeometryEffect(id: "tab", in: animation)
-                            }
-                        }
-                }
-            }
-        }
-        .padding()
     }
     
     // MARK: - Blurred Background
@@ -189,9 +162,10 @@ struct Films: View {
     }
 }
 
-struct Home_Previews: PreviewProvider {
+struct Films_Previews: PreviewProvider {
     static var previews: some View {
         Films()
             .preferredColorScheme(.dark)
     }
 }
+

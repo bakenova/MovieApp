@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailMovieView: View {
+struct DetailPlotView: View {
     
     var movie: Movie
     @Binding var detailMovie: Movie?

@@ -21,6 +21,14 @@ struct Films: View {
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
     var body: some View {
+        switch currentTab {
+        case "Films":
+            Films()
+        //case "Music":
+            
+        default:
+            Films()
+        }
         ZStack{
             //Background
             BGView()
@@ -61,7 +69,7 @@ struct Films: View {
             }
             .overlay{
                 if let movie = detailMovie, showDetailView {
-                     DetailMovieView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
+                     DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
                 }
             }
         }
@@ -72,7 +80,7 @@ struct Films: View {
     func customBlock(name: String) -> some View{
         HStack(){
             Text(name)
-                .font(.title3.bold())
+                .font(.title2.bold())
             Spacer()
             Button("See More"){}
                 .font(.system(size: 16, weight: .semibold))
@@ -84,11 +92,19 @@ struct Films: View {
         ScrollView(.horizontal, showsIndicators: false){
             HStack(spacing: 15){
                 ForEach(movies){ movie in
-                    Image(movie.artwork)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(15)
-                        .frame(width: 100, height: 150)
+                    VStack(alignment: .leading){
+                        Image(movie.artwork)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .frame(width: 100, height: 150)
+                        Text(movie.movieTitle)
+                            .font(.body)
+                            .fontWeight(.medium)
+                            .frame(width: 100, alignment: .leading)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 5)
+                    }
                 }
             }
             .padding(.top, 0)

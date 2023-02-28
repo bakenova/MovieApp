@@ -14,8 +14,9 @@
 		3052683C29AA3C8100DA7678 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683B29AA3C8100DA7678 /* Movie.swift */; };
 		3052683E29AA453900DA7678 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Films.swift */; };
 		3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683F29AA53C900DA7678 /* SnapCarousel.swift */; };
-		3052684229AD32FC00DA7678 /* DetailMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684129AD32FC00DA7678 /* DetailMovieView.swift */; };
+		3052684229AD32FC00DA7678 /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684129AD32FC00DA7678 /* DetailPlotView.swift */; };
 		3052684429AD448500DA7678 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684329AD448500DA7678 /* OffsetModifier.swift */; };
+		3052684829AE3FB900DA7678 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684729AE3FB900DA7678 /* Music.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +28,9 @@
 		3052683B29AA3C8100DA7678 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		3052683D29AA453900DA7678 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		3052683F29AA53C900DA7678 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
-		3052684129AD32FC00DA7678 /* DetailMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieView.swift; sourceTree = "<group>"; };
+		3052684129AD32FC00DA7678 /* DetailPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlotView.swift; sourceTree = "<group>"; };
 		3052684329AD448500DA7678 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
+		3052684729AE3FB900DA7678 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +92,29 @@
 		3052683A29AA1FD200DA7678 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3052683D29AA453900DA7678 /* Films.swift */,
-				3052683F29AA53C900DA7678 /* SnapCarousel.swift */,
-				3052684129AD32FC00DA7678 /* DetailMovieView.swift */,
-				3052684329AD448500DA7678 /* OffsetModifier.swift */,
+				3052684529AE3FA200DA7678 /* Films */,
+				3052684929AE3FBD00DA7678 /* Music */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3052684529AE3FA200DA7678 /* Films */ = {
+			isa = PBXGroup;
+			children = (
+				3052683D29AA453900DA7678 /* Films.swift */,
+				3052683F29AA53C900DA7678 /* SnapCarousel.swift */,
+				3052684129AD32FC00DA7678 /* DetailPlotView.swift */,
+				3052684329AD448500DA7678 /* OffsetModifier.swift */,
+			);
+			path = Films;
+			sourceTree = "<group>";
+		};
+		3052684929AE3FBD00DA7678 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				3052684729AE3FB900DA7678 /* Music.swift */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,13 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3052684229AD32FC00DA7678 /* DetailMovieView.swift in Sources */,
+				3052684229AD32FC00DA7678 /* DetailPlotView.swift in Sources */,
 				3052682E29AA1D9100DA7678 /* ContentView.swift in Sources */,
 				3052682C29AA1D9100DA7678 /* MovieAppApp.swift in Sources */,
 				3052684429AD448500DA7678 /* OffsetModifier.swift in Sources */,
 				3052683E29AA453900DA7678 /* Films.swift in Sources */,
 				3052683C29AA3C8100DA7678 /* Movie.swift in Sources */,
 				3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */,
+				3052684829AE3FB900DA7678 /* Music.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

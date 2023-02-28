@@ -21,14 +21,6 @@ struct Films: View {
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
     var body: some View {
-        switch currentTab {
-        case "Films":
-            Films()
-        //case "Music":
-            
-        default:
-            Films()
-        }
         ZStack{
             //Background
             BGView()
@@ -69,7 +61,7 @@ struct Films: View {
             }
             .overlay{
                 if let movie = detailMovie, showDetailView {
-                     DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
+                    DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
                 }
             }
         }
@@ -132,6 +124,9 @@ struct Films: View {
         HStack(spacing: 0){
             ForEach(["Films", "Music", "Comics"], id: \.self) { tab in
                 Button{
+                    if tab == "Music" {
+                        Music__()
+                    }
                     withAnimation{
                         currentTab = tab
                     }

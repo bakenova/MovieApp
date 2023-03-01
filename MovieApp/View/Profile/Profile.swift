@@ -38,8 +38,6 @@ struct Profile: View {
                     .font(.body)
                     .foregroundColor(.gray)
                 
-                
-                
             }.padding()
             
             ZStack{
@@ -47,6 +45,23 @@ struct Profile: View {
                     .fill(self.scheme == .dark ? .gray : .yellow.opacity(0.2))
                     .opacity(self.scheme == .dark ? 0.5 : 1)
                     .ignoresSafeArea()
+                VStack(alignment: .leading){
+                    Text("User Info")
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .padding(.top, 30)
+                        .padding(.horizontal, 30)
+                    List{
+                        ForEach((1...5), id: \.self) {
+                                        Text("Row \($0)")
+                                .listRowBackground(Color.gray.opacity(0))
+                                    }
+                    }
+                    .background(.gray.opacity(0))
+                    .scrollContentBackground(.hidden)
+                    //.padding(.horizontal, 30)
+                    .padding(.bottom, 30)
+                }
             }
         }
     }
@@ -55,6 +70,6 @@ struct Profile: View {
 struct Comics_Previews: PreviewProvider {
     static var previews: some View {
         Profile()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }

@@ -33,6 +33,7 @@ struct Home_Previews: PreviewProvider {
             .preferredColorScheme(.light)
     }
 }
+
 struct RoundedCorner: Shape {
 
     var radius: CGFloat = .infinity

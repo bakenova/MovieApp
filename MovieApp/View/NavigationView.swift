@@ -27,7 +27,7 @@ struct NavBar: View{
                     .background{
                         Capsule()
                             .fill(self.currentTab == "Search" ? (self.scheme == .light ? .orange : .gray) : .gray)
-                            .opacity(self.scheme == .dark ? 0.2 : 0.3)
+                            .opacity(0.2)
                             .frame(width: 40, height: 40)
                             .environment(\.colorScheme, .dark)
                     }
@@ -81,7 +81,7 @@ struct NavBar: View{
                     .background{
                         Capsule()
                             .fill(self.currentTab == "Profile" ? (self.scheme == .light ? .orange : .gray) : .gray)
-                            .opacity(self.scheme == .dark ? 0.2 : 0.3)
+                            .opacity(0.2)
                             .frame(width: 40, height: 40)
                             .environment(\.colorScheme, .dark)
                     }

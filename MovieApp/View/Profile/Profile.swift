@@ -38,16 +38,17 @@ struct Profile: View {
                     .font(.body)
                     .foregroundColor(.gray)
                 
+                
+                
             }.padding()
             
             ZStack{
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(self.scheme == .dark ? .gray : .white)
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(self.scheme == .dark ? .gray : .yellow.opacity(0.2))
                     .opacity(self.scheme == .dark ? 0.5 : 1)
                     .ignoresSafeArea()
             }
         }
-        .background(self.scheme == .dark ? .black : .yellow)
     }
 }
 

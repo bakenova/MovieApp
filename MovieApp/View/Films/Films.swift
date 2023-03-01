@@ -67,44 +67,54 @@ struct Films: View {
                 }
             }.opacity(self.currentTab == "Films" ? 1 : 0)
             Music().opacity(self.currentTab == "Music" ? 1 : 0)
-            Comics().opacity(self.currentTab == "Comics" ? 1 : 0)
+            Profile().opacity(self.currentTab == "Comics" ? 1 : 0)
         }
     }
     
     //MARK: - Custom Blocks
     @ViewBuilder
     func customBlock(name: String) -> some View{
-        HStack(){
-            Text(name)
-                .font(.title2.bold())
-            Spacer()
-            Button("See More"){}
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.yellow)
-        }
-        .padding(.top, 30)
-        .padding(.horizontal, 20)
-        
-        ScrollView(.horizontal, showsIndicators: false){
-            HStack(spacing: 15){
-                ForEach(movies){ movie in
-                    VStack(alignment: .leading){
-                        Image(movie.artwork)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .frame(width: 100, height: 150)
-                        Text(movie.movieTitle)
-                            .font(.body)
-                            .fontWeight(.semibold)
-                            .frame(width: 100, alignment: .leading)
-                            .multilineTextAlignment(.leading)
-                            .padding(.top, 5)
+        ZStack{
+            Rectangle()
+                .fill(.white)
+                .opacity(self.scheme == .dark ? 0 : 1)
+                .cornerRadius(15)
+                .padding(.bottom, 30)
+            
+            VStack{
+                HStack(){
+                    Text(name)
+                        .font(.title2.bold())
+                    Spacer()
+                    Button("See More"){}
+                        .font(.system(size: 16, weight: .semibold))
+                        //.foregroundColor(self.scheme == .dark ? .yellow : .purple)
+                        .foregroundColor(.orange)
+                }
+                .padding(.top, 20)
+                .padding(.horizontal, 20)
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(alignment: .top, spacing: 15){
+                        ForEach(movies){ movie in
+                            VStack(alignment: .leading){
+                                Image(movie.artwork)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(15)
+                                    .frame(width: 100, height: 150)
+                                Text(movie.movieTitle)
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .multilineTextAlignment(.leading)
+                                    .frame(width: 100, height: 40, alignment: .topLeading)
+                            }
+                        }
                     }
+                    .padding(.top, 0)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 40)
                 }
             }
-            .padding(.top, 0)
-            .padding(.horizontal, 20)
         }
     }
     
@@ -114,12 +124,15 @@ struct Films: View {
         HStack(spacing: 5){
             ForEach(movies.indices, id: \.self){ index in
                 Rectangle()
-                    .fill(currentIndex == index ? .yellow : .gray.opacity(0.5))
+                //.fill(currentIndex == index ? (self.scheme == .dark ? .yellow : .purple) : .gray.opacity(0.5))
+                    .fill(currentIndex == index ? .orange : .gray.opacity(0.5))
                     .frame(width: currentIndex == index ? 10 : 6, height: currentIndex == index ? 10 : 6)
                     .cornerRadius(25)
+                
             }
         }
         .animation(.easeInOut, value: currentIndex)
+        .padding(.bottom, 20)
     }
     
     // MARK: - Blurred Background
@@ -165,7 +178,7 @@ struct Films: View {
 struct Films_Previews: PreviewProvider {
     static var previews: some View {
         Films()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
 

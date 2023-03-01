@@ -16,7 +16,7 @@ struct NavBar: View{
         HStack(spacing: 10){
             Button{
                 withAnimation(.easeIn){
-                    
+                    currentTab = "Search"
                 }
             } label: {
                 Image(systemName: "magnifyingglass")
@@ -26,12 +26,13 @@ struct NavBar: View{
                     .frame(width: 15, height: 15)
                     .background{
                         Capsule()
-                            .fill(.ultraThinMaterial)
+                            .fill(self.currentTab == "Search" ? (self.scheme == .light ? .orange : .gray) : .gray)
+                            .opacity(self.scheme == .dark ? 0.2 : 0.3)
                             .frame(width: 40, height: 40)
                             .environment(\.colorScheme, .dark)
                     }
             }
-            .tint(.yellow)
+            .tint(.orange)
             .padding(.horizontal)
             
             Spacer()
@@ -48,11 +49,18 @@ struct NavBar: View{
                         .padding(.horizontal, 25)
                         .background{
                             if currentTab == tab {
-                                Capsule()
-                                    .fill(.ultraThinMaterial)
-                                    .frame(width: 100)
-                                    .environment(\.colorScheme, .dark)
-                                    .matchedGeometryEffect(id: "tab", in: animation)
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.orange, lineWidth: 1)
+                                        .matchedGeometryEffect(id: "tab", in: animation)
+                                    Capsule()
+                                        //.fill(self.scheme == .light ? .yellow : .gray)
+                                        .fill(.ultraThinMaterial)
+                                        .opacity(0.2)
+                                        .frame(width: 100)
+                                        .environment(\.colorScheme, .dark)
+                                        .matchedGeometryEffect(id: "tab", in: animation)
+                                }
                             }
                         }
                 }
@@ -62,7 +70,7 @@ struct NavBar: View{
             
             Button{
                 withAnimation(.easeIn){
-                    
+                    currentTab = "Profile"
                 }
             } label: {
                 Image(systemName: "person")
@@ -72,12 +80,13 @@ struct NavBar: View{
                     .frame(width: 15, height: 15)
                     .background{
                         Capsule()
-                            .fill(.ultraThinMaterial)
+                            .fill(self.currentTab == "Profile" ? (self.scheme == .light ? .orange : .gray) : .gray)
+                            .opacity(self.scheme == .dark ? 0.2 : 0.3)
                             .frame(width: 40, height: 40)
                             .environment(\.colorScheme, .dark)
                     }
             }
-            .tint(.yellow)
+            .tint(.orange)
             .padding(.horizontal)
             
         }

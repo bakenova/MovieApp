@@ -17,9 +17,10 @@ struct Home: View {
             ZStack{
                 Films().opacity(self.currentTab == "Films" ? 1 : 0)
                 Music().opacity(self.currentTab == "Music" ? 1 : 0)
-                //Comics().opacity(self.currentTab == "Comics" ? 1 : 0)
+                Profile().opacity(self.currentTab == "Profile" ? 1 : 0)
+                Search().opacity(self.currentTab == "Search" ? 1 : 0)
             }
-            .cornerRadius(15, corners: [.topLeft, .topRight])
+            .cornerRadius(self.currentTab == "Comics" ? 15 : 0, corners: [.topLeft, .topRight])
             .ignoresSafeArea()
         }
     }
@@ -29,7 +30,7 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
 struct RoundedCorner: Shape {

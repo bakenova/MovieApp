@@ -58,13 +58,46 @@ struct Profile: View {
                             .padding(.horizontal, 30)
                         
                         List{
-                            ForEach(profileSettings, id: \.self){ setting in
-                                Text(setting.description)
-                                    .padding(.vertical, 5)
-                                    .font(.system(size: 24, weight: .medium))
+                            NavigationLink(destination: MyAccount(), label: {
+                                Text("My Account")
+                                    .padding(.vertical, 8)
+                                    .font(.system(size: 20, weight: .medium))
                                     .foregroundColor(.primary)
-                                    .listRowBackground(Color.gray.opacity(0))
-                            }
+                                EmptyView()
+                            })
+                            .listRowBackground(Color.gray.opacity(0))
+                            
+                            NavigationLink(destination: SubscriptionInfo(), label: {
+                                Text("Subscription Info")
+                                    .padding(.vertical, 8)
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(.primary)
+                                
+                                EmptyView()
+                            })
+                            .listRowBackground(Color.gray.opacity(0))
+                            
+                            NavigationLink(destination: PaymentInfo(), label: {
+                                Text("Payment Info")
+                                    .padding(.vertical, 8)
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(.primary)
+                                EmptyView()
+                            })
+                            .listRowBackground(Color.gray.opacity(0))
+                            
+                            NavigationLink(destination: DeleteAccount(), label: {
+                                Text("Delete Account")
+                                    .padding(.vertical, 8)
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(.primary)
+                                EmptyView()
+                            })
+                            .listRowBackground(Color.gray.opacity(0))
+                            
+//                            NavigationLink(destination: EmptyView()) {
+//                                EmptyView()
+//                            }
                         }
                         .listStyle(PlainListStyle())
                         .background(.gray.opacity(0))

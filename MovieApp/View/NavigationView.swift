@@ -54,7 +54,7 @@ struct NavBar: View{
                                         .stroke(Color.orange, lineWidth: 1)
                                         .matchedGeometryEffect(id: "tab", in: animation)
                                     Capsule()
-                                        //.fill(self.scheme == .light ? .yellow : .gray)
+                                    //.fill(self.scheme == .light ? .yellow : .gray)
                                         .fill(.ultraThinMaterial)
                                         .opacity(0.2)
                                         .frame(width: 100)

@@ -20,70 +20,72 @@ struct DetailPlotView: View {
     @State var offset: CGFloat = 0
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false){
-            VStack{
-                Image(movie.artwork)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: currentCardSize.width, height: currentCardSize.height, alignment: .center)
-                    .cornerRadius(15)
-                    .matchedGeometryEffect(id: movie.id, in: animation)
-                
-                VStack(spacing: 15){
-                    Text("Story Plot")
-                        .font(.largeTitle)
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 24)
-                    Text(sampleDescription)
-                        .multilineTextAlignment(.leading)
-                    Button(){
+        NavigationView{
+            ScrollView(.vertical, showsIndicators: false){
+                VStack{
+                    Image(movie.imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: currentCardSize.width, height: currentCardSize.height, alignment: .center)
+                        .cornerRadius(15)
+                        .matchedGeometryEffect(id: movie.id, in: animation)
+                    
+                    VStack(spacing: 15){
+                        Text("Story Plot")
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 24)
+                        Text(sampleDescription)
+                            .multilineTextAlignment(.leading)
                         
-                    } label: {
-                        Text("Learn More")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical)
-                            .background{
-                                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .fill(.yellow)
-                            }
+                        NavigationLink(destination: FilmDetails(film: movie)) {
+                            Text("Learn More")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                        .fill(.yellow)
+                                }
+                        }
+                        .padding(.top, 20)
                     }
-                    .padding(.top, 20)
+                    .opacity(showDetailViewContent ? 1 : 0)
+                    .offset(y: showDetailViewContent ? 1 : 0)
                 }
-                .opacity(showDetailViewContent ? 1 : 0)
-                .offset(y: showDetailViewContent ? 1 : 0)
+                .padding()
+                .modifier(OffsetModifier(offset: $offset))
             }
-            .padding()
-            .modifier(OffsetModifier(offset: $offset))
-        }
-        .coordinateSpace(name: "SCROLL")
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background{
-            Rectangle()
-                .fill(.ultraThinMaterial)
-                .ignoresSafeArea()
-        }
-        .onAppear{
-            withAnimation(.easeIn){
-                showDetailViewContent = true
+            .coordinateSpace(name: "SCROLL")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background{
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .ignoresSafeArea()
             }
-        }
-        .onChange(of: offset) { newValue in
-            if newValue > 120 {
-                withAnimation(.easeInOut){
-                    showDetailViewContent = false
+            .onAppear{
+                withAnimation(.easeIn){
+                    showDetailViewContent = true
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            }
+            .onChange(of: offset) { newValue in
+                if newValue > 120 {
                     withAnimation(.easeInOut){
-                        showDetailView = false
+                        showDetailViewContent = false
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                        withAnimation(.easeInOut){
+                            showDetailView = false
+                        }
                     }
                 }
             }
         }
     }
 }
+
 
 struct DetailMovieView_Previews: PreviewProvider {
     static var previews: some View {

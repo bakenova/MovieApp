@@ -11,17 +11,21 @@ import SwiftUI
 struct Movie: Identifiable {
     var id = UUID().uuidString
     var movieTitle: String
-    var artwork: String
+    var imageName: String
+    var genre: String
+    var description: String
+    var releaseDate: String
+    var runtime: Int
 }
 
 // MARK: - Movie Sample Data
 var movies: [Movie] = [
-    Movie(movieTitle: "Zhau zhurek myn bala", artwork: "Movie1"),
-    Movie(movieTitle: "Kurmanzhan datka", artwork: "Movie2"),
-    Movie(movieTitle: "Zemlya otcov", artwork: "Movie3"),
-    Movie(movieTitle: "Aldar Kose", artwork: "Movie4"),
-    Movie(movieTitle: "Shal", artwork: "Movie5"),
-    Movie(movieTitle: "Amre", artwork: "Movie6")
+    Movie(movieTitle: "Zhau zhurek myn bala", imageName: "Movie1", genre: "", description: "", releaseDate: "", runtime: 1),
+    Movie(movieTitle: "Kurmanzhan datka", imageName: "Movie2", genre: "", description: "", releaseDate: "", runtime: 1),
+    Movie(movieTitle: "Zemlya otcov", imageName: "Movie3", genre: "", description: "", releaseDate: "", runtime: 1),
+    Movie(movieTitle: "Aldar Kose", imageName: "Movie4", genre: "", description: "", releaseDate: "", runtime: 1),
+    Movie(movieTitle: "Shal", imageName: "Movie5", genre: "", description: "", releaseDate: "", runtime: 1),
+    Movie(movieTitle: "Amre", imageName: "Movie6", genre: "", description: "", releaseDate: "", runtime: 1)
 ]
 
 var sampleDescription = "Here should be decription. Unfortunately, I could not care less"

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3003C3B929FC960B008D953F /* FilmDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003C3B829FC960B008D953F /* FilmDetails.swift */; };
+		3003C3BB29FC962E008D953F /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003C3BA29FC962E008D953F /* DetailPlotView.swift */; };
 		302F224629F9E7D700D07FED /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F224529F9E7D700D07FED /* MyAccount.swift */; };
 		3049087429FB23C800A0F2FA /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087329FB23C800A0F2FA /* ProfileSettings.swift */; };
 		3049087629FB276100A0F2FA /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087529FB276100A0F2FA /* SubscriptionInfo.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3003C3B829FC960B008D953F /* FilmDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmDetails.swift; sourceTree = "<group>"; };
+		3003C3BA29FC962E008D953F /* DetailPlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlotView.swift; sourceTree = "<group>"; };
 		302F224529F9E7D700D07FED /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
 		3049087329FB23C800A0F2FA /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		3049087529FB276100A0F2FA /* SubscriptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfo.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				3052683D29AA453900DA7678 /* Films.swift */,
+				3003C3B829FC960B008D953F /* FilmDetails.swift */,
+				3003C3BA29FC962E008D953F /* DetailPlotView.swift */,
 				3052683F29AA53C900DA7678 /* SnapCarousel.swift */,
 				3052684129AD32FC00DA7678 /* DetailPlotView.swift */,
 				3052684329AD448500DA7678 /* OffsetModifier.swift */,
@@ -230,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3003C3BB29FC962E008D953F /* DetailPlotView.swift in Sources */,
 				3052684229AD32FC00DA7678 /* DetailPlotView.swift in Sources */,
 				3049087629FB276100A0F2FA /* SubscriptionInfo.swift in Sources */,
 				3052684F29AE60D500DA7678 /* NavigationView.swift in Sources */,
@@ -238,6 +245,7 @@
 				302F224629F9E7D700D07FED /* MyAccount.swift in Sources */,
 				3049087829FB279800A0F2FA /* PaymentInfo.swift in Sources */,
 				3052684B29AE4C7500DA7678 /* Music.swift in Sources */,
+				3003C3B929FC960B008D953F /* FilmDetails.swift in Sources */,
 				3052682C29AA1D9100DA7678 /* MovieAppApp.swift in Sources */,
 				3049087A29FB27A600A0F2FA /* DeleteAccount.swift in Sources */,
 				3052685129AE610A00DA7678 /* Profile.swift in Sources */,

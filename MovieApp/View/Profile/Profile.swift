@@ -13,6 +13,7 @@ struct Profile: View {
     @Environment(\.colorScheme) var scheme
     
     var profileSettings: [String] = ["My Account","Subscription Info", "Payment Info", "Dark mode", "Delete Account"]
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -60,7 +61,7 @@ struct Profile: View {
                         List{
                             NavigationLink(destination: MyAccount(), label: {
                                 Text("My Account")
-                                    .padding(.vertical, 8)
+                                    .padding(.vertical, 5)
                                     .font(.system(size: 20, weight: .medium))
                                     .foregroundColor(.primary)
                                 EmptyView()
@@ -69,7 +70,7 @@ struct Profile: View {
                             
                             NavigationLink(destination: SubscriptionInfo(), label: {
                                 Text("Subscription Info")
-                                    .padding(.vertical, 8)
+                                    .padding(.vertical, 5)
                                     .font(.system(size: 20, weight: .medium))
                                     .foregroundColor(.primary)
                                 
@@ -79,7 +80,7 @@ struct Profile: View {
                             
                             NavigationLink(destination: PaymentInfo(), label: {
                                 Text("Payment Info")
-                                    .padding(.vertical, 8)
+                                    .padding(.vertical, 5)
                                     .font(.system(size: 20, weight: .medium))
                                     .foregroundColor(.primary)
                                 EmptyView()
@@ -88,16 +89,12 @@ struct Profile: View {
                             
                             NavigationLink(destination: DeleteAccount(), label: {
                                 Text("Delete Account")
-                                    .padding(.vertical, 8)
+                                    .padding(.vertical, 5)
                                     .font(.system(size: 20, weight: .medium))
                                     .foregroundColor(.primary)
                                 EmptyView()
                             })
                             .listRowBackground(Color.gray.opacity(0))
-                            
-//                            NavigationLink(destination: EmptyView()) {
-//                                EmptyView()
-//                            }
                         }
                         .listStyle(PlainListStyle())
                         .background(.gray.opacity(0))
@@ -107,12 +104,13 @@ struct Profile: View {
                         .padding(.horizontal, 16)
                         
                         ButtonView(title: "Sign Out", color: Color(.systemOrange))
-                            .padding(.leading, 80)
+                            .padding(.leading, 50)
                             .padding(.vertical, 30)
                     }
                 }
             }
         }
+        .toolbarBackground(.hidden, for: .navigationBar)
     }
 }
 
@@ -132,7 +130,7 @@ struct ButtonView: View {
         Text(title)
             .bold()
             .font(.title2)
-            .frame(width: 280, height: 50)
+            .frame(width: 280, height: 50, alignment: .center)
             .background(color)
             .foregroundColor(.white)
             .cornerRadius(15)

@@ -35,7 +35,6 @@ struct Home_Previews: PreviewProvider {
 }
 
 struct RoundedCorner: Shape {
-
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
 

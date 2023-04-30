@@ -12,7 +12,7 @@ import ExpandableText
 struct FilmDetails: View {
     
     var film: Movie
-    
+    var reviewed: Bool = false
 //    @State var player = AVPlayer(url: URL(string: "")!)
     @Environment(\.colorScheme) var scheme
     
@@ -52,7 +52,7 @@ struct FilmDetails: View {
                                         .frame(width: 14, height: 14)
                                         .aspectRatio(contentMode: .fit)
                                         .padding(.bottom, 2)
-                                    Text("9.8")
+                                    Text(String(film.rating))
                                         .frame(alignment: .leading)
                                         .font(.system(size: 16))
                                         .fontWeight(.bold)
@@ -121,12 +121,12 @@ struct FilmDetails: View {
                                         .padding(.top, -100)
                                 }
                                 
-                                ButtonView(title: "Play", imageName: "play.fill", color: .orange, cornerRadius: 10, width: size.width-24, height: 50, fontSize: 24)
+                                ButtonView(title: "Play", imageName: "play.fill", color: .orange, cornerRadius: 10, width: size.width-24, height: 40, fontSize: 20)
                                     .padding(.top, -60)
                                     .padding(.leading, 12)
                                 
-                                ButtonView(title: "Watch later", imageName: "bookmark.fill", color: .gray, cornerRadius: 10, width: size.width-24, height: 46, fontSize: 20)
-                                    .padding(.top, -10)
+                                ButtonView(title: "Watch later", imageName: "bookmark.fill", color: .gray, cornerRadius: 10, width: size.width-24, height: 38, fontSize: 16)
+                                    .padding(.top, -20)
                                     .padding(.leading, 12)
                                 
                                 Text(film.description)
@@ -144,7 +144,7 @@ struct FilmDetails: View {
                                     .font(.system(size: 16, weight: .regular))
                                     .padding(.top, 10)
                                     .padding(.horizontal, 20)
-                                    
+                                
                                 
                                 Text("Director: " + film.director)
                                     .frame(alignment: .leading)
@@ -157,7 +157,7 @@ struct FilmDetails: View {
                                     .frame(alignment: .leading)
                                     .font(.title3)
                                     .fontWeight(.bold)
-                                    //.font(.system(size: 16, weight: .regular))
+                                //.font(.system(size: 16, weight: .regular))
                                     .padding(.top, 10)
                                     .padding(.horizontal, 20)
                                 
@@ -171,53 +171,90 @@ struct FilmDetails: View {
                                         Text(String(film.rating))
                                             .font(.system(size: 60, weight: .bold))
                                             .foregroundColor(.orange)
-                                            .padding(.top, 10)
+                                            .padding(.top, 15)
                                             .padding(.horizontal, 20)
                                         
                                         Text(String(film.ratingCount*10000 + 232) + " ratings")
                                             .frame(alignment: .leading)
                                             .font(.system(size: 16, weight: .regular))
-                                            //.padding(.top, 10)
+                                        //.padding(.top, 10)
                                             .padding(.horizontal, 20)
                                             .foregroundColor(.gray)
+                                        
                                         ButtonView(title: "Rate", imageName: "star.circle.fill", color: .orange, cornerRadius: 25, width: size.width/2, height: 48, fontSize: 24)
-                                            .padding(.vertical, 20)
+                                            .padding(.top, 10)
+                                            .padding(.bottom, 25)
                                     }
                                 }
                                 
-                                HStack(){
-                                    Text("Reviews")
-                                        .font(.title3.bold())
-                                    Spacer()
-                                    Button("See More"){}
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(.orange)
+                                VStack{
+                                    HStack(){
+                                        Text("Reviews")
+                                            .font(.title3.bold())
+                                        Spacer()
+                                        Button("See More"){}
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundColor(.orange)
+                                    }
+                                    .padding(.top, 20)
+                                    .padding(.horizontal, 20)
+                                    
+                                    ScrollView(.horizontal, showsIndicators: false){
+                                        HStack(alignment: .top, spacing: 12){
+                                            ForEach(film.reviews?.prefix(3) ?? [Review(
+                                                reviewTitle: "",
+                                                reviewAuthor: "",
+                                                reviewAuthorImage: "",
+                                                reviewDescription: "")]){ review in
+                                                NavigationLink(destination: ReviewView()) {
+                                                    ZStack{
+                                                        RoundedRectangle(cornerRadius: 15)
+                                                            .fill(.thinMaterial)
+                                                            .frame(width: size.width - 100,
+                                                                   height: 150,
+                                                                   alignment: .leading)
+                                                        
+                                                        VStack(alignment: .leading, spacing: 5){
+                                                            HStack(spacing: 8){
+                                                                Image(review.reviewAuthorImage)
+                                                                    .resizable()
+                                                                    .aspectRatio(contentMode: .fit)
+                                                                    .frame(width: 20, height: 20)
+                                                                Text(review.reviewAuthor)
+                                                                    .bold()
+                                                                    .font(.system(size: 16))
+                                                                    .fontWeight(.bold)
+                                                                    .foregroundColor(.white)
+                                                            }
+                                                            .padding(.top, 10)
+                                                            .padding(.horizontal, 8)
+                                                            
+                                                            Text(review.reviewTitle)
+                                                                .lineLimit(1)
+                                                                .frame(width: size.width - 150)
+                                                                .font(.system(size: 16, weight: .bold))
+                                                                .foregroundColor(.white)
+                                                                .padding(.top, 15)
+                                                                .padding(.horizontal, 8)
+                                                            Text(review.reviewDescription)
+                                                                .lineLimit(3)
+                                                                .frame(width: size.width - 150)
+                                                                .font(.system(size: 14, weight: .regular))
+                                                                .foregroundColor(.white)
+                                                                .multilineTextAlignment(.leading)
+                                                                .padding(.bottom, 10)
+                                                                .padding(.horizontal, 8)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .padding(.top, 0)
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, 40)
+                                    }
                                 }
-                                .padding(.top, 20)
-                                .padding(.horizontal, 20)
-                                
-//                                ScrollView(.horizontal, showsIndicators: false){
-//                                    HStack(alignment: .top, spacing: 15){
-//                                        ForEach(movies){ movie in
-//                                            NavigationLink(destination: FilmDetails(film: movie)) {
-//                                                VStack(alignment: .leading){
-//                                                    Image(movie.imageName)
-//                                                        .resizable()
-//                                                        .aspectRatio(contentMode: .fit)
-//                                                        .cornerRadius(15)
-//                                                        .frame(width: 100, height: 150)
-//                                                    Text(movie.movieTitle)
-//                                                        .font(.system(size: 14, weight: .semibold))
-//                                                        .multilineTextAlignment(.leading)
-//                                                        .frame(width: 100, height: 40, alignment: .topLeading)
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//                                    .padding(.top, 0)
-//                                    .padding(.horizontal, 20)
-//                                    .padding(.bottom, 40)
-//                                }
+                                .opacity(reviewed ? 0 : 1)
                             }
                         }
                     }
@@ -260,7 +297,36 @@ struct Blur: UIViewRepresentable {
 
 struct FilmDetails_Previews: PreviewProvider {
     static var previews: some View {
-        let film = Movie(movieTitle: "Zhau zhurek myn bala", imageName: "Movie1", genre: "Drama, Adventure, War, Historical", description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov", director: "Akan Satayev", releaseDate: "2012", ageLimit: "16", runtime: "133", rating: 8.0, ratingCount: 7, videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f")
+        let film = Movie(movieTitle: "Zhau zhurek myn bala",
+                         imageName: "Movie1",
+                         genre: "Drama, Adventure, War, Historical",
+                         description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                         cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov",
+                         director: "Akan Satayev",
+                         releaseDate: "2012",
+                         ageLimit: "16",
+                         runtime: "133",
+                         rating: 8.0,
+                         ratingCount: 7,
+                         reviews: [
+                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                                   reviewAuthor: "Arailym Bakenova",
+                                   reviewAuthorImage: "user",
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                                   reviewAuthor: "Arailym Bakenova",
+                                   reviewAuthorImage: "user",
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                                   reviewAuthor: "Arailym Bakenova",
+                                   reviewAuthorImage: "user",
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+                            Review(reviewTitle: "The first Kazakh movie I have ever watched...",
+                                   reviewAuthor: "Ivan Ivanov",
+                                   reviewAuthorImage: "user",
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.")
+                         ],
+                         videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f")
         FilmDetails(film: film).preferredColorScheme(.dark)
     }
 }

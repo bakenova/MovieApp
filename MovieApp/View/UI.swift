@@ -29,12 +29,12 @@ struct ButtonView: View {
                 Image(systemName: imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                    .frame(width: 18, height: 18)
                 Text(title)
                     .bold()
                     .font(.system(size: fontSize))
                     .fontWeight(.bold)
-                    //.foregroundColor(.white)
+                    .foregroundColor(.white)
             }
         }
         

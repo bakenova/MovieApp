@@ -105,7 +105,7 @@ struct Films: View {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(alignment: .top, spacing: 15){
                         ForEach(movies){ movie in
-                            NavigationLink(destination: FilmDetails(film: movie)) {
+                            NavigationLink(destination: FilmDetails(film: movie, reviewed: !(movie.reviews?.isEmpty ?? true) ? false : true)) {
                                 VStack(alignment: .leading){
                                     Image(movie.imageName)
                                         .resizable()
@@ -116,6 +116,7 @@ struct Films: View {
                                         .font(.system(size: 14, weight: .semibold))
                                         .multilineTextAlignment(.leading)
                                         .frame(width: 100, height: 40, alignment: .topLeading)
+                                        .foregroundColor(self.scheme == .dark ? .white : .black)
                                 }
                             }
                         }

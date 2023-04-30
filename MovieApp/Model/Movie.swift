@@ -21,12 +21,63 @@ struct Movie: Identifiable {
     var runtime: String
     var rating: Double
     var ratingCount: Int
+    var reviews: [Review]?
     var videoURL: String
+    
+//    init(movieTitle: String) {
+//        self.movieTitle = movieTitle
+//    }
+    
+    init(id: String = UUID().uuidString, movieTitle: String, imageName: String, genre: String, description: String, cast: String, director: String, releaseDate: String, ageLimit: String, runtime: String, rating: Double, ratingCount: Int, reviews: [Review]? = nil, videoURL: String) {
+        self.id = id
+        self.movieTitle = movieTitle
+        self.imageName = imageName
+        self.genre = genre
+        self.description = description
+        self.cast = cast
+        self.director = director
+        self.releaseDate = releaseDate
+        self.ageLimit = ageLimit
+        self.runtime = runtime
+        self.rating = rating
+        self.ratingCount = ratingCount
+        self.reviews = reviews
+        self.videoURL = videoURL
+    }
 }
 
 // MARK: - Movie Sample Data
 var movies: [Movie] = [
-    Movie(movieTitle: "Zhau zhurek myn bala", imageName: "Movie1", genre: "Drama, Adventure, War, Historical", description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov", director: "Akan Satayev", releaseDate: "2012", ageLimit: "16", runtime: "133", rating: 8.0, ratingCount: 7, videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f"),
+    Movie(movieTitle: "Zhau zhurek myn bala",
+          imageName: "Movie1",
+          genre: "Drama, Adventure, War, Historical",
+          description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+          cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov",
+          director: "Akan Satayev",
+          releaseDate: "2012",
+          ageLimit: "16",
+          runtime: "133",
+          rating: 8.0,
+          ratingCount: 7,
+          reviews: [
+             Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                    reviewAuthor: "Arailym Bakenova",
+                    reviewAuthorImage: "user",
+                    reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+             Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                    reviewAuthor: "Arailym Bakenova",
+                    reviewAuthorImage: "user",
+                    reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+             Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                    reviewAuthor: "Arailym Bakenova",
+                    reviewAuthorImage: "user",
+                    reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+             Review(reviewTitle: "The first Kazakh movie I have ever watched...",
+                    reviewAuthor: "Ivan Ivanov",
+                    reviewAuthorImage: "user",
+                    reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.")
+          ],
+          videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f"),
     Movie(movieTitle: "Kurmanzhan datka", imageName: "Movie2", genre: "", description: "", cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov", director: "Akan Satayev", releaseDate: "", ageLimit: "12", runtime: "1", rating: 8.0, ratingCount: 7, videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f"),
     Movie(movieTitle: "Zemlya otcov", imageName: "Movie3", genre: "", description: "", cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov", director: "Akan Satayev", releaseDate: "", ageLimit: "21", runtime: "1", rating: 8.0, ratingCount: 7, videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f"),
     Movie(movieTitle: "Aldar Kose", imageName: "Movie4", genre: "", description: "", cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov", director: "Akan Satayev", releaseDate: "", ageLimit: "12", runtime: "1", rating: 8.0, ratingCount: 7, videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f"),

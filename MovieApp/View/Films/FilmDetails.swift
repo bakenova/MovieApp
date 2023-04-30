@@ -153,7 +153,7 @@ struct FilmDetails: View {
                                     .padding(.horizontal, 20)
                                     .foregroundColor(.gray)
                                 
-                                Text("Ko'rkem's Rating")
+                                Text("Korkem's Rating")
                                     .frame(alignment: .leading)
                                     .font(.title3)
                                     .fontWeight(.bold)

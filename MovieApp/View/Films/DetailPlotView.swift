@@ -86,8 +86,7 @@ struct DetailPlotView: View {
     }
 }
 
-
-struct DetailMovieView_Previews: PreviewProvider {
+struct DetailPlotView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .preferredColorScheme(.dark)

@@ -103,7 +103,7 @@ struct Profile: View {
                         .padding(.vertical, 0)
                         .padding(.horizontal, 16)
                         
-                        ButtonView(title: "Sign Out", color: Color(.systemOrange))
+                        ButtonView(title: "Sign Out", imageName: "door.left.hand.open", color: Color(.systemOrange), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
                             .padding(.leading, 50)
                             .padding(.vertical, 30)
                     }
@@ -121,18 +121,3 @@ struct Comics_Previews: PreviewProvider {
     }
 }
 
-struct ButtonView: View {
-    
-    var title: String
-    var color: Color
-    
-    var body: some View {
-        Text(title)
-            .bold()
-            .font(.title2)
-            .frame(width: 280, height: 50, alignment: .center)
-            .background(color)
-            .foregroundColor(.white)
-            .cornerRadius(15)
-    }
-}

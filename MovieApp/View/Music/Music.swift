@@ -12,9 +12,7 @@ struct Music: View {
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
     
-    let musicPlaylist: [MusicSelection] = [
-        MusicSelection(title: "Replay to your top songs", imageName: "m23"), MusicSelection(title: "Replay to your top songs", imageName: "m23"), MusicSelection(title: "Replay to your top songs", imageName: "m23"),
-        MusicSelection(title: "Replay to your top songs", imageName: "m23")]
+    let musicPlaylist: [MusicSelection] = musicCollectionTopPick
     
     let artistAlbum: [ArtistPlaylist] = playlistArtist
     let artist = artistSample
@@ -37,7 +35,7 @@ struct Music: View {
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(musicPlaylist){ music in
-                                    NavigationLink(destination: SongDetailView()) {
+                                    NavigationLink(destination: PlaylistView(playlist: music)) {
                                         VStack(alignment: .leading){
                                             Text(music.title)
                                                 .font(.system(size: 14, weight: .semibold))
@@ -215,12 +213,13 @@ struct Music: View {
                         }
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
+                        
                         LazyVGrid(columns: columns, alignment: .leading, spacing: 10) {
                             ForEach(categories) { item in
                                 ZStack(alignment: .leading){
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(.ultraThinMaterial)
-                                        .frame(width: 180, height: 40, alignment: .leading)
+                                        .frame(width: 160, height: 40, alignment: .leading)
                                     HStack{
                                         Image(item.imageName)
                                             .resizable()

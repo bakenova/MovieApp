@@ -75,7 +75,39 @@ struct MovieListView: View {
     }
 }
 
-           
+struct MusicHListView: View {
+    var item: Song
+    
+    var body: some View {
+        HStack {
+            Image(item.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 80)
+                .padding(.trailing, 10)
+            VStack(alignment: .leading, spacing: 5){
+                Text(item.name)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 16))
+                    .fontWeight(.medium)
+                    .padding(.trailing, 24)
+                Text(item.releaseDate)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 14))
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 24)
+                Text("Listen now")
+                    .frame(alignment: .leading)
+                    .font(.system(size: 14))
+                    .fontWeight(.bold)
+                    .foregroundColor(.orange)
+                    .padding(.trailing, 24)
+            }
+        }
+    }
+}
+
 
 struct CustomTextField: View {
     

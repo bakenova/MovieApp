@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SongDetailView: View {
     
+    @Environment(\.colorScheme) var scheme
+    
     var body: some View {
         VStack {
             

@@ -24,8 +24,10 @@ struct Search: View {
     @Environment(\.colorScheme) var scheme
     
     let items: [Movie] = movies
+    let itemsM: [Song] = songCollection
+    
     let movieList: [MovieSelection] = movieSelectionLists
-    let musicList: [MusicSelection] = musicSelectionLists
+    let musicList: [MusicSelection] = musicCollectionTopPick
     
     var body: some View {
         
@@ -68,8 +70,8 @@ struct Search: View {
                                 }
                             }
                         } else {
-                            List(items.filter({ searchText.isEmpty ? true : $0.movieTitle.localizedCaseInsensitiveContains(searchText) })) { item in
-                                MovieListView(item: item)
+                            List(itemsM.filter({ searchText.isEmpty ? true : $0.name.localizedCaseInsensitiveContains(searchText) })) { item in
+                                MusicHListView(item: item)
                             }
                         }
                         

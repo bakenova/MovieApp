@@ -7,39 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3003C3B929FC960B008D953F /* FilmDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003C3B829FC960B008D953F /* FilmDetails.swift */; };
-		3003C3BB29FC962E008D953F /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003C3BA29FC962E008D953F /* DetailPlotView.swift */; };
-		3016947729FD969600D2CF84 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3016947629FD969600D2CF84 /* UI.swift */; };
 		3016947A29FDB72D00D2CF84 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 3016947929FDB72D00D2CF84 /* ExpandableText */; };
-		302F224629F9E7D700D07FED /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F224529F9E7D700D07FED /* MyAccount.swift */; };
-		3049087429FB23C800A0F2FA /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087329FB23C800A0F2FA /* ProfileSettings.swift */; };
-		3049087629FB276100A0F2FA /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087529FB276100A0F2FA /* SubscriptionInfo.swift */; };
-		3049087829FB279800A0F2FA /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087729FB279800A0F2FA /* PaymentInfo.swift */; };
-		3049087A29FB27A600A0F2FA /* DeleteAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087929FB27A600A0F2FA /* DeleteAccount.swift */; };
-		3052682C29AA1D9100DA7678 /* MovieAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052682B29AA1D9100DA7678 /* MovieAppApp.swift */; };
-		3052682E29AA1D9100DA7678 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052682D29AA1D9100DA7678 /* ContentView.swift */; };
 		3052683029AA1D9300DA7678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3052682F29AA1D9300DA7678 /* Assets.xcassets */; };
 		3052683329AA1D9300DA7678 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3052683229AA1D9300DA7678 /* Preview Assets.xcassets */; };
-		3052683C29AA3C8100DA7678 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683B29AA3C8100DA7678 /* Movie.swift */; };
-		3052683E29AA453900DA7678 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Films.swift */; };
-		3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683F29AA53C900DA7678 /* SnapCarousel.swift */; };
-		3052684229AD32FC00DA7678 /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684129AD32FC00DA7678 /* DetailPlotView.swift */; };
-		3052684429AD448500DA7678 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684329AD448500DA7678 /* OffsetModifier.swift */; };
-		3052684B29AE4C7500DA7678 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684A29AE4C7500DA7678 /* Music.swift */; };
-		3052684F29AE60D500DA7678 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684E29AE60D500DA7678 /* NavigationView.swift */; };
-		3052685129AE610A00DA7678 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685029AE610A00DA7678 /* Profile.swift */; };
-		3052685329AE8B6100DA7678 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685229AE8B6100DA7678 /* Home.swift */; };
-		3052685629AFDB9500DA7678 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685529AFDB9500DA7678 /* Search.swift */; };
-		30BC7F5729FDD5D90067436B /* ReviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5629FDD5D90067436B /* ReviewList.swift */; };
-		30BC7F5C29FDD6600067436B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5B29FDD6600067436B /* Review.swift */; };
-		30BC7F5E29FDDA4B0067436B /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5D29FDDA4B0067436B /* ReviewView.swift */; };
-		30BC7F6229FEB5820067436B /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6129FEB5820067436B /* MyView.swift */; };
-		30BC7F6629FEC1150067436B /* MovieSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6529FEC1150067436B /* MovieSelection.swift */; };
-		30BC7F6829FEC1210067436B /* MusicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6729FEC1210067436B /* MusicSelection.swift */; };
-		30BC7F6A29FF0F070067436B /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6929FF0F070067436B /* Song.swift */; };
-		30BC7F6C29FF10780067436B /* SongDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6B29FF10780067436B /* SongDetailView.swift */; };
-		30BC7F6E29FF23EF0067436B /* ArtistPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6D29FF23EF0067436B /* ArtistPlaylist.swift */; };
-		30BC7F7029FF2B770067436B /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6F29FF2B770067436B /* Artist.swift */; };
+		30BC7F7429FF5A340067436B /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685229AE8B6100DA7678 /* Home.swift */; };
+		30BC7F7529FF5A340067436B /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3016947629FD969600D2CF84 /* UI.swift */; };
+		30BC7F7629FF5A340067436B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684E29AE60D500DA7678 /* NavigationView.swift */; };
+		30BC7F7729FF5A340067436B /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Films.swift */; };
+		30BC7F7829FF5A340067436B /* FilmDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003C3B829FC960B008D953F /* FilmDetails.swift */; };
+		30BC7F7A29FF5A340067436B /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683F29AA53C900DA7678 /* SnapCarousel.swift */; };
+		30BC7F7B29FF5A340067436B /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684129AD32FC00DA7678 /* DetailPlotView.swift */; };
+		30BC7F7C29FF5A340067436B /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684329AD448500DA7678 /* OffsetModifier.swift */; };
+		30BC7F7D29FF5A340067436B /* ReviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5629FDD5D90067436B /* ReviewList.swift */; };
+		30BC7F7E29FF5A340067436B /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5D29FDDA4B0067436B /* ReviewView.swift */; };
+		30BC7F7F29FF5A340067436B /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684A29AE4C7500DA7678 /* Music.swift */; };
+		30BC7F8029FF5A340067436B /* SongDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6B29FF10780067436B /* SongDetailView.swift */; };
+		30BC7F8129FF5A340067436B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685029AE610A00DA7678 /* Profile.swift */; };
+		30BC7F8229FF5A340067436B /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F224529F9E7D700D07FED /* MyAccount.swift */; };
+		30BC7F8329FF5A340067436B /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087329FB23C800A0F2FA /* ProfileSettings.swift */; };
+		30BC7F8429FF5A340067436B /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087529FB276100A0F2FA /* SubscriptionInfo.swift */; };
+		30BC7F8529FF5A340067436B /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087729FB279800A0F2FA /* PaymentInfo.swift */; };
+		30BC7F8629FF5A340067436B /* DeleteAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3049087929FB27A600A0F2FA /* DeleteAccount.swift */; };
+		30BC7F8729FF5A340067436B /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685529AFDB9500DA7678 /* Search.swift */; };
+		30BC7F8829FF5A410067436B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052682D29AA1D9100DA7678 /* ContentView.swift */; };
+		30BC7F8929FF5A630067436B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683B29AA3C8100DA7678 /* Movie.swift */; };
+		30BC7F8A29FF5A630067436B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5B29FDD6600067436B /* Review.swift */; };
+		30BC7F8B29FF5A630067436B /* MovieSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6529FEC1150067436B /* MovieSelection.swift */; };
+		30BC7F8C29FF5A630067436B /* MusicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6729FEC1210067436B /* MusicSelection.swift */; };
+		30BC7F8D29FF5A630067436B /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6929FF0F070067436B /* Song.swift */; };
+		30BC7F8E29FF5A630067436B /* ArtistPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6D29FF23EF0067436B /* ArtistPlaylist.swift */; };
+		30BC7F8F29FF5A630067436B /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F6F29FF2B770067436B /* Artist.swift */; };
+		30BC7F9029FF5A630067436B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F7129FF4BDB0067436B /* Category.swift */; };
+		30BC7F9129FF5A8B0067436B /* MovieAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052682B29AA1D9100DA7678 /* MovieAppApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +75,7 @@
 		30BC7F6B29FF10780067436B /* SongDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailView.swift; sourceTree = "<group>"; };
 		30BC7F6D29FF23EF0067436B /* ArtistPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistPlaylist.swift; sourceTree = "<group>"; };
 		30BC7F6F29FF2B770067436B /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		30BC7F7129FF4BDB0067436B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +146,7 @@
 				30BC7F6929FF0F070067436B /* Song.swift */,
 				30BC7F6D29FF23EF0067436B /* ArtistPlaylist.swift */,
 				30BC7F6F29FF2B770067436B /* Artist.swift */,
+				30BC7F7129FF4BDB0067436B /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,9 +217,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3052683629AA1D9300DA7678 /* Build configuration list for PBXNativeTarget "MovieApp" */;
 			buildPhases = (
-				3052682429AA1D9100DA7678 /* Sources */,
 				3052682529AA1D9100DA7678 /* Frameworks */,
 				3052682629AA1D9100DA7678 /* Resources */,
+				30BC7F7329FF5A1F0067436B /* Sources */,
 			);
 			buildRules = (
 			);
@@ -281,40 +282,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3052682429AA1D9100DA7678 /* Sources */ = {
+		30BC7F7329FF5A1F0067436B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30BC7F6A29FF0F070067436B /* Song.swift in Sources */,
-				30BC7F6229FEB5820067436B /* MyView.swift in Sources */,
-				3003C3BB29FC962E008D953F /* DetailPlotView.swift in Sources */,
-				3052684229AD32FC00DA7678 /* DetailPlotView.swift in Sources */,
-				30BC7F5729FDD5D90067436B /* ReviewList.swift in Sources */,
-				30BC7F6629FEC1150067436B /* MovieSelection.swift in Sources */,
-				3049087629FB276100A0F2FA /* SubscriptionInfo.swift in Sources */,
-				30BC7F6829FEC1210067436B /* MusicSelection.swift in Sources */,
-				3052684F29AE60D500DA7678 /* NavigationView.swift in Sources */,
-				3052682E29AA1D9100DA7678 /* ContentView.swift in Sources */,
-				3052685329AE8B6100DA7678 /* Home.swift in Sources */,
-				30BC7F5C29FDD6600067436B /* Review.swift in Sources */,
-				302F224629F9E7D700D07FED /* MyAccount.swift in Sources */,
-				3049087829FB279800A0F2FA /* PaymentInfo.swift in Sources */,
-				3052684B29AE4C7500DA7678 /* Music.swift in Sources */,
-				30BC7F5E29FDDA4B0067436B /* ReviewView.swift in Sources */,
-				3003C3B929FC960B008D953F /* FilmDetails.swift in Sources */,
-				3052682C29AA1D9100DA7678 /* MovieAppApp.swift in Sources */,
-				30BC7F7029FF2B770067436B /* Artist.swift in Sources */,
-				3049087A29FB27A600A0F2FA /* DeleteAccount.swift in Sources */,
-				3052685129AE610A00DA7678 /* Profile.swift in Sources */,
-				3016947729FD969600D2CF84 /* UI.swift in Sources */,
-				3049087429FB23C800A0F2FA /* ProfileSettings.swift in Sources */,
-				3052684429AD448500DA7678 /* OffsetModifier.swift in Sources */,
-				30BC7F6E29FF23EF0067436B /* ArtistPlaylist.swift in Sources */,
-				3052683E29AA453900DA7678 /* Films.swift in Sources */,
-				3052685629AFDB9500DA7678 /* Search.swift in Sources */,
-				3052683C29AA3C8100DA7678 /* Movie.swift in Sources */,
-				30BC7F6C29FF10780067436B /* SongDetailView.swift in Sources */,
-				3052684029AA53C900DA7678 /* SnapCarousel.swift in Sources */,
+				30BC7F9129FF5A8B0067436B /* MovieAppApp.swift in Sources */,
+				30BC7F8929FF5A630067436B /* Movie.swift in Sources */,
+				30BC7F8A29FF5A630067436B /* Review.swift in Sources */,
+				30BC7F8B29FF5A630067436B /* MovieSelection.swift in Sources */,
+				30BC7F8C29FF5A630067436B /* MusicSelection.swift in Sources */,
+				30BC7F8D29FF5A630067436B /* Song.swift in Sources */,
+				30BC7F8E29FF5A630067436B /* ArtistPlaylist.swift in Sources */,
+				30BC7F8F29FF5A630067436B /* Artist.swift in Sources */,
+				30BC7F9029FF5A630067436B /* Category.swift in Sources */,
+				30BC7F8829FF5A410067436B /* ContentView.swift in Sources */,
+				30BC7F7429FF5A340067436B /* Home.swift in Sources */,
+				30BC7F7529FF5A340067436B /* UI.swift in Sources */,
+				30BC7F7629FF5A340067436B /* NavigationView.swift in Sources */,
+				30BC7F7729FF5A340067436B /* Films.swift in Sources */,
+				30BC7F7829FF5A340067436B /* FilmDetails.swift in Sources */,
+				30BC7F7A29FF5A340067436B /* SnapCarousel.swift in Sources */,
+				30BC7F7B29FF5A340067436B /* DetailPlotView.swift in Sources */,
+				30BC7F7C29FF5A340067436B /* OffsetModifier.swift in Sources */,
+				30BC7F7D29FF5A340067436B /* ReviewList.swift in Sources */,
+				30BC7F7E29FF5A340067436B /* ReviewView.swift in Sources */,
+				30BC7F7F29FF5A340067436B /* Music.swift in Sources */,
+				30BC7F8029FF5A340067436B /* SongDetailView.swift in Sources */,
+				30BC7F8129FF5A340067436B /* Profile.swift in Sources */,
+				30BC7F8229FF5A340067436B /* MyAccount.swift in Sources */,
+				30BC7F8329FF5A340067436B /* ProfileSettings.swift in Sources */,
+				30BC7F8429FF5A340067436B /* SubscriptionInfo.swift in Sources */,
+				30BC7F8529FF5A340067436B /* PaymentInfo.swift in Sources */,
+				30BC7F8629FF5A340067436B /* DeleteAccount.swift in Sources */,
+				30BC7F8729FF5A340067436B /* Search.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -65,14 +65,14 @@ struct PlaylistView_Previews: PreviewProvider {
                 artistName: "Dose",
                 albumName: "Пока",
                 songs: [
-                    Song(name: "Губы", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Пока"),
-                    Song(name: "В плену", artist: "Dose", imageName: "Пока", releaseDate: "2021", album: "Пока"),
-                    Song(name: "Пепел", artist: "Dose", imageName: "Пока", releaseDate: "2021", album:  "Пока"),
-                    Song(name: "Доверяй", artist: "Dose", imageName: "Пока", releaseDate: "2021", album:  "Пока"),
-                    Song(name: "Сдаюсь", artist: "Dose", imageName: "Пока", releaseDate: "2021", album: "Пока"),
-                    Song(name: "Ветер", artist: "Dose", imageName: "Пока", releaseDate: "2021", album:  "Пока"),
-                    Song(name: "Компас", artist: "Dose", imageName: "Пока", releaseDate: "2021", album:  "Пока"),
-                    Song(name: "Дома", artist: "Dose", imageName: "Пока", releaseDate: "2021", album:  "Пока")
+                    Song(name: "Губы", artist: "Dose ", imageName: "Солнце золотое", releaseDate: "2021", album: "Пока", duration: 185),
+                    Song(name: "В плену", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album: "Пока", duration: 185),
+                    Song(name: "Пепел", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
+                    Song(name: "Доверяй", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
+                    Song(name: "Сдаюсь", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album: "Пока", duration: 185),
+                    Song(name: "Ветер", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
+                    Song(name: "Компас", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
+                    Song(name: "Дома", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185)
                 ],
                 releaseDate: "2021",
                 genre: "Pop",
@@ -83,7 +83,7 @@ struct PlaylistView_Previews: PreviewProvider {
                 artistName: "Dose",
                 albumName: "Солнце золотое",
                 songs: [
-                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое")
+                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое", duration: 185)
                 ],
                 releaseDate: "2021",
                 genre: "Pop",
@@ -94,7 +94,7 @@ struct PlaylistView_Previews: PreviewProvider {
                 artistName: "Dose",
                 albumName: "Солнце золотое",
                 songs: [
-                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое")
+                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое", duration: 185)
                 ],
                 releaseDate: "2021",
                 genre: "Pop",
@@ -105,7 +105,7 @@ struct PlaylistView_Previews: PreviewProvider {
                 artistName: "Dose",
                 albumName: "Солнце золотое",
                 songs: [
-                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое")
+                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое", duration: 185)
                 ],
                 releaseDate: "2021",
                 genre: "Pop",

@@ -104,7 +104,7 @@ struct Profile: View {
                         .padding(.horizontal, 16)
                         
                         ButtonView(title: "Sign Out", imageName: "rectangle.portrait.and.arrow.right", color: Color(.systemOrange), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
-                            .padding(.leading, 50)
+                            .padding(.leading, 60)
                             .padding(.vertical, 30)
                     }
                 }

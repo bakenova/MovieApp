@@ -73,7 +73,7 @@ struct Music: View {
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(artistAlbum.prefix(4)){ album in
-                                    NavigationLink(destination: SongDetailView()) {
+                                    NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
                                         VStack(alignment: .leading){
                                             Image(album.imageName)
                                                 .resizable()
@@ -130,7 +130,7 @@ struct Music: View {
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(artist.albums.prefix(4)){ album in
-                                    NavigationLink(destination: SongDetailView()) {
+                                    NavigationLink(destination: SongDetailView(song:Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185))) {
                                         VStack(alignment: .leading){
                                             Image(album.imageName)
                                                 .resizable()
@@ -172,7 +172,7 @@ struct Music: View {
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(artistAlbum.prefix(4)){ album in
-                                    NavigationLink(destination: SongDetailView()) {
+                                    NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
                                         VStack(alignment: .leading){
                                             Image(album.imageName)
                                                 .resizable()

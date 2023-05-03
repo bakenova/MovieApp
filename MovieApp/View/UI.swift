@@ -42,15 +42,95 @@ struct ButtonView: View {
     }
 }
 
-struct ExpandableText_Test: View {
+struct MovieListView: View {
+    var item: Movie
     
     var body: some View {
-        ExpandableText(text: "Do you think you're living an ordinary life? You are so mistaken it's difficult to even explain. The mere fact that you exist makes you extraordinary. The odds of you existing are less than winning the lottery, but here you are. Are you going to let this extraordinary opportunity pass?")
-            .font(.body)//optional
-            .foregroundColor(.primary)//optional
-            .lineLimit(3)//optional
-            .animation(.easeIn)
-            .padding(.horizontal, 24)//optional
+        HStack {
+            Image(item.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 80)
+                .padding(.trailing, 10)
+            VStack(alignment: .leading, spacing: 5){
+                Text(item.movieTitle)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 16))
+                    .fontWeight(.medium)
+                    .padding(.trailing, 24)
+                Text(item.releaseDate)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 14))
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 24)
+                Text("Watch now")
+                    .frame(alignment: .leading)
+                    .font(.system(size: 14))
+                    .fontWeight(.bold)
+                    .foregroundColor(.orange)
+                    .padding(.trailing, 24)
+            }
+        }
     }
 }
 
+struct MusicHListView: View {
+    var item: Song
+    
+    var body: some View {
+        HStack {
+            Image(item.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 80)
+                .padding(.trailing, 10)
+            VStack(alignment: .leading, spacing: 5){
+                Text(item.name)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 16))
+                    .fontWeight(.medium)
+                    .padding(.trailing, 24)
+                Text(item.releaseDate)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 14))
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 24)
+                Text("Listen now")
+                    .frame(alignment: .leading)
+                    .font(.system(size: 14))
+                    .fontWeight(.bold)
+                    .foregroundColor(.orange)
+                    .padding(.trailing, 24)
+            }
+        }
+    }
+}
+
+
+struct CustomTextField: View {
+    
+    public struct CustomTextFieldStyle : TextFieldStyle {
+        public func _body(configuration: TextField<Self._Label>) -> some View {
+            configuration
+                .font(.title3) // set the inner Text Field Font
+                .padding(10) // Set the inner Text Field Padding
+                //Give it some style
+                .background(
+                    RoundedRectangle(cornerRadius: 5)
+                        .strokeBorder(Color.primary.opacity(0.5), lineWidth: 3))
+        }
+    }
+    @State private var password = ""
+    @State private var username = ""
+    
+    var body: some View {
+        VStack {
+            TextField("Test", text: $username)
+                .textFieldStyle(CustomTextFieldStyle()) // call the CustomTextField
+            SecureField("Password", text: $password)
+                .textFieldStyle(CustomTextFieldStyle())
+        }.padding()
+    }
+}

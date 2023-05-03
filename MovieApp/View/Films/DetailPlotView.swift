@@ -36,7 +36,7 @@ struct DetailPlotView: View {
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 24)
-                        Text(sampleDescription)
+                        Text(movie.description)
                             .multilineTextAlignment(.leading)
                         
                         NavigationLink(destination: FilmDetails(film: movie)) {
@@ -86,8 +86,7 @@ struct DetailPlotView: View {
     }
 }
 
-
-struct DetailMovieView_Previews: PreviewProvider {
+struct DetailPlotView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .preferredColorScheme(.dark)

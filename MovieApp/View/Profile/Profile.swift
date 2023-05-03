@@ -12,7 +12,7 @@ struct Profile: View {
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
     
-    var profileSettings: [String] = ["My Account","Subscription Info", "Payment Info", "Dark mode", "Delete Account"]
+    var profileSettings: [String] = ["My Account", "Privacy & Policy", "Subscription Info", "Payment Info", "Delete Account"]
     
     var body: some View {
         NavigationView{
@@ -68,6 +68,16 @@ struct Profile: View {
                             })
                             .listRowBackground(Color.gray.opacity(0))
                             
+                            NavigationLink(destination: Privacy(), label: {
+                                Text("Privacy & Policy")
+                                    .padding(.vertical, 5)
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(.primary)
+                                
+                                EmptyView()
+                            })
+                            .listRowBackground(Color.gray.opacity(0))
+                            
                             NavigationLink(destination: SubscriptionInfo(), label: {
                                 Text("Subscription Info")
                                     .padding(.vertical, 5)
@@ -87,14 +97,14 @@ struct Profile: View {
                             })
                             .listRowBackground(Color.gray.opacity(0))
                             
-                            NavigationLink(destination: DeleteAccount(), label: {
-                                Text("Delete Account")
-                                    .padding(.vertical, 5)
-                                    .font(.system(size: 20, weight: .medium))
-                                    .foregroundColor(.primary)
-                                EmptyView()
-                            })
-                            .listRowBackground(Color.gray.opacity(0))
+//                            NavigationLink(destination: DeleteAccount(), label: {
+//                                Text("Delete Account")
+//                                    .padding(.vertical, 5)
+//                                    .font(.system(size: 20, weight: .medium))
+//                                    .foregroundColor(.primary)
+//                                EmptyView()
+//                            })
+//                            .listRowBackground(Color.gray.opacity(0))
                         }
                         .listStyle(PlainListStyle())
                         .background(.gray.opacity(0))
@@ -103,8 +113,8 @@ struct Profile: View {
                         .padding(.vertical, 0)
                         .padding(.horizontal, 16)
                         
-                        ButtonView(title: "Sign Out", imageName: "door.left.hand.open", color: Color(.systemOrange), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
-                            .padding(.leading, 50)
+                        ButtonView(title: "Sign Out", imageName: "rectangle.portrait.and.arrow.right", color: Color(.systemOrange), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
+                            .padding(.leading, 60)
                             .padding(.vertical, 30)
                     }
                 }

@@ -23,6 +23,7 @@ struct Films: View {
     //Environment values
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
+    
     var body: some View {
         NavigationView{
             ZStack{

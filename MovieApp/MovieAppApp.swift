@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct MovieAppApp: App {
+    @Environment(\.colorScheme) var scheme
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

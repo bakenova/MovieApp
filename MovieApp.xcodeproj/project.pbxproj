@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3016947A29FDB72D00D2CF84 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 3016947929FDB72D00D2CF84 /* ExpandableText */; };
+		3022DC542A00902100933C03 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3022DC532A00902100933C03 /* PasswordView.swift */; };
+		3022DC562A00B01400933C03 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3022DC552A00B01400933C03 /* Privacy.swift */; };
 		3052683029AA1D9300DA7678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3052682F29AA1D9300DA7678 /* Assets.xcassets */; };
 		3052683329AA1D9300DA7678 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3052683229AA1D9300DA7678 /* Preview Assets.xcassets */; };
 		30BC7F7429FF5A340067436B /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052685229AE8B6100DA7678 /* Home.swift */; };
@@ -48,6 +50,8 @@
 		3003C3B829FC960B008D953F /* FilmDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmDetails.swift; sourceTree = "<group>"; };
 		3003C3BA29FC962E008D953F /* DetailPlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlotView.swift; sourceTree = "<group>"; };
 		3016947629FD969600D2CF84 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		3022DC532A00902100933C03 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		3022DC552A00B01400933C03 /* Privacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
 		302F224529F9E7D700D07FED /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
 		3049087329FB23C800A0F2FA /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		3049087529FB276100A0F2FA /* SubscriptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfo.swift; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 				3049087529FB276100A0F2FA /* SubscriptionInfo.swift */,
 				3049087729FB279800A0F2FA /* PaymentInfo.swift */,
 				3049087929FB27A600A0F2FA /* DeleteAccount.swift */,
+				3022DC532A00902100933C03 /* PasswordView.swift */,
+				3022DC552A00B01400933C03 /* Privacy.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -294,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30BC7F9629FFFB210067436B /* MyView.swift in Sources */,
+				3022DC542A00902100933C03 /* PasswordView.swift in Sources */,
 				30BC7F9129FF5A8B0067436B /* MovieAppApp.swift in Sources */,
 				30BC7F8929FF5A630067436B /* Movie.swift in Sources */,
 				30BC7F8A29FF5A630067436B /* Review.swift in Sources */,
@@ -314,6 +321,7 @@
 				30BC7F7C29FF5A340067436B /* OffsetModifier.swift in Sources */,
 				30BC7F7D29FF5A340067436B /* ReviewList.swift in Sources */,
 				30BC7F7E29FF5A340067436B /* ReviewView.swift in Sources */,
+				3022DC562A00B01400933C03 /* Privacy.swift in Sources */,
 				30BC7F7F29FF5A340067436B /* Music.swift in Sources */,
 				30BC7F8029FF5A340067436B /* SongDetailView.swift in Sources */,
 				30BC7F8129FF5A340067436B /* Profile.swift in Sources */,

@@ -71,7 +71,9 @@ struct Search: View {
                             }
                         } else {
                             List(itemsM.filter({ searchText.isEmpty ? true : $0.name.localizedCaseInsensitiveContains(searchText) })) { item in
-                                MusicHListView(item: item)
+                                NavigationLink(destination: SongDetailView(song: item)) {
+                                    MusicHListView(item: item)
+                                }
                             }
                         }
                         

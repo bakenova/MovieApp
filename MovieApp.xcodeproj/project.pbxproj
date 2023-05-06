@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3013CE9D2A01E34A002D7AF6 /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013CE9C2A01E34A002D7AF6 /* DetailPlotView.swift */; };
+		3013CEA12A01EBCF002D7AF6 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013CEA02A01EBCF002D7AF6 /* VideoView.swift */; };
 		3016947A29FDB72D00D2CF84 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 3016947929FDB72D00D2CF84 /* ExpandableText */; };
 		3022DC542A00902100933C03 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3022DC532A00902100933C03 /* PasswordView.swift */; };
 		3022DC562A00B01400933C03 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3022DC552A00B01400933C03 /* Privacy.swift */; };
@@ -18,7 +20,6 @@
 		30BC7F7729FF5A340067436B /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683D29AA453900DA7678 /* Films.swift */; };
 		30BC7F7829FF5A340067436B /* FilmDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3003C3B829FC960B008D953F /* FilmDetails.swift */; };
 		30BC7F7A29FF5A340067436B /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052683F29AA53C900DA7678 /* SnapCarousel.swift */; };
-		30BC7F7B29FF5A340067436B /* DetailPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684129AD32FC00DA7678 /* DetailPlotView.swift */; };
 		30BC7F7C29FF5A340067436B /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3052684329AD448500DA7678 /* OffsetModifier.swift */; };
 		30BC7F7D29FF5A340067436B /* ReviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5629FDD5D90067436B /* ReviewList.swift */; };
 		30BC7F7E29FF5A340067436B /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BC7F5D29FDDA4B0067436B /* ReviewView.swift */; };
@@ -49,6 +50,8 @@
 /* Begin PBXFileReference section */
 		3003C3B829FC960B008D953F /* FilmDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmDetails.swift; sourceTree = "<group>"; };
 		3003C3BA29FC962E008D953F /* DetailPlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlotView.swift; sourceTree = "<group>"; };
+		3013CE9C2A01E34A002D7AF6 /* DetailPlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlotView.swift; sourceTree = "<group>"; };
+		3013CEA02A01EBCF002D7AF6 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		3016947629FD969600D2CF84 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		3022DC532A00902100933C03 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		3022DC552A00B01400933C03 /* Privacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
@@ -65,7 +68,6 @@
 		3052683B29AA3C8100DA7678 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		3052683D29AA453900DA7678 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		3052683F29AA53C900DA7678 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
-		3052684129AD32FC00DA7678 /* DetailPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlotView.swift; sourceTree = "<group>"; };
 		3052684329AD448500DA7678 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 		3052684A29AE4C7500DA7678 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		3052684E29AE60D500DA7678 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3013CEA22A063C2A002D7AF6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		302F224429F9E7A900D07FED /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +135,7 @@
 		3052682A29AA1D9100DA7678 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				3013CEA22A063C2A002D7AF6 /* ViewModel */,
 				3052683A29AA1FD200DA7678 /* View */,
 				3052683929AA1FCA00DA7678 /* Model */,
 				3052682B29AA1D9100DA7678 /* MovieAppApp.swift */,
@@ -180,10 +190,11 @@
 				3052683D29AA453900DA7678 /* Films.swift */,
 				3003C3B829FC960B008D953F /* FilmDetails.swift */,
 				3003C3BA29FC962E008D953F /* DetailPlotView.swift */,
+				3013CE9C2A01E34A002D7AF6 /* DetailPlotView.swift */,
 				3052683F29AA53C900DA7678 /* SnapCarousel.swift */,
-				3052684129AD32FC00DA7678 /* DetailPlotView.swift */,
 				3052684329AD448500DA7678 /* OffsetModifier.swift */,
 				30BC7F5A29FDD5F20067436B /* Reviews */,
+				3013CEA02A01EBCF002D7AF6 /* VideoView.swift */,
 			);
 			path = Films;
 			sourceTree = "<group>";
@@ -300,7 +311,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				30BC7F9629FFFB210067436B /* MyView.swift in Sources */,
+				3013CEA12A01EBCF002D7AF6 /* VideoView.swift in Sources */,
 				3022DC542A00902100933C03 /* PasswordView.swift in Sources */,
+				3013CE9D2A01E34A002D7AF6 /* DetailPlotView.swift in Sources */,
 				30BC7F9129FF5A8B0067436B /* MovieAppApp.swift in Sources */,
 				30BC7F8929FF5A630067436B /* Movie.swift in Sources */,
 				30BC7F8A29FF5A630067436B /* Review.swift in Sources */,
@@ -317,7 +330,6 @@
 				30BC7F7729FF5A340067436B /* Films.swift in Sources */,
 				30BC7F7829FF5A340067436B /* FilmDetails.swift in Sources */,
 				30BC7F7A29FF5A340067436B /* SnapCarousel.swift in Sources */,
-				30BC7F7B29FF5A340067436B /* DetailPlotView.swift in Sources */,
 				30BC7F7C29FF5A340067436B /* OffsetModifier.swift in Sources */,
 				30BC7F7D29FF5A340067436B /* ReviewList.swift in Sources */,
 				30BC7F7E29FF5A340067436B /* ReviewView.swift in Sources */,

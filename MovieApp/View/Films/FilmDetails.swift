@@ -11,10 +11,10 @@ import ExpandableText
 
 struct FilmDetails: View {
     
+    @Environment(\.colorScheme) var scheme
+    
     var film: Movie
     var reviewed: Bool = false
-//    @State var player = AVPlayer(url: URL(string: "")!)
-    @Environment(\.colorScheme) var scheme
     
     var body: some View {
         GeometryReader { proxy in
@@ -114,16 +114,20 @@ struct FilmDetails: View {
                                         .fontWeight(.bold)
                                         .padding(.top, -100)
                                     
-                                    Text(film.runtime)
+                                    Text(film.runtime + " mins")
                                         .frame(alignment: .leading)
                                         .font(.subheadline)
                                         .fontWeight(.bold)
                                         .padding(.top, -100)
                                 }
                                 
-                                ButtonView(title: "Play", imageName: "play.fill", color: .orange, cornerRadius: 10, width: size.width-24, height: 40, fontSize: 20)
-                                    .padding(.top, -60)
-                                    .padding(.leading, 12)
+                                NavigationLink(destination: VideoView(video: film)) {
+                                    ButtonView(title: "Play", imageName: "play.fill", color: .orange, cornerRadius: 10, width: size.width-24, height: 40, fontSize: 20)
+                                }
+                                .foregroundColor(.white)
+                                .padding(.top, -60)
+                                .padding(.leading, 12)
+                                
                                 
                                 ButtonView(title: "Watch later", imageName: "bookmark.fill", color: .gray, cornerRadius: 10, width: size.width-24, height: 38, fontSize: 16)
                                     .padding(.top, -20)
@@ -198,6 +202,8 @@ struct FilmDetails: View {
                                     }
                                     .padding(.top, 20)
                                     .padding(.horizontal, 20)
+                                    
+                                    
                                     
                                     ScrollView(.horizontal, showsIndicators: false){
                                         HStack(alignment: .top, spacing: 12){

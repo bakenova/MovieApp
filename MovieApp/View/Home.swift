@@ -10,10 +10,9 @@ import SwiftUI
 struct Home: View {
     @State var currentTab: String = "Films"
     @Environment(\.colorScheme) var scheme
+    
     var body: some View {
-        VStack(alignment: .center){
-            NavBar(currentTab: $currentTab)
-                .padding(0)
+        ZStack(alignment: .center){
             ZStack{
                 Films().opacity(self.currentTab == "Films" ? 1 : 0)
                 Music().opacity(self.currentTab == "Music" ? 1 : 0)
@@ -22,6 +21,13 @@ struct Home: View {
             }
             .cornerRadius(self.currentTab == "Comics" ? 15 : 0, corners: [.topLeft, .topRight])
             .ignoresSafeArea()
+            //.padding(.top, 60)
+             
+//            VStack{
+//                NavBar(currentTab: $currentTab)
+//                    .padding(0)
+//                Spacer()
+//            }
         }
     }
 }

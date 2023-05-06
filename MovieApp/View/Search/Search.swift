@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Search: View {
-    
+    @State var currentTab: String = "Search"
     @State private var searchText = ""
     @State private var selectedTab = 0
     @State private var isEditing = false

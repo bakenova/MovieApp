@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Profile: View {
-    @State var currentTab: String = "Comics"
+    @State var currentTab: String = "Profile"
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
     

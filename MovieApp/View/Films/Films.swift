@@ -26,56 +26,61 @@ struct Films: View {
     
     var body: some View {
         NavigationView{
-            ZStack{
+            VStack{
+                NavBar(currentTab: $currentTab)
+                    .padding(0)
                 ZStack{
-                    //Background
-                    BGView()
-                    //MARK: Main View Content
-                    VStack{
-                        ScrollView(.vertical, showsIndicators: false){
-                            //NavBar
-                            //NavBar(currentTab: self.$currentTab)
-                            //Custum carousel
-                            SnapCarousel(spacing: 20, trailingSpace: 150, index: $currentIndex, items: movies) { movie in
-                                GeometryReader { proxy in
-                                    let size = proxy.size
-                                    
-                                    Image(movie.imageName)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .cornerRadius(15)
-                                        .frame(width: size.width, height: size.height)
-                                        .matchedGeometryEffect(id: movie.id, in: animation)
-//                                        .onTapGesture {
-//                                            isActiveDetailPage.toggle()
-//                                        }
-                                        .onLongPressGesture(perform: {
-                                            currentCardSize = size
-                                            detailMovie = movie
-                                            withAnimation(.easeInOut){
-                                                showDetailView = true
-                                            }
-                                        })
+                    ZStack{
+                        //Background
+                        BGView()
+                        //MARK: Main View Content
+                        VStack{
+                            ScrollView(.vertical, showsIndicators: false){
+                                //NavBar
+                                //NavBar(currentTab: self.$currentTab)
+                                //Custum carousel
+                                SnapCarousel(spacing: 20, trailingSpace: 150, index: $currentIndex, items: movies) { movie in
+                                    GeometryReader { proxy in
+                                        let size = proxy.size
+                                        
+                                        Image(movie.imageName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(15)
+                                            .frame(width: size.width, height: size.height)
+                                            .matchedGeometryEffect(id: movie.id, in: animation)
+                                        //                                        .onTapGesture {
+                                        //                                            isActiveDetailPage.toggle()
+                                        //                                        }
+                                            .onLongPressGesture(perform: {
+                                                currentCardSize = size
+                                                detailMovie = movie
+                                                withAnimation(.easeInOut){
+                                                    showDetailView = true
+                                                }
+                                            })
+                                    }
                                 }
+                                .padding(.top, 100)
+                                .frame(width: UIScreen.main.bounds.size.width, height: 450)
+                                
+                                //Custom indicator
+                                customIndicator()
+                                
+                                customBlock(name: "Popular")
+                                customBlock(name: "Recently published")
                             }
-                            .padding(.top, 100)
-                            .frame(width: UIScreen.main.bounds.size.width, height: 450)
-                            
-                            //Custom indicator
-                            customIndicator()
-                            
-                            customBlock(name: "Popular")
-                            customBlock(name: "Recently published")
                         }
-                    }
-                    .overlay{
-                        if let movie = detailMovie, showDetailView {
-                            DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
+                        .overlay{
+                            if let movie = detailMovie, showDetailView {
+                                DetailPlotView(movie: movie, detailMovie: $detailMovie, showDetailView: $showDetailView, currentCardSize: $currentCardSize, animation: animation)
+                            }
                         }
-                    }
-                }.opacity(self.currentTab == "Films" ? 1 : 0)
-                Music().opacity(self.currentTab == "Music" ? 1 : 0)
-                Profile().opacity(self.currentTab == "Comics" ? 1 : 0)
+                    }.opacity(self.currentTab == "Films" ? 1 : 0)
+                    Music().opacity(self.currentTab == "Music" ? 1 : 0)
+                    Search().opacity(self.currentTab == "Search" ? 1 : 0)
+                    Profile().opacity(self.currentTab == "Profile" ? 1 : 0)
+                }
             }
         }
     }

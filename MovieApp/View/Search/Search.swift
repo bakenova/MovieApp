@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Search: View {
+    
+    @StateObject var viewModel = FilmDetailViewModel()
     @State var currentTab: String = "Search"
     @State private var searchText = ""
     @State private var selectedTab = 0
@@ -65,7 +67,7 @@ struct Search: View {
                         
                         if selectedTab == 0 {
                             List(items.filter({ searchText.isEmpty ? true : $0.movieTitle.localizedCaseInsensitiveContains(searchText) })) { item in
-                                NavigationLink(destination: FilmDetails(film: item)) {
+                                NavigationLink(destination: FilmDetails(viewModel: viewModel, film: item)) {
                                     MovieListView(item: item)
                                 }
                             }
@@ -95,7 +97,7 @@ struct Search: View {
                                 ScrollView(.horizontal, showsIndicators: false){
                                     HStack(alignment: .top, spacing: 12){
                                         ForEach(movieList.prefix(3)){ selection in
-                                            NavigationLink(destination: ReviewView()) {
+                                            NavigationLink(destination: FilmListView()) {
                                                 ZStack{
                                                     RoundedRectangle(cornerRadius: 15)
                                                         .fill(.ultraThinMaterial)
@@ -184,7 +186,7 @@ struct Search: View {
                                 ScrollView(.horizontal, showsIndicators: false){
                                     HStack(alignment: .top, spacing: 12){
                                         ForEach(musicList.prefix(3)){ selection in
-                                            NavigationLink(destination: ReviewView()) {
+                                            NavigationLink(destination: PlaylistView(playlist: selection)) {
                                                 ZStack{
                                                     RoundedRectangle(cornerRadius: 15)
                                                         .fill(.ultraThinMaterial)

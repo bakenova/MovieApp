@@ -16,6 +16,7 @@ struct DetailPlotView: View {
     
     var animation: Namespace.ID
     
+    @StateObject var viewModel = FilmDetailViewModel()
     @State var showDetailViewContent: Bool = false
     @State var offset: CGFloat = 0
     
@@ -39,7 +40,7 @@ struct DetailPlotView: View {
                         Text(movie.description)
                             .multilineTextAlignment(.leading)
                         
-                        NavigationLink(destination: FilmDetails(film: movie)) {
+                        NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie)) {
                             Text("Learn More")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)

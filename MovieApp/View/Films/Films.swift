@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Films: View {
+    
+    @StateObject var viewModel = FilmDetailViewModel()
+    
     // MARK: Animated View Properties
     @State var currentIndex: Int = 0
     @State var currentTab: String = "Films"
@@ -111,7 +114,7 @@ struct Films: View {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(alignment: .top, spacing: 15){
                         ForEach(movies){ movie in
-                            NavigationLink(destination: FilmDetails(film: movie, reviewed: !(movie.reviews?.isEmpty ?? true) ? false : true)) {
+                            NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie, reviewed: !(movie.reviews?.isEmpty ?? true) ? false : true)) {
                                 VStack(alignment: .leading){
                                     Image(movie.imageName)
                                         .resizable()

@@ -19,7 +19,7 @@ struct PlaylistDetailView: View {
                 Image(playlistDetail.imageName)
                     .resizable()
                     .frame(height: size.height/2)
-                    .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+                    //.cornerRadius(15, corners: [.bottomLeft, .bottomRight])
                 
                 HStack(alignment: .top){
                     Text(playlistDetail.albumName)

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct Films: View {
-    
+    @EnvironmentObject var userManager: UserManager
     @StateObject var viewModel = FilmDetailViewModel()
+    @Binding var isUserCurrentlyLoggedOut : Bool
     
     // MARK: Animated View Properties
     @State var currentIndex: Int = 0
@@ -197,7 +198,7 @@ struct Films: View {
 
 struct Films_Previews: PreviewProvider {
     static var previews: some View {
-        Films()
+        Films(isUserCurrentlyLoggedOut: .constant(true))
             .preferredColorScheme(.dark)
     }
 }

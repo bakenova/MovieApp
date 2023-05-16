@@ -17,6 +17,7 @@ struct LoginRegister: View {
     @State var password = ""
     @State var fname = ""
     @State var lname = ""
+    @State var phoneNumber = ""
      
     @State private var shouldShowLoginAlert: Bool = false
     @State private var shouldShowSignUpAlert: Bool = false
@@ -143,7 +144,7 @@ struct LoginRegister: View {
                  
             }.padding()
         } //End ScrollView
-        //.navigationViewStyle(StackNavigationViewStyle()) 
+        .navigationViewStyle(StackNavigationViewStyle()) 
         .background(Color.orange)
     }
      
@@ -189,7 +190,7 @@ struct LoginRegister: View {
      
     private func storeUserInformation() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["fname": self.fname, "lname": self.lname, "email": self.email, "profileImageUrl": "profileurl", "uid": uid]
+        let userData = ["fname": self.fname, "lname": self.lname, "email": self.email, "username": self.fname, "phoneNumber": self.phoneNumber, "uid": uid]
         Firestore.firestore().collection("users")
             .document(uid).setData(userData) { err in
                 if let err = err {

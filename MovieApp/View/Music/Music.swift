@@ -84,7 +84,7 @@ struct Music: View {
                                                 .font(.system(size: 16, weight: .bold))
                                                 .multilineTextAlignment(.leading)
                                                 .frame(width: 130, height: 20, alignment: .topLeading)
-                                                .foregroundColor(Color.white)
+                                                .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                             Text(album.artistName)
                                                 .font(.system(size: 14, weight: .semibold))
                                                 .multilineTextAlignment(.leading)
@@ -112,12 +112,16 @@ struct Music: View {
                                 Text("More from")
                                     .foregroundColor(.gray)
                                     .font(.system(size: 16, weight: .bold))
-                                HStack{
-                                    Text(artist.artistName)
-                                        .font(.title.bold())
-                                    Image(systemName: "chevron.forward")
-                                        .foregroundColor(.orange)
-                                        .padding(.top, 5)
+                                NavigationLink {
+                                    ArtistDetailView(artist: artist)
+                                } label: {
+                                    HStack{
+                                        Text(artist.artistName)
+                                            .font(.title.bold())
+                                        Image(systemName: "chevron.forward")
+                                            .foregroundColor(.orange)
+                                            .padding(.top, 5)
+                                    }
                                 }
                             }
                             
@@ -129,20 +133,21 @@ struct Music: View {
                         
                         ScrollView(.horizontal) {
                             HStack{
-                                ForEach(artist.albums.prefix(4)){ album in
+                                ForEach(artist.albums.prefix(4)){ artist in
                                     NavigationLink(destination: SongDetailView(song:Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185))) {
                                         VStack(alignment: .leading){
-                                            Image(album.imageName)
+                                            Image(artist.imageName)
                                                 .resizable()
                                                 .frame(width: 150, height: 150)
                                                 .aspectRatio(contentMode: .fit)
                                                 .cornerRadius(15)
-                                            Text(album.albumName)
+                                            Text(artist.albumName)
                                                 .font(.system(size: 16, weight: .bold))
                                                 .multilineTextAlignment(.leading)
                                                 .frame(width: 130, height: 20, alignment: .topLeading)
-                                                .foregroundColor(Color.white)
-                                            Text(album.artistName)
+                                                .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                
+                                            Text(artist.artistName)
                                                 .font(.system(size: 14, weight: .semibold))
                                                 .multilineTextAlignment(.leading)
                                                 .frame(width: 130, height: 20, alignment: .topLeading)
@@ -183,7 +188,7 @@ struct Music: View {
                                                 .font(.system(size: 16, weight: .bold))
                                                 .multilineTextAlignment(.leading)
                                                 .frame(width: 130, height: 20, alignment: .topLeading)
-                                                .foregroundColor(Color.white)
+                                                .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                             Text(album.artistName)
                                                 .font(.system(size: 14, weight: .semibold))
                                                 .multilineTextAlignment(.leading)
@@ -229,7 +234,7 @@ struct Music: View {
                                             .frame(alignment: .leading)
                                             .padding(.horizontal, 10)
                                             .padding(.vertical, 5)
-                                            .foregroundColor(.white)
+                                            .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                             .font(.system(size: 14, weight: .semibold))
                                     }
                                 }
@@ -246,6 +251,6 @@ struct Music: View {
 struct Music_Previews: PreviewProvider {
     static var previews: some View {
         Music()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }

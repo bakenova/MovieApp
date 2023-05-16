@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReviewView: View {
+    @Environment(\.colorScheme) var scheme
     
     let review: Review
     
@@ -24,7 +25,7 @@ struct ReviewView: View {
                         .bold()
                         .font(.system(size: 24))
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                 }
                 .padding(.top, 10)
                 .padding(.horizontal, 16)
@@ -32,14 +33,14 @@ struct ReviewView: View {
                 VStack(alignment: .leading){
                     Text(review.reviewTitle)
                         .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                         .multilineTextAlignment(.leading)
                         .padding(.leading, 16)
                         .padding(.top, 24)
                     
                     Text(review.reviewDescription)
                         .font(.system(size: 16, weight: .regular))
-                        .foregroundColor(.white)
+                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                         .multilineTextAlignment(.leading)
                         .padding(.leading, 16)
                         .padding(.top, 10)

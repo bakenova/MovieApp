@@ -16,12 +16,15 @@ struct MyAccount: View {
     @State private var phoneNumber: String = ""
     
     @State private var selectedMode: AppearanceMode?
+    @ObservedObject private var vm = UserManager()
     
     enum AppearanceMode {
         case system, dark, light
     }
     
     var body: some View {
+        let user = vm.user
+        
         GeometryReader{ proxy in
             Form {
                 Section(header: Text("Personal Information").foregroundColor(self.scheme == .dark ? .white : .black)) {

@@ -19,12 +19,12 @@ class AppDelegate: NSObject,UIApplicationDelegate{
 struct MovieAppApp: App {
     @StateObject private var userManager = UserManager()
     @State private var isRegistrationPresented = false
-    //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.colorScheme) var scheme
     
-    init() {
-        FirebaseApp.configure()
-    }
+//    init() {
+//        FirebaseApp.configure()
+//    }
     
     var body: some Scene {
         WindowGroup {

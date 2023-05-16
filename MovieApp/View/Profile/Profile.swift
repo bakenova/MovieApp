@@ -11,6 +11,7 @@ struct Profile: View {
     @State var currentTab: String = "Profile"
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
+    @ObservedObject private var vm = UserManager()
     
     var profileSettings: [String] = ["My Account", "Privacy & Policy", "Subscription Info", "Payment Info", "Delete Account"]
     
@@ -32,13 +33,13 @@ struct Profile: View {
                     }
                     .padding()
                     
-                    Text("Arailym")
+                    Text(vm.user?.username ?? "")
                         .font(.title2)
                         .fontWeight(.black)
                         .foregroundColor(.primary)
                         .padding(.bottom, 5)
                     
-                    Text(verbatim: "arailym.bakenovaa@gmail.com")
+                    Text(verbatim: vm.user?.email ?? "")
                         .font(.body)
                         .foregroundColor(.gray)
                     

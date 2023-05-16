@@ -12,6 +12,8 @@ struct Films: View {
     @StateObject var viewModel = FilmDetailViewModel()
     @Binding var isUserCurrentlyLoggedOut : Bool
     
+    @ObservedObject private var vm = UserManager()
+    
     // MARK: Animated View Properties
     @State var currentIndex: Int = 0
     @State var currentTab: String = "Films"
@@ -199,7 +201,7 @@ struct Films: View {
 struct Films_Previews: PreviewProvider {
     static var previews: some View {
         Films(isUserCurrentlyLoggedOut: .constant(true))
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
 

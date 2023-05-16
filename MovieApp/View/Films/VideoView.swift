@@ -35,6 +35,7 @@ struct VideoView: View {
     
     var body: some View {
         let videoUrl = URL(string: video.videoURL)!
+        
         ZStack{
             VideoPlayerView(videoUrl: videoUrl)
             
@@ -44,6 +45,7 @@ struct VideoView: View {
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

@@ -19,6 +19,7 @@ struct Artist: Identifiable {
 var artistSample =
 Artist(
     artistName: "Dose",
+    
     albums: [
         ArtistPlaylist(
             artistName: "Dose",

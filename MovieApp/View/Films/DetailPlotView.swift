@@ -48,7 +48,7 @@ struct DetailPlotView: View {
                                 .padding(.vertical)
                                 .background{
                                     RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                        .fill(.yellow)
+                                        .fill(.blue)
                                 }
                         }
                         .padding(.top, 20)

@@ -63,7 +63,7 @@ struct Music: View {
                             Text("Recently played")
                                 .font(.title.bold())
                             Image(systemName: "chevron.forward")
-                                .foregroundColor(.orange)
+                                .foregroundColor(.blue)
                                 .padding(.top, 10)
                             Spacer()
                         }
@@ -119,7 +119,7 @@ struct Music: View {
                                         Text(artist.artistName)
                                             .font(.title.bold())
                                         Image(systemName: "chevron.forward")
-                                            .foregroundColor(.orange)
+                                            .foregroundColor(.blue)
                                             .padding(.top, 5)
                                     }
                                 }
@@ -146,7 +146,6 @@ struct Music: View {
                                                 .multilineTextAlignment(.leading)
                                                 .frame(width: 130, height: 20, alignment: .topLeading)
                                                 .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
-                                                
                                             Text(artist.artistName)
                                                 .font(.system(size: 14, weight: .semibold))
                                                 .multilineTextAlignment(.leading)
@@ -167,7 +166,7 @@ struct Music: View {
                             Text("2023: the best")
                                 .font(.title.bold())
                             Image(systemName: "chevron.forward")
-                                .foregroundColor(.orange)
+                                .foregroundColor(.blue)
                                 .padding(.top, 10)
                             Spacer()
                         }

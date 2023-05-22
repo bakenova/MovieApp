@@ -25,7 +25,7 @@ struct SongDetailView: View {
                     } label: {
                         Text("Close")
                             .font(.headline)
-                            .foregroundColor(.orange)
+                            .foregroundColor(.blue)
                             .padding(.trailing, 25)
                     }
                 }
@@ -55,7 +55,7 @@ struct SongDetailView: View {
                         .foregroundColor(.gray)
                     
                     Slider(value: $progress, in: 0...Float(song.duration), step: 1.0)
-                        .accentColor(.orange)
+                        .accentColor(.blue)
                     
                     Text(timeString(time: Double(song.duration)))
                         .font(.caption)

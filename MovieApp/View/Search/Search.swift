@@ -89,7 +89,7 @@ struct Search: View {
                                     Spacer()
                                     Button("See More"){}
                                         .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(.orange)
+                                        .foregroundColor(.blue)
                                 }
                                 .padding(.top, 20)
                                 .padding(.horizontal, 20)

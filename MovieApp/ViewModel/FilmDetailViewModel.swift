@@ -22,7 +22,7 @@ class FilmDetailViewModel: ObservableObject {
     
     func fetchReviews(for film: Movie) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self.reviews = film.reviews ?? [Review(reviewTitle: "", reviewAuthor: "", reviewAuthorImage: "", reviewDescription: "")]
+            self.reviews = film.reviews ?? [Review(reviewTitle: "", reviewAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""), reviewDescription: "", reviewRate: "")] 
         }
     }
     

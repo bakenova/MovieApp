@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct Films: View {
-    @EnvironmentObject var userManager: UserManager
-    @StateObject var viewModel = FilmDetailViewModel()
-    @Binding var isUserCurrentlyLoggedOut : Bool
     
-    @ObservedObject private var vm = UserManager()
+    @State private var tapCount = 0
+    @State private var shouldDismiss = false
     
     // MARK: Animated View Properties
     @State var currentIndex: Int = 0
@@ -29,6 +27,11 @@ struct Films: View {
     //Environment values
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
+    @EnvironmentObject var userManager: UserManager
+    @StateObject var viewModel = FilmDetailViewModel()
+    @Binding var isUserCurrentlyLoggedOut : Bool
+    
+    @ObservedObject private var vm = UserManager()
     
     var body: some View {
         NavigationView{
@@ -109,7 +112,7 @@ struct Films: View {
                     Button("See More"){}
                         .font(.system(size: 16, weight: .semibold))
                         //.foregroundColor(self.scheme == .dark ? .yellow : .purple)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.blue)
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
@@ -148,7 +151,7 @@ struct Films: View {
             ForEach(movies.indices, id: \.self){ index in
                 Rectangle()
                 //.fill(currentIndex == index ? (self.scheme == .dark ? .yellow : .purple) : .gray.opacity(0.5))
-                    .fill(currentIndex == index ? .orange : .gray.opacity(0.5))
+                    .fill(currentIndex == index ? .blue : .gray.opacity(0.5))
                     .frame(width: currentIndex == index ? 10 : 6, height: currentIndex == index ? 10 : 6)
                     .cornerRadius(25)
                 
@@ -201,7 +204,7 @@ struct Films: View {
 struct Films_Previews: PreviewProvider {
     static var previews: some View {
         Films(isUserCurrentlyLoggedOut: .constant(true))
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
     }
 }
 

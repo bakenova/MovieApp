@@ -145,7 +145,7 @@ struct LoginRegister: View {
             }.padding()
         } //End ScrollView
         .navigationViewStyle(StackNavigationViewStyle()) 
-        .background(Color.orange)
+        .background(Color.blue)
     }
      
     private func loginUser() {

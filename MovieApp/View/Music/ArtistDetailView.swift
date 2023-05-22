@@ -41,7 +41,7 @@ struct ArtistDetailView: View {
                             .font(.system(size: 18, weight: .semibold))
                         Spacer()
                     }
-                    .background(Color.orange)
+                    .background(Color.blue)
                 }
                 .cornerRadius(15)
                 .padding(.horizontal, 15)

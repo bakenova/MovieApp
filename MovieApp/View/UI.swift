@@ -68,7 +68,7 @@ struct MovieListView: View {
                     .frame(alignment: .leading)
                     .font(.system(size: 14))
                     .fontWeight(.bold)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                     .padding(.trailing, 24)
             }
         }
@@ -101,7 +101,7 @@ struct MusicHListView: View {
                     .frame(alignment: .leading)
                     .font(.system(size: 14))
                     .fontWeight(.bold)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                     .padding(.trailing, 24)
             }
         }

@@ -21,8 +21,6 @@ class FilmDetailViewModel: ObservableObject {
     @Published var reviews: [Review] = []
     @Published var userRating: Double = 0
     
-    
-    
     func addMovie(
         movieTitle: String,
         imageName: String,
@@ -77,39 +75,39 @@ class FilmDetailViewModel: ObservableObject {
     }
     
     func fetchMovies() {
-            for collectionName in ["Classic", "Popular", "2010-2019"] {
-                let collectionRef = db.collection("movies").document(collectionName).collection("films")
-
-                collectionRef.getDocuments { snapshot, error in
-                    if let error = error {
-                        print("Error fetching movies from \(collectionName): \(error.localizedDescription)")
-                        return
-                    }
-
-                    guard let documents = snapshot?.documents else {
-                        print("No documents found in \(collectionName) collection")
-                        return
-                    }
-
-                    let fetchedMovies = documents.compactMap { document -> Movie? in
-                        try? document.data(as: Movie.self)
-                    }
-
-                    DispatchQueue.main.async {
-                        switch collectionName {
-                        case "Classic":
-                            self.classicFilms = fetchedMovies
-                        case "Popular":
-                            self.popularFilms = fetchedMovies
-                        case "2010-2019":
-                            self.films2010 = fetchedMovies
-                        default:
-                            break
-                        }
+        for collectionName in ["Classic", "Popular", "2010-2019"] {
+            let collectionRef = db.collection("movies").document(collectionName).collection("films")
+            
+            collectionRef.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error fetching movies from \(collectionName): \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    print("No documents found in \(collectionName) collection")
+                    return
+                }
+                
+                let fetchedMovies = documents.compactMap { document -> Movie? in
+                    try? document.data(as: Movie.self)
+                }
+                
+                DispatchQueue.main.async {
+                    switch collectionName {
+                    case "Classic":
+                        self.classicFilms = fetchedMovies
+                    case "Popular":
+                        self.popularFilms = fetchedMovies
+                    case "2010-2019":
+                        self.films2010 = fetchedMovies
+                    default:
+                        break
                     }
                 }
             }
         }
+    }
     
     func fetchFilmDetails(for film: Movie) {
         // Asynchronous fetch
@@ -138,19 +136,19 @@ class FilmDetailViewModel: ObservableObject {
         
         for collectionName in collectionNames {
             let movieRef = db.collection("movies").document(collectionName).collection("films").document(movieID)
-
+            
             // Check if the movie document exists
             movieRef.getDocument { (snapshot, error) in
                 if let error = error {
                     print("Error retrieving movie document: \(error.localizedDescription)")
                     return
                 }
-
+                
                 guard let movieData = snapshot?.data() else {
                     print("Movie document does not exist")
                     return
                 }
-
+                
                 // Retrieve the current rating and rating count from the movie document
                 var currentRating = movieData["rating"] as? Double ?? 0.0
                 var ratingCount = movieData["ratingCount"] as? Int ?? 0
@@ -159,12 +157,12 @@ class FilmDetailViewModel: ObservableObject {
                     print("Invalid rating. Rating cannot be higher than 10.")
                     return
                 }
-
+                
                 if newRating != currentRating {
                     // Update rating count (number of people who rated the movie)
                     currentRating = (currentRating * Double(ratingCount) + newRating) / Double(ratingCount + 1)
                     ratingCount += 1
-
+                    
                     // Update the rating and rating count in the movie document
                     movieRef.updateData([
                         "rating": currentRating,
@@ -180,5 +178,75 @@ class FilmDetailViewModel: ObservableObject {
             }
         }
     }
+    
+    //    func addReview(_ review: Review, to movie: inout Movie) {
+    //        if var reviews = movie.reviews {
+    //            reviews.append(review)
+    //            movie.reviews = reviews
+    //        } else {
+    //            movie.reviews = [review]
+    //        }
+    //
+    //        // Save the updated movie object to the database or perform any other necessary operations
+    //        // For example, you can use Firestore to update the movie document:
+    //        let db = Firestore.firestore()
+    //        let movieRef = db.collection("movies").document(movie.id!)
+    //        do {
+    //            try movieRef.setData(from: movie)
+    //            // Successfully added the review to the movie
+    //        } catch let error {
+    //            // Handle the error
+    //            print("Error adding review to movie: \(error)")
+    //        }
+    //    }
+    func addReview(_ review: Review, to film: Movie) {
+        let db = Firestore.firestore()
 
+        guard let movieID = film.id else {
+            print("Movie ID is missing.")
+            return
+        }
+
+        for collectionName in film.collection {
+            let collectionRef = db.collection("movies").document(collectionName).collection("films")
+
+            collectionRef.document(movieID).getDocument { (documentSnapshot, error) in
+                if let error = error {
+                    print("Error fetching movie document: \(error)")
+                    return
+                }
+
+                guard let document = documentSnapshot, document.exists else {
+                    print("Movie document does not exist.")
+                    return
+                }
+
+                do {
+                    if var movie = try documentSnapshot?.data(as: Movie.self) {
+                        if var reviews = movie.reviews {
+                            reviews.append(review)
+                            movie.reviews = reviews
+                        } else {
+                            movie.reviews = [review]
+                        }
+
+                        // Update the movie document with the updated reviews array
+                        do {
+                            try collectionRef.document(movieID).setData(from: movie) { error in
+                                if let error = error {
+                                    print("Error updating movie document: \(error)")
+                                } else {
+                                    print("Movie document updated successfully.")
+                                }
+                            }
+                        } catch {
+                            print("Error updating movie document: \(error)")
+                        }
+                    }
+                } catch {
+                    print("Error decoding movie document: \(error)")
+                }
+            }
+        }
+    }
 }

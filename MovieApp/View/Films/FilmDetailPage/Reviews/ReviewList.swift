@@ -19,7 +19,7 @@ struct ReviewList: View {
             ScrollView{
                 VStack(spacing: 20){
                     NavigationLink {
-                        NewReviewView()
+                        NewReviewView(viewModel: viewModel, film: film)
                     } label: {
                         ButtonView(title: "Add review", imageName: "pencil.line", color: .blue, cornerRadius: 25, width: size.width/2, height: 48, fontSize: 18)
                     }

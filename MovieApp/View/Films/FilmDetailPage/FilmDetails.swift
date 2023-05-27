@@ -16,8 +16,8 @@ struct FilmDetails: View {
     @Environment(\.colorScheme) var scheme
     @State private var isRatingFormPresented = false
     
-    var film: Movie
-    
+    @State var film: Movie
+    @State var collectionName: String
     @State private var value = "positive"
     
     @State var reviewed: Bool = false
@@ -452,7 +452,8 @@ struct FilmDetails: View {
         .onAppear {
             viewModel.fetchFilmDetails(for: film)
         }
-        .sheet(isPresented: $isRatingFormPresented) {
+        .sheet(isPresented: $isRatingFormPresented, onDismiss: {
+        }) {
             RatingView(film: film)
         }
     }
@@ -521,8 +522,9 @@ struct FilmDetails_Previews: PreviewProvider {
         
         let viewModel = FilmDetailViewModel()
         viewModel.reviews = film.reviews!
+        let collection = "Popular"
         return VStack {
-            FilmDetails(viewModel: viewModel, film: film).preferredColorScheme(.dark)
+            FilmDetails(viewModel: viewModel, film: film, collectionName: collection).preferredColorScheme(.dark)
         }
     }
 }

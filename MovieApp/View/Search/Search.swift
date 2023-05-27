@@ -67,7 +67,7 @@ struct Search: View {
                         
                         if selectedTab == 0 {
                             List(items.filter({ searchText.isEmpty ? true : $0.movieTitle.localizedCaseInsensitiveContains(searchText) })) { item in
-                                NavigationLink(destination: FilmDetails(viewModel: viewModel, film: item)) {
+                                NavigationLink(destination: FilmDetails(viewModel: viewModel, film: item, collectionName: "General")) {
                                     MovieListView(item: item)
                                 }
                             }

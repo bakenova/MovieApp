@@ -195,7 +195,7 @@ struct Films: View {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(alignment: .top, spacing: 15){
                         ForEach(movies){ movie in
-                            NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie, reviewed: !(movie.reviews?.isEmpty ?? true) ? false : true)) {
+                            NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie, collectionName: collectionName, reviewed: !(movie.reviews?.isEmpty ?? true) ? false : true)) {
                                 VStack(alignment: .leading){
                                     Image(movie.imageName)
                                         .resizable()

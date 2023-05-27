@@ -23,9 +23,7 @@ struct MyAccount: View {
     }
     
     var body: some View {
-        let user = vm.user
-        
-        GeometryReader{ proxy in
+        GeometryReader { proxy in
             Form {
                 Section(header: Text("Personal Information").foregroundColor(self.scheme == .dark ? .white : .black)) {
                     TextField("First Name", text: $firstName)
@@ -80,6 +78,14 @@ struct MyAccount: View {
                                 }
                         }
                     }
+                }
+            }
+            .onReceive(vm.$user) { user in
+                if let user = user {
+                    firstName = user.firstName ?? ""
+                    lastName = user.lastName ?? ""
+                    email = user.email ?? ""
+                    phoneNumber = user.phoneNumber ?? ""
                 }
             }
         }

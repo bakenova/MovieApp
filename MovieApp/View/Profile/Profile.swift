@@ -47,7 +47,7 @@ struct Profile: View {
                 
                 ZStack(){
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(self.scheme == .dark ? .gray : .yellow.opacity(0.2))
+                        .fill(self.scheme == .dark ? .gray : .blue.opacity(0.2))
                         .opacity(self.scheme == .dark ? 0.5 : 1)
                         .ignoresSafeArea()
                     
@@ -128,7 +128,7 @@ struct Profile: View {
 struct Comics_Previews: PreviewProvider {
     static var previews: some View {
         Profile()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
 

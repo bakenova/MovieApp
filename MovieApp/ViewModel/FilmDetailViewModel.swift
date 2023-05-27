@@ -138,14 +138,37 @@ class FilmDetailViewModel: ObservableObject {
         
         for collectionName in collectionNames {
             let movieRef = db.collection("movies").document(collectionName).collection("films").document(movieID)
-            
-            // Check if user has already rated the movie
-            if let userRating = movie.rating {
-                if newRating != userRating {
+
+            // Check if the movie document exists
+            movieRef.getDocument { (snapshot, error) in
+                if let error = error {
+                    print("Error retrieving movie document: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let movieData = snapshot?.data() else {
+                    print("Movie document does not exist")
+                    return
+                }
+
+                // Retrieve the current rating and rating count from the movie document
+                var currentRating = movieData["rating"] as? Double ?? 0.0
+                var ratingCount = movieData["ratingCount"] as? Int ?? 0
+                
+                if newRating > 10 {
+                    print("Invalid rating. Rating cannot be higher than 10.")
+                    return
+                }
+
+                if newRating != currentRating {
                     // Update rating count (number of people who rated the movie)
+                    currentRating = (currentRating * Double(ratingCount) + newRating) / Double(ratingCount + 1)
+                    ratingCount += 1
+
+                    // Update the rating and rating count in the movie document
                     movieRef.updateData([
-                        "rating": FieldValue.increment(newRating - userRating),
-                        "ratingCount": FieldValue.increment(Int64(0))
+                        "rating": currentRating,
+                        "ratingCount": ratingCount
                     ]) { error in
                         if let error = error {
                             print("Error updating rating in \(collectionName): \(error.localizedDescription)")
@@ -154,20 +177,8 @@ class FilmDetailViewModel: ObservableObject {
                         }
                     }
                 }
-            } else {
-                // Update rating count and set user's rating
-                movieRef.updateData([
-                    "rating": FieldValue.increment(newRating),
-                    "ratingCount": FieldValue.increment(Int64(1))
-                ]) { error in
-                    if let error = error {
-                        print("Error updating rating in \(collectionName): \(error.localizedDescription)")
-                    } else {
-                        print("Rating updated successfully in \(collectionName)")
-                    }
-                }
             }
         }
     }
-    
+
 }

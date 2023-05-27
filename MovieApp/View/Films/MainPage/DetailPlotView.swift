@@ -40,7 +40,7 @@ struct DetailPlotView: View {
                         Text(movie.description)
                             .multilineTextAlignment(.leading)
                         
-                        NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie)) {
+                        NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie, collectionName: "General")) {
                             Text("Learn More")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)

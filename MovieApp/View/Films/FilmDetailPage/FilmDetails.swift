@@ -53,6 +53,7 @@ struct FilmDetails: View {
                                         .cornerRadius(15)
                                         .aspectRatio(contentMode: .fill)
                                         .frame(height: size.height/2)
+                                        .padding(.top, 45)
                                     
                                     ZStack (alignment: .center){
                                         RoundedRectangle(cornerRadius: 15)
@@ -68,7 +69,7 @@ struct FilmDetails: View {
                                                 .aspectRatio(contentMode: .fit)
                                                 .foregroundColor(.blue)
                                                 .padding(.bottom, 2)
-                                            Text("\(film.rating, specifier: "%.1f")")
+                                            Text("\(film.rating ?? 0.0, specifier: "%.1f")")
                                                 .frame(alignment: .leading)
                                                 .font(.system(size: 16))
                                                 .fontWeight(.bold)
@@ -196,7 +197,7 @@ struct FilmDetails: View {
                                                 .padding(.leading, 12)
                                             
                                             VStack{
-                                                Text("\(film.rating, specifier: "%.1f")")
+                                                Text("\(film.rating ?? 0.0, specifier: "%.1f")")
                                                     .font(.system(size: 60, weight: .bold))
                                                     .foregroundColor(.blue)
                                                     .padding(.top, 15)
@@ -325,7 +326,7 @@ struct FilmDetails: View {
                                                 Text("Film Criticism")
                                                     .font(.title3.bold())
                                                 Spacer()
-                                                NavigationLink(destination: ReviewList(viewModel: viewModel, film: film)) {
+                                                NavigationLink(destination: FilmCriticismList(viewModel: viewModel, film: film)) {
                                                     Text("See More")
                                                         .font(.system(size: 16, weight: .semibold))
                                                         .foregroundColor(.blue)
@@ -335,48 +336,96 @@ struct FilmDetails: View {
                                             
                                             ScrollView(.horizontal, showsIndicators: false){
                                                 HStack(alignment: .top, spacing: 12){
-                                                    ForEach(film.reviews?.prefix(3) ?? [Review(
-                                                        reviewTitle: "",
-                                                        reviewAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""),
-                                                        reviewDescription: "", reviewRate: "")]){ review in
-                                                            NavigationLink(destination: ReviewView(review: review)) {
+                                                    ForEach(film.criticisms?.prefix(3) ?? [FilmCriticism(criticismTitle: "", criticismAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""), criticismDescription: "", actorRate: 0, directingRate: 0, soundRate: 0, scriptRate: 0)]){ crit in
+                                                            NavigationLink(destination: FilmCriticismView(criticism: crit)) {
                                                                 ZStack{
                                                                     RoundedRectangle(cornerRadius: 15)
                                                                         .fill(self.scheme == .dark ? .thinMaterial : .thickMaterial)
                                                                         .frame(width: size.width - 100,
-                                                                               height: 150,
+                                                                               height: 200,
                                                                                alignment: .leading)
-                                                                    
+
                                                                     VStack(alignment: .leading, spacing: 5){
                                                                         HStack(spacing: 8){
                                                                             Image("user")
                                                                                 .resizable()
                                                                                 .aspectRatio(contentMode: .fit)
                                                                                 .frame(width: 20, height: 20)
-                                                                            Text(review.reviewAuthor.username ?? "")
+                                                                                .padding(.leading, 10)
+
+                                                                            Text(crit.criticismAuthor.username ?? "")
                                                                                 .bold()
                                                                                 .font(.system(size: 16))
                                                                                 .fontWeight(.bold)
                                                                                 .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+
+                                                                            Spacer()
                                                                         }
                                                                         .padding(.top, 10)
                                                                         .padding(.horizontal, 8)
-                                                                        
-                                                                        Text(review.reviewTitle)
+
+                                                                        HStack{
+                                                                            VStack(alignment: .leading){
+                                                                                HStack{
+                                                                                    Text("Actor play:")
+                                                                                        .fontWeight(.semibold)
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                    Text("\(crit.actorRate)/10")
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                }
+                                                                                HStack{
+                                                                                    Text("Directing:")
+                                                                                        .fontWeight(.semibold)
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                    Text("\(crit.directingRate)/10")
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                }
+                                                                            }
+
+                                                                            VStack(alignment: .leading){
+                                                                                HStack{
+                                                                                    Text("Sound Engineering:")
+                                                                                        .fontWeight(.semibold)
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                    Text("\(crit.soundRate)/10")
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                }
+
+                                                                                HStack{
+                                                                                    Text("Literecy of the script:")
+                                                                                        .fontWeight(.semibold)
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                    Text("\(crit.scriptRate)/10")
+                                                                                        .font(.system(size: 14))
+                                                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        .padding(.top, 16)
+                                                                        .padding(.horizontal)
+
+                                                                        Text(crit.criticismTitle)
                                                                             .lineLimit(1)
                                                                             .frame(width: size.width - 150)
                                                                             .font(.system(size: 16, weight: .bold))
                                                                             .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                                                             .padding(.top, 15)
-                                                                            .padding(.horizontal, 8)
-                                                                        Text(review.reviewDescription)
+                                                                            .padding(.horizontal, 10)
+                                                                        Text(crit.criticismDescription)
                                                                             .lineLimit(3)
                                                                             .frame(width: size.width - 150)
                                                                             .font(.system(size: 14, weight: .regular))
                                                                             .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                                                             .multilineTextAlignment(.leading)
                                                                             .padding(.bottom, 10)
-                                                                            .padding(.horizontal, 8)
+                                                                            .padding(.horizontal, 10)
                                                                     }
                                                                 }
                                                             }
@@ -387,7 +436,7 @@ struct FilmDetails: View {
                                                 .padding(.bottom, 40)
                                             }
                                         }
-                                        .opacity(reviewed ? 0 : 1)
+                                        //.opacity(reviewed ? 0 : 1)
                                     }
                                 }
                             }
@@ -404,7 +453,7 @@ struct FilmDetails: View {
             viewModel.fetchFilmDetails(for: film)
         }
         .sheet(isPresented: $isRatingFormPresented) {
-            RatingView(viewModel: viewModel, film: film)
+            RatingView(film: film)
         }
     }
 }
@@ -427,36 +476,48 @@ struct Blur: UIViewRepresentable {
 
 struct FilmDetails_Previews: PreviewProvider {
     static var previews: some View {
-        let film = Movie(movieTitle: "Zhau zhurek myn bala",
-                         imageName: "Movie1",
-                         genre: "Drama, Adventure, War, Historical",
-                         description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
-                         cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov",
-                         director: "Akan Satayev",
-                         releaseDate: "2012",
-                         ageLimit: "16",
-                         runtime: "133",
-                         rating: 8.0,
-                         ratingCount: 7,
-                         reviews: [
-                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
-                                   reviewRate: "positive"),
-                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
-                                   reviewRate: "positive"),
-                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
-                                   reviewRate: "negative"),
-                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
-                                   reviewRate: "neutral")
-                         ],
-                         videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f")
+        let film =
+        Movie(movieTitle: "Zhau zhurek myn bala",
+              imageName: "Movie1",
+              genre: "Drama, Adventure, War, Historical",
+              collection: ["2010-2019"],
+              description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+              cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov",
+              director: "Akan Satayev",
+              releaseDate: "2012",
+              ageLimit: "16",
+              runtime: "133",
+              rating: 8.0,
+              ratingCount: 7,
+              reviews: [
+                Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                       reviewAuthor:
+                        User(uid: "",
+                             username: "kairatov",
+                             email: "kairatovk@mail.ru",
+                             firstName: "Kairat",
+                             lastName: "Kairatov",
+                             phoneNumber: "77777777777"),
+                       reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                       reviewRate: "positive"),
+                Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                       reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                       reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                       reviewRate: "neutral"),
+                Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                       reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                       reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                       reviewRate: "negative"),
+                Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                       reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                       reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                       reviewRate: "neutral")
+              ],
+              criticisms: [
+                 FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7),
+                 FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7)
+              ],
+              videoURL: "https://www.dropbox.com/s/60ogynxyne5eyig/ZXhATkf7.mp4?raw=1")
         
         let viewModel = FilmDetailViewModel()
         viewModel.reviews = film.reviews!

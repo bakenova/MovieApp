@@ -54,6 +54,7 @@ struct VideoView_Previews: PreviewProvider {
         VideoView(video: Movie(movieTitle: "Zhau zhurek myn bala",
                                imageName: "Movie1",
                                genre: "Drama, Adventure, War, Historical",
+                               collection: ["2010-2019"],
                                description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
                                cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov",
                                director: "Akan Satayev",

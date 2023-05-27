@@ -24,6 +24,7 @@ struct LoginRegister: View {
     @State var StatusMessage = ""
      
     @Binding var isUserCurrentlyLoggedOut : Bool
+    @Environment(\.colorScheme) var scheme
      
     var body: some View {
         ScrollView {
@@ -47,11 +48,10 @@ struct LoginRegister: View {
                         TextField("Email", text: $email)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
-                        
                         SecureField("Password", text: $password)
                     }
                     .padding()
-                    .background(Color.white)
+                    .background(scheme == .dark ? Color.black : Color.white)
                     .cornerRadius(15)
                      
                     Button {
@@ -103,7 +103,7 @@ struct LoginRegister: View {
                         SecureField("Password", text: $password)
                     }
                     .padding()
-                    .background(Color.white)
+                    .background(scheme == .dark ? Color.black : Color.white)
                     .cornerRadius(10)
                      
                     Button {
@@ -207,6 +207,6 @@ struct LoginRegister: View {
 struct LoginRegister_Previews: PreviewProvider {
     @State static var isUserCurrentlyLoggedOut = false
     static var previews: some View {
-        LoginRegister(isUserCurrentlyLoggedOut: $isUserCurrentlyLoggedOut)
+        LoginRegister(isUserCurrentlyLoggedOut: $isUserCurrentlyLoggedOut).preferredColorScheme(.light)
     }
 }

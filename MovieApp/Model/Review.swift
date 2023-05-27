@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Review: Identifiable {
+struct Review: Identifiable, Codable {
     var id = UUID().uuidString
     var reviewTitle: String
     var reviewAuthor: User

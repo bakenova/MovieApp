@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct Profile: View {
-    @State var currentTab: String = "Comics"
+    @State var currentTab: String = "Profile"
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
+    @ObservedObject private var vm = UserManager()
     
     var profileSettings: [String] = ["My Account", "Privacy & Policy", "Subscription Info", "Payment Info", "Delete Account"]
     
@@ -32,13 +33,13 @@ struct Profile: View {
                     }
                     .padding()
                     
-                    Text("Arailym")
+                    Text(vm.user?.username ?? "")
                         .font(.title2)
                         .fontWeight(.black)
                         .foregroundColor(.primary)
                         .padding(.bottom, 5)
                     
-                    Text(verbatim: "arailym.bakenovaa@gmail.com")
+                    Text(verbatim: vm.user?.email ?? "")
                         .font(.body)
                         .foregroundColor(.gray)
                     
@@ -46,7 +47,7 @@ struct Profile: View {
                 
                 ZStack(){
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(self.scheme == .dark ? .gray : .yellow.opacity(0.2))
+                        .fill(self.scheme == .dark ? .gray : .blue.opacity(0.2))
                         .opacity(self.scheme == .dark ? 0.5 : 1)
                         .ignoresSafeArea()
                     
@@ -113,7 +114,7 @@ struct Profile: View {
                         .padding(.vertical, 0)
                         .padding(.horizontal, 16)
                         
-                        ButtonView(title: "Sign Out", imageName: "rectangle.portrait.and.arrow.right", color: Color(.systemOrange), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
+                        ButtonView(title: "Sign Out", imageName: "rectangle.portrait.and.arrow.right", color: Color(.systemBlue), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
                             .padding(.leading, 60)
                             .padding(.vertical, 30)
                     }
@@ -127,7 +128,7 @@ struct Profile: View {
 struct Comics_Previews: PreviewProvider {
     static var previews: some View {
         Profile()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
 

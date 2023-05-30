@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Review: Identifiable {
+struct Review: Identifiable, Codable {
     var id = UUID().uuidString
     var reviewTitle: String
-    var reviewAuthor: String
-    var reviewAuthorImage: String
+    var reviewAuthor: User
     var reviewDescription: String
+    var reviewRate: String
 }

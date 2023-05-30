@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct Search: View {
     
+    @StateObject var viewModel = FilmDetailViewModel()
+    @State var currentTab: String = "Search"
     @State private var searchText = ""
     @State private var selectedTab = 0
     @State private var isEditing = false
@@ -27,7 +30,7 @@ struct Search: View {
     let itemsM: [Song] = songCollection
     
     let movieList: [MovieSelection] = movieSelectionLists
-    let musicList: [MusicSelection] = musicCollectionTopPick
+    let musicList: [MusicSelection] = []
     
     var body: some View {
         
@@ -65,7 +68,7 @@ struct Search: View {
                         
                         if selectedTab == 0 {
                             List(items.filter({ searchText.isEmpty ? true : $0.movieTitle.localizedCaseInsensitiveContains(searchText) })) { item in
-                                NavigationLink(destination: FilmDetails(film: item)) {
+                                NavigationLink(destination: FilmDetails(viewModel: viewModel, film: item, collectionName: "General")) {
                                     MovieListView(item: item)
                                 }
                             }
@@ -87,7 +90,7 @@ struct Search: View {
                                     Spacer()
                                     Button("See More"){}
                                         .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(.orange)
+                                        .foregroundColor(.blue)
                                 }
                                 .padding(.top, 20)
                                 .padding(.horizontal, 20)
@@ -95,7 +98,7 @@ struct Search: View {
                                 ScrollView(.horizontal, showsIndicators: false){
                                     HStack(alignment: .top, spacing: 12){
                                         ForEach(movieList.prefix(3)){ selection in
-                                            NavigationLink(destination: ReviewView()) {
+                                            NavigationLink(destination: FilmListView()) {
                                                 ZStack{
                                                     RoundedRectangle(cornerRadius: 15)
                                                         .fill(.ultraThinMaterial)
@@ -104,7 +107,7 @@ struct Search: View {
                                                                alignment: .leading)
 
                                                     VStack(alignment: .center, spacing: 5){
-                                                        Image(selection.imageName)
+                                                        WebImage(url: URL(string: selection.imageName))
                                                             .resizable()
                                                             .aspectRatio(contentMode: .fit)
                                                             .cornerRadius(15)
@@ -184,7 +187,7 @@ struct Search: View {
                                 ScrollView(.horizontal, showsIndicators: false){
                                     HStack(alignment: .top, spacing: 12){
                                         ForEach(musicList.prefix(3)){ selection in
-                                            NavigationLink(destination: ReviewView()) {
+                                            NavigationLink(destination: PlaylistView(playlist: selection)) {
                                                 ZStack{
                                                     RoundedRectangle(cornerRadius: 15)
                                                         .fill(.ultraThinMaterial)
@@ -193,7 +196,7 @@ struct Search: View {
                                                                alignment: .leading)
 
                                                     VStack(alignment: .center, spacing: 5){
-                                                        Image(selection.imageName)
+                                                        WebImage(url: URL(string: selection.imageName))
                                                             .resizable()
                                                             .aspectRatio(contentMode: .fit)
                                                             .cornerRadius(15)

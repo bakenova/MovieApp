@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PlaylistView: View {
     
     var playlist: MusicSelection
+    
+    @ObservedObject var viewModel = MusicViewModel()
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -32,7 +36,7 @@ struct PlaylistView: View {
                 ForEach(playlist.playlists){ album in
                     NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
                         VStack(alignment: .leading){
-                            Image(album.imageName)
+                            WebImage(url: URL(string: album.imageName))
                                 .resizable()
                                 .frame(width: 180, height: 180)
                                 .aspectRatio(contentMode: .fit)
@@ -53,65 +57,98 @@ struct PlaylistView: View {
                     }
                 }
             }
-            .padding(.leading, 8)
+            .padding(.horizontal, 20)
         }.scrollIndicators(.hidden)
     }
 }
 
 struct PlaylistView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaylistView(playlist: MusicSelection(title: "Replay to your top songs", imageName: "m23", playlists: [
-            ArtistPlaylist(
-                artistName: "Dose",
-                albumName: "Пока",
-                songs: [
-                    Song(name: "Губы", artist: "Dose ", imageName: "Солнце золотое", releaseDate: "2021", album: "Пока", duration: 185),
-                    Song(name: "В плену", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album: "Пока", duration: 185),
-                    Song(name: "Пепел", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
-                    Song(name: "Доверяй", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
-                    Song(name: "Сдаюсь", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album: "Пока", duration: 185),
-                    Song(name: "Ветер", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
-                    Song(name: "Компас", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185),
-                    Song(name: "Дома", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185)
-                ],
-                releaseDate: "2021",
-                genre: "Pop",
-                imageName: "Пока",
-                runtime: "24"
-            ),
-            ArtistPlaylist(
-                artistName: "Dose",
-                albumName: "Солнце золотое",
-                songs: [
-                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое", duration: 185)
-                ],
-                releaseDate: "2021",
-                genre: "Pop",
-                imageName: "Солнце золотое",
-                runtime: "3"
-            ),
-            ArtistPlaylist(
-                artistName: "Dose",
-                albumName: "Солнце золотое",
-                songs: [
-                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое", duration: 185)
-                ],
-                releaseDate: "2021",
-                genre: "Pop",
-                imageName: "Солнце золотое",
-                runtime: "3"
-            ),
-            ArtistPlaylist(
-                artistName: "Dose",
-                albumName: "Солнце золотое",
-                songs: [
-                    Song(name: "Солнце золотое", artist: "Dose ", imageName: "Пока", releaseDate: "2021", album: "Солнце золотое", duration: 185)
-                ],
-                releaseDate: "2021",
-                genre: "Pop",
-                imageName: "Солнце золотое",
-                runtime: "3"
-            )
-        ])).preferredColorScheme(.dark)
+        PlaylistView(playlist:
+                        MusicSelection(id: "Rewind Top Songs 2022",
+                                       title: "Rewind Top Songs 2022",
+                                       imageName: "https://www.dropbox.com/s/qu3qqbxbfs24h51/rts.jpeg?dl=1",
+                                       playlists:
+                                        [ArtistPlaylist(
+                                            id: UUID().uuidString,
+                                            artistName: "Hiro",
+                                            albumName: "Миллион событий",
+                                            songs: [
+                                                Song(id: UUID().uuidString,
+                                                     name: "Миллион событий", artist: "Hiro", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185, audioURL: "")
+                                            ],
+                                            releaseDate: "2023",
+                                            genre: "Hip-Hop/Rap",
+                                            imageName: "Миллион событий",
+                                            runtime: "3"
+                                        ),
+                                         ArtistPlaylist(
+                                            id: UUID().uuidString,
+                                            artistName: "Miras Zhugunusov",
+                                            albumName: "Зымыран",
+                                            songs: [
+                                                Song(id: UUID().uuidString,
+                                                     name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185, audioURL: "")
+                                            ],
+                                            releaseDate: "2021",
+                                            genre: "Pop",
+                                            imageName: "Зымыран",
+                                            runtime: "3"
+                                         ),
+                                         ArtistPlaylist(
+                                            id: UUID().uuidString,
+                                            artistName: "RaiM",
+                                            albumName: "4 dongelek",
+                                            songs: [
+                                                Song(id: UUID().uuidString,
+                                                     name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: "")
+                                            ],
+                                            releaseDate: "2021",
+                                            genre: "Pop",
+                                            imageName: "4 dongelek",
+                                            runtime: "21"
+                                         ),
+                                         ArtistPlaylist(
+                                            id: UUID().uuidString,
+                                            artistName: "V $ X V PRiNCE",
+                                            albumName: "NERVЫ",
+                                            songs: [
+                                                Song(id: UUID().uuidString,
+                                                     name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                                                Song(id: UUID().uuidString,
+                                                     name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: "")
+                                            ],
+                                            releaseDate: "2021",
+                                            genre: "Hip-Hop/Rap",
+                                            imageName: "NERVЫ",
+                                            runtime: "30"
+                                            
+                                         )])).preferredColorScheme(.dark)
     }
 }

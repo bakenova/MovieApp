@@ -6,10 +6,21 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+
+import SwiftUI
 
 struct ContentView: View {
+    @State private var isUserCurrentlyLoggedOut: Bool = false
+    
     var body: some View {
-        Home()
+        if self.isUserCurrentlyLoggedOut {
+            Films(isUserCurrentlyLoggedOut: $isUserCurrentlyLoggedOut)
+        }else {
+            LoginRegister(isUserCurrentlyLoggedOut: $isUserCurrentlyLoggedOut)
+        }
     }
 }
 

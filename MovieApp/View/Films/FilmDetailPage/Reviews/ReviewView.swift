@@ -16,12 +16,39 @@ struct ReviewView: View {
         GeometryReader{ proxy in
             let size = proxy.size
             VStack(alignment: .leading, spacing: 5){
+                switch review.reviewRate {
+                case "positive":
+                    Capsule()
+                        .fill(Color.green)
+                        .frame(width: size.width - 30, height: 10)
+                        .padding(.top, 30)
+                        .padding(.horizontal, 10)
+                case "negative":
+                    Capsule()
+                        .fill(Color.red)
+                        .frame(width: size.width - 30, height: 10)
+                        .padding(.top, 30)
+                        .padding(.horizontal, 10)
+                case "neutral":
+                    Capsule()
+                        .fill(Color.gray)
+                        .frame(width: size.width - 30, height: 10)
+                        .padding(.top, 30)
+                        .padding(.horizontal, 10)
+                default:
+                    Capsule()
+                        .fill(Color.gray)
+                        .frame(width: size.width - 30, height: 10)
+                        .padding(.top, 30)
+                        .padding(.horizontal, 10)
+                }
+                
                 HStack(spacing: 10){
-                    Image(review.reviewAuthorImage)
+                    Image("user")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)
-                    Text(review.reviewAuthor)
+                    Text(review.reviewAuthor.username ?? "")
                         .bold()
                         .font(.system(size: 24))
                         .fontWeight(.bold)
@@ -46,6 +73,8 @@ struct ReviewView: View {
                         .padding(.top, 10)
                 }.frame(width: size.width - 24)
             }
+            //.padding(.top, -60)
+            .navigationBarTitle("", displayMode: .inline)
         }
     }
 }
@@ -53,9 +82,9 @@ struct ReviewView: View {
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
         ReviewView(review: Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                  reviewAuthor: "Arailym Bakenova",
-                                  reviewAuthorImage: "user",
-                                  reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.")
+                                  reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                                  reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                                  reviewRate: "positive")
         ).preferredColorScheme(.dark)
     }
 }

@@ -47,7 +47,7 @@ struct Profile: View {
                 
                 ZStack(){
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(self.scheme == .dark ? .gray : .yellow.opacity(0.2))
+                        .fill(self.scheme == .dark ? .gray : .blue.opacity(0.2))
                         .opacity(self.scheme == .dark ? 0.5 : 1)
                         .ignoresSafeArea()
                     
@@ -114,7 +114,7 @@ struct Profile: View {
                         .padding(.vertical, 0)
                         .padding(.horizontal, 16)
                         
-                        ButtonView(title: "Sign Out", imageName: "rectangle.portrait.and.arrow.right", color: Color(.systemOrange), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
+                        ButtonView(title: "Sign Out", imageName: "rectangle.portrait.and.arrow.right", color: Color(.systemBlue), cornerRadius: 15, width: 280, height: 60, fontSize: 24)
                             .padding(.leading, 60)
                             .padding(.vertical, 30)
                     }
@@ -128,7 +128,7 @@ struct Profile: View {
 struct Comics_Previews: PreviewProvider {
     static var previews: some View {
         Profile()
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
 

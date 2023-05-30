@@ -47,8 +47,8 @@ class UserManager: ObservableObject {
             self.errorMessage = "Data: \(data.description)"
             let uid = data["uid"] as? String ?? ""
             let email = data["email"] as? String ?? ""
-            let fName = data["fName"] as? String ?? ""
-            let lName = data["lName"] as? String ?? ""
+            let fName = data["fname"] as? String ?? ""
+            let lName = data["lname"] as? String ?? ""
             let username = data["username"] as? String ?? ""
             let phoneNumber = data["phoneNumber"] as? String ?? ""
              

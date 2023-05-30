@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-struct MusicSelection: Identifiable{
-    var id = UUID().uuidString
+struct MusicSelection: Identifiable, Codable {
+    var id: String
     var title: String
     var imageName: String
     var playlists: [ArtistPlaylist]
@@ -20,75 +22,102 @@ struct MusicSelection: Identifiable{
 
 
 var musicCollectionTopPick: [MusicSelection] = [
-    MusicSelection(title: "Rewind Top Songs 2022",
-                   imageName: "rts",
-                   playlists: [ArtistPlaylist(
-                    artistName: "Hiro",
-                    albumName: "Миллион событий",
-                    songs: [
-                        Song(name: "Миллион событий", artist: "Hiro ", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185)
-                    ],
-                    releaseDate: "2023",
-                    genre: "Hip-Hop/Rap",
-                    imageName: "Миллион событий",
-                    runtime: "3"
-                ),
-                ArtistPlaylist(
-                    artistName: "Miras Zhugunusov",
-                    albumName: "Зымыран",
-                    songs: [
-                        Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185)
-                    ],
-                    releaseDate: "2021",
-                    genre: "Pop",
-                    imageName: "Зымыран",
-                    runtime: "3"
-                ),
-                ArtistPlaylist(
-                    artistName: "RaiM",
-                    albumName: "4 dongelek",
-                    songs: [
-                        Song(name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                        Song(name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                        Song(name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                        Song(name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                        Song(name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                        Song(name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                        Song(name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185)
-                    ],
-                    releaseDate: "2021",
-                    genre: "Pop",
-                    imageName: "4 dongelek",
-                    runtime: "21"
-                ),
-                ArtistPlaylist(
-                    artistName: "V $ X V PRiNCE",
-                    albumName: "NERVЫ",
-                    songs: [
-                        Song(name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                        Song(name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185)
-                    ],
-                    releaseDate: "2021",
-                    genre: "Hip-Hop/Rap",
-                    imageName: "NERVЫ",
-                    runtime: "30"
-                    
-                )]),
-    MusicSelection(title: "Made For You",
-                   imageName: "mfu",
-                   playlists: [
-                    ArtistPlaylist(
+    MusicSelection(id: "Rewind Top Songs 2022",
+                   title: "Rewind Top Songs 2022",
+                   imageName: "https://www.dropbox.com/s/qu3qqbxbfs24h51/rts.jpeg?dl=1",
+                   playlists:
+                    [ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "Hiro",
                         albumName: "Миллион событий",
                         songs: [
-                            Song(name: "Миллион событий", artist: "Hiro ", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Миллион событий", artist: "Hiro", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185, audioURL: "")
+                        ],
+                        releaseDate: "2023",
+                        genre: "Hip-Hop/Rap",
+                        imageName: "Миллион событий",
+                        runtime: "3"
+                    ),
+                     ArtistPlaylist(
+                        id: UUID().uuidString,
+                        artistName: "Miras Zhugunusov",
+                        albumName: "Зымыран",
+                        songs: [
+                            Song(id: UUID().uuidString,
+                                 name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185, audioURL: "")
+                        ],
+                        releaseDate: "2021",
+                        genre: "Pop",
+                        imageName: "Зымыран",
+                        runtime: "3"
+                     ),
+                     ArtistPlaylist(
+                        id: UUID().uuidString,
+                        artistName: "RaiM",
+                        albumName: "4 dongelek",
+                        songs: [
+                            Song(id: UUID().uuidString,
+                                 name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: "")
+                        ],
+                        releaseDate: "2021",
+                        genre: "Pop",
+                        imageName: "4 dongelek",
+                        runtime: "21"
+                     ),
+                     ArtistPlaylist(
+                        id: UUID().uuidString,
+                        artistName: "V $ X V PRiNCE",
+                        albumName: "NERVЫ",
+                        songs: [
+                            Song(id: UUID().uuidString,
+                                 name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: "")
+                        ],
+                        releaseDate: "2021",
+                        genre: "Hip-Hop/Rap",
+                        imageName: "NERVЫ",
+                        runtime: "30"
+                        
+                     )]),
+    MusicSelection(id: "Made For You",
+                   title: "Made For You",
+                   imageName: "https://www.dropbox.com/s/e405moz4gy6ggkh/mfu.jpeg?raw=1",
+                   playlists: [
+                    ArtistPlaylist(
+                        id: UUID().uuidString,
+                        artistName: "Hiro",
+                        albumName: "Миллион событий",
+                        songs: [
+                            Song(id: UUID().uuidString,
+                                 name: "Миллион событий", artist: "Hiro ", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2023",
                         genre: "Hip-Hop/Rap",
@@ -96,10 +125,12 @@ var musicCollectionTopPick: [MusicSelection] = [
                         runtime: "3"
                     ),
                     ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "Miras Zhugunusov",
                         albumName: "Зымыран",
                         songs: [
-                            Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2021",
                         genre: "Pop",
@@ -107,16 +138,24 @@ var musicCollectionTopPick: [MusicSelection] = [
                         runtime: "3"
                     ),
                     ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "RaiM",
                         albumName: "4 dongelek",
                         songs: [
-                            Song(name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                            Song(name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                            Song(name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                            Song(name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                            Song(name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                            Song(name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                            Song(name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2021",
                         genre: "Pop",
@@ -124,18 +163,28 @@ var musicCollectionTopPick: [MusicSelection] = [
                         runtime: "21"
                     ),
                     ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "V $ X V PRiNCE",
                         albumName: "NERVЫ",
                         songs: [
-                            Song(name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2021",
                         genre: "Hip-Hop/Rap",
@@ -144,25 +193,30 @@ var musicCollectionTopPick: [MusicSelection] = [
                         
                     )
                    ]),
-    MusicSelection(title: "Good Day by Korkem",
-                   imageName: "gdk",
+    MusicSelection(id: "Good Day with Korkem",
+                   title: "Good Day by Korkem",
+                   imageName: "https://www.dropbox.com/s/zbdahp53sdhhlm5/gdk.jpeg?raw=1",
                    playlists: [
                     ArtistPlaylist(
-                    artistName: "Hiro",
-                    albumName: "Миллион событий",
-                    songs: [
-                        Song(name: "Миллион событий", artist: "Hiro ", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185)
-                    ],
-                    releaseDate: "2023",
-                    genre: "Hip-Hop/Rap",
-                    imageName: "Миллион событий",
-                    runtime: "3"
-                ),
+                        id: UUID().uuidString,
+                        artistName: "Hiro",
+                        albumName: "Миллион событий",
+                        songs: [
+                            Song(id: UUID().uuidString,
+                                 name: "Миллион событий", artist: "Hiro ", imageName: "Миллион событий", releaseDate: "2023", album: "Миллион событий", duration: 185, audioURL: "")
+                        ],
+                        releaseDate: "2023",
+                        genre: "Hip-Hop/Rap",
+                        imageName: "Миллион событий",
+                        runtime: "3"
+                    ),
                     ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "Miras Zhugunusov",
                         albumName: "Зымыран",
                         songs: [
-                            Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2021",
                         genre: "Pop",
@@ -170,16 +224,24 @@ var musicCollectionTopPick: [MusicSelection] = [
                         runtime: "3"
                     ),
                     ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "RaiM",
                         albumName: "4 dongelek",
                         songs: [
-                            Song(name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                            Song(name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                            Song(name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                            Song(name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                            Song(name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185),
-                            Song(name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185),
-                            Song(name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Watcha Wanna", artist: "RaiM ", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kaif (feat. Miko)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Baila (feat. Alina Gerc)", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kolikpen", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Where are you", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album: "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Oh My Love", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Jol", artist: "RaiM", imageName: "4 dongelek", releaseDate: "2021", album:  "4 dongelek", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2021",
                         genre: "Pop",
@@ -187,18 +249,28 @@ var musicCollectionTopPick: [MusicSelection] = [
                         runtime: "21"
                     ),
                     ArtistPlaylist(
+                        id: UUID().uuidString,
                         artistName: "V $ X V PRiNCE",
                         albumName: "NERVЫ",
                         songs: [
-                            Song(name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185),
-                            Song(name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185)
+                            Song(id: UUID().uuidString,
+                                 name: "Veчnый", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Нервы", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Kozime Kara", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Танцуй со мной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Лирика", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "В этом что-то есть", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Выходной", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Татьяна", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: ""),
+                            Song(id: UUID().uuidString,
+                                 name: "Mercedes", artist: "V $ X V PRiNCE", imageName: "NERVЫ", releaseDate: "2021", album: "NERVЫ", duration: 185, audioURL: "")
                         ],
                         releaseDate: "2021",
                         genre: "Hip-Hop/Rap",

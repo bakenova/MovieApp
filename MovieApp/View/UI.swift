@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import ExpandableText
+import SDWebImageSwiftUI
 
 struct ButtonView: View {
     
@@ -47,7 +48,7 @@ struct MovieListView: View {
     
     var body: some View {
         HStack {
-            Image(item.imageName)
+            WebImage(url: URL(string: item.imageName))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 50, height: 80)
@@ -68,7 +69,7 @@ struct MovieListView: View {
                     .frame(alignment: .leading)
                     .font(.system(size: 14))
                     .fontWeight(.bold)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                     .padding(.trailing, 24)
             }
         }
@@ -80,7 +81,7 @@ struct MusicHListView: View {
     
     var body: some View {
         HStack {
-            Image(item.imageName)
+            WebImage(url: URL(string: item.imageName))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 50, height: 80)
@@ -101,7 +102,7 @@ struct MusicHListView: View {
                     .frame(alignment: .leading)
                     .font(.system(size: 14))
                     .fontWeight(.bold)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                     .padding(.trailing, 24)
             }
         }

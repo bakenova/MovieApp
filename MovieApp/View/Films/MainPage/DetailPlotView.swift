@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DetailPlotView: View {
     
@@ -24,7 +25,7 @@ struct DetailPlotView: View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false){
                 VStack{
-                    Image(movie.imageName)
+                    WebImage(url: URL(string: movie.imageName))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: currentCardSize.width, height: currentCardSize.height, alignment: .center)
@@ -40,7 +41,7 @@ struct DetailPlotView: View {
                         Text(movie.description)
                             .multilineTextAlignment(.leading)
                         
-                        NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie)) {
+                        NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie, collectionName: "General")) {
                             Text("Learn More")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -48,7 +49,7 @@ struct DetailPlotView: View {
                                 .padding(.vertical)
                                 .background{
                                     RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                        .fill(.yellow)
+                                        .fill(.blue)
                                 }
                         }
                         .padding(.top, 20)

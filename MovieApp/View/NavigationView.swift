@@ -26,13 +26,13 @@ struct NavBar: View{
                     .frame(width: 15, height: 15)
                     .background{
                         Capsule()
-                            .fill(self.currentTab == "Search" ? (self.scheme == .light ? .orange : .gray) : .gray)
+                            .fill(self.currentTab == "Search" ? (self.scheme == .light ? .blue : .gray) : .gray)
                             .opacity(0.2)
                             .frame(width: 40, height: 40)
                             .environment(\.colorScheme, .dark)
                     }
             }
-            .tint(.orange)
+            .tint(.blue)
             .padding(.horizontal)
             
             Spacer()
@@ -51,7 +51,7 @@ struct NavBar: View{
                             if currentTab == tab {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.orange, lineWidth: 1)
+                                        .stroke(Color.blue, lineWidth: 1)
                                         .matchedGeometryEffect(id: "tab", in: animation)
                                     Capsule()
                                     //.fill(self.scheme == .light ? .yellow : .gray)
@@ -80,13 +80,13 @@ struct NavBar: View{
                     .frame(width: 15, height: 15)
                     .background{
                         Capsule()
-                            .fill(self.currentTab == "Profile" ? (self.scheme == .light ? .orange : .gray) : .gray)
+                            .fill(self.currentTab == "Profile" ? (self.scheme == .light ? .blue : .gray) : .gray)
                             .opacity(0.2)
                             .frame(width: 40, height: 40)
                             .environment(\.colorScheme, .dark)
                     }
             }
-            .tint(.orange)
+            .tint(.blue)
             .padding(.horizontal)
             
         }

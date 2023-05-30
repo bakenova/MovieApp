@@ -19,9 +19,9 @@ struct ReviewList: View {
             ScrollView{
                 VStack(spacing: 20){
                     NavigationLink {
-                        NewReviewView()
+                        NewReviewView(viewModel: viewModel, film: film)
                     } label: {
-                        ButtonView(title: "Add review", imageName: "pencil.line", color: .orange, cornerRadius: 25, width: size.width/2, height: 48, fontSize: 18)
+                        ButtonView(title: "Add review", imageName: "pencil.line", color: .blue, cornerRadius: 25, width: size.width/2, height: 48, fontSize: 18)
                     }
                     .foregroundColor(.white)
                     .padding()
@@ -37,11 +37,11 @@ struct ReviewList: View {
                                 
                                 VStack(alignment: .leading, spacing: 5){
                                     HStack(spacing: 8){
-                                        Image(review.reviewAuthorImage)
+                                        Image("user")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 20, height: 20)
-                                        Text(review.reviewAuthor)
+                                        Text(review.reviewAuthor.username ?? "")
                                             .bold()
                                             .font(.system(size: 16))
                                             .fontWeight(.bold)
@@ -84,6 +84,7 @@ struct ReviewList_Previews: PreviewProvider {
         let film = Movie(movieTitle: "Zhau zhurek myn bala",
                          imageName: "Movie1",
                          genre: "Drama, Adventure, War, Historical",
+                         collection: ["2010-2019"],
                          description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
                          cast: "Asylkhan Tolepov, Ayan Utepbergen, Kuralai Anarbekova, Tlektes Meiramov, Aliya Anuarbek, Toleubek Aralbay, Eduard Ondar, Nurlan Alimzhanov, Dauren Sergazin, Artur Tolepov",
                          director: "Akan Satayev",
@@ -94,21 +95,21 @@ struct ReviewList_Previews: PreviewProvider {
                          ratingCount: 7,
                          reviews: [
                             Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: "Arailym Bakenova",
-                                   reviewAuthorImage: "user",
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                                   reviewRate: "positive"),
                             Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: "Arailym Bakenova",
-                                   reviewAuthorImage: "user",
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
+                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                                   reviewRate: "positive"),
                             Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
-                                   reviewAuthor: "Arailym Bakenova",
-                                   reviewAuthorImage: "user",
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom."),
-                            Review(reviewTitle: "The first Kazakh movie I have ever watched...",
-                                   reviewAuthor: "Ivan Ivanov",
-                                   reviewAuthorImage: "user",
-                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.")
+                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                                   reviewRate: "negative"),
+                            Review(reviewTitle: "The best work of Akyn Satayev I have ever seen!",
+                                   reviewAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"),
+                                   reviewDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",
+                                   reviewRate: "neutral")
                          ],
                          videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f")
         

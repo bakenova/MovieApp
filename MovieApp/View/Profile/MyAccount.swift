@@ -23,9 +23,7 @@ struct MyAccount: View {
     }
     
     var body: some View {
-        let user = vm.user
-        
-        GeometryReader{ proxy in
+        GeometryReader { proxy in
             Form {
                 Section(header: Text("Personal Information").foregroundColor(self.scheme == .dark ? .white : .black)) {
                     TextField("First Name", text: $firstName)
@@ -46,7 +44,7 @@ struct MyAccount: View {
                     HStack{
                         ZStack{
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(selectedMode == .system ? Color.orange : (self.scheme == .dark ? .clear : .white))
+                                .fill(selectedMode == .system ? Color.blue : (self.scheme == .dark ? .clear : .white))
                                 .frame(width: proxy.size.width/3, height: 100, alignment: .leading)
                             Text("System")
                                 .foregroundColor(selectedMode == .system ? .white : (self.scheme == .dark ? .white : .black))
@@ -58,7 +56,7 @@ struct MyAccount: View {
                         
                         ZStack{
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(selectedMode == .dark ? Color.orange : (self.scheme == .dark ? .orange : .white))
+                                .fill(selectedMode == .dark ? Color.blue : (self.scheme == .dark ? .blue : .white))
                                 .frame(width: proxy.size.width/3 - 50, height: 100, alignment: .leading)
                             Text("Dark")
                                 .foregroundColor(self.scheme == .dark ? .white : .black)
@@ -70,7 +68,7 @@ struct MyAccount: View {
                         
                         ZStack{
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(selectedMode == .light ? Color.orange : (self.scheme == .dark ? .clear : .white))
+                                .fill(selectedMode == .light ? Color.blue : (self.scheme == .dark ? .clear : .white))
                                 .frame(width: proxy.size.width/3 - 50, height: 100, alignment: .leading)
                             Text("Light")
                                 .foregroundColor(selectedMode == .light ? .white : (self.scheme == .dark ? .white : .black))
@@ -80,6 +78,14 @@ struct MyAccount: View {
                                 }
                         }
                     }
+                }
+            }
+            .onReceive(vm.$user) { user in
+                if let user = user {
+                    firstName = user.firstName ?? ""
+                    lastName = user.lastName ?? ""
+                    email = user.email ?? ""
+                    phoneNumber = user.phoneNumber ?? ""
                 }
             }
         }

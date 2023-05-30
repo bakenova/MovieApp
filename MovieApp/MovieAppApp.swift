@@ -22,10 +22,6 @@ struct MovieAppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.colorScheme) var scheme
     
-//    init() {
-//        FirebaseApp.configure()
-//    }
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

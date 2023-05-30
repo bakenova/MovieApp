@@ -16,6 +16,5 @@ struct FilmCriticism: Identifiable, Codable {
     var directingRate: Int
     var soundRate: Int
     var scriptRate: Int
+    var approved: Bool
 }
-
-var crits: [FilmCriticism] = []

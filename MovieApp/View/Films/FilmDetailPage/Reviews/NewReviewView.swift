@@ -10,6 +10,8 @@ import SwiftUI
 struct NewReviewView: View {
     
     @Environment(\.colorScheme) var scheme
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject private var vm = UserManager()
     @ObservedObject var viewModel: FilmDetailViewModel
     
@@ -81,6 +83,8 @@ struct NewReviewView: View {
                         reviewAuthorName = ""
                         reviewDescription = ""
                         reviewRate = ""
+                        
+                        presentationMode.wrappedValue.dismiss()
                     }, label: {
                         ButtonView(title: "Add Review", imageName: "square.and.pencil", color: .blue, cornerRadius: 15, width: proxy.size.width - 60, height: 50, fontSize: 16)
                             .tint(.white)
@@ -135,8 +139,8 @@ struct NewReviewView_Previews: PreviewProvider {
                        reviewRate: "neutral")
               ],
               criticisms: [
-                FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7),
-                FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7)
+                FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7, approved: true),
+                FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7, approved: true)
               ],
               videoURL: "https://www.dropbox.com/s/60ogynxyne5eyig/ZXhATkf7.mp4?raw=1")
         

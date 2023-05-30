@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import SwiftUI
 
 class FilmDetailViewModel: ObservableObject {
     @Published var movies: [Movie] = []
@@ -16,6 +17,12 @@ class FilmDetailViewModel: ObservableObject {
     @Published var popularFilms: [Movie] = []
     @Published var classicFilms: [Movie] = []
     @Published var films2010: [Movie] = []
+    @Published var generalList: [Movie] = []
+    @Published var actionFilms: [Movie] = []
+    @Published var thrillerFilms: [Movie] = []
+    @Published var comedyFilms: [Movie] = []
+    @Published var recommendations: [Movie] = []
+    @Published var festivalFilms: [Movie] = []
     
     @Published var film: Movie?
     @Published var reviews: [Review] = []
@@ -75,7 +82,7 @@ class FilmDetailViewModel: ObservableObject {
     }
     
     func fetchMovies() {
-        for collectionName in ["Classic", "Popular", "2010-2019"] {
+        for collectionName in ["Classic", "Popular", "2010-2019", "General", "Action", "Thriller", "Comedy", "Recommendation", "Festival"] {
             let collectionRef = db.collection("movies").document(collectionName).collection("films")
             
             collectionRef.getDocuments { snapshot, error in
@@ -101,6 +108,18 @@ class FilmDetailViewModel: ObservableObject {
                         self.popularFilms = fetchedMovies
                     case "2010-2019":
                         self.films2010 = fetchedMovies
+                    case "General":
+                        self.generalList = fetchedMovies
+                    case "Action":
+                        self.actionFilms = fetchedMovies
+                    case "Thriller":
+                        self.thrillerFilms = fetchedMovies
+                    case "Comedy":
+                        self.comedyFilms = fetchedMovies
+                    case "Recommendation":
+                        self.recommendations = fetchedMovies
+                    case "Festival":
+                        self.festivalFilms = fetchedMovies
                     default:
                         break
                     }
@@ -125,7 +144,7 @@ class FilmDetailViewModel: ObservableObject {
     
     func fetchCriticisms(for film: Movie) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self.film?.criticisms = film.criticisms ?? [FilmCriticism(criticismTitle: "", criticismAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""), criticismDescription: "", actorRate: 0, directingRate: 0, soundRate: 0, scriptRate: 0)]
+            self.film?.criticisms = film.criticisms ?? [FilmCriticism(criticismTitle: "", criticismAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""), criticismDescription: "", actorRate: 0, directingRate: 0, soundRate: 0, scriptRate: 0, approved: false)]
         }
     }
     
@@ -179,26 +198,6 @@ class FilmDetailViewModel: ObservableObject {
         }
     }
     
-    //    func addReview(_ review: Review, to movie: inout Movie) {
-    //        if var reviews = movie.reviews {
-    //            reviews.append(review)
-    //            movie.reviews = reviews
-    //        } else {
-    //            movie.reviews = [review]
-    //        }
-    //
-    //        // Save the updated movie object to the database or perform any other necessary operations
-    //        // For example, you can use Firestore to update the movie document:
-    //        let db = Firestore.firestore()
-    //        let movieRef = db.collection("movies").document(movie.id!)
-    //        do {
-    //            try movieRef.setData(from: movie)
-    //            // Successfully added the review to the movie
-    //        } catch let error {
-    //            // Handle the error
-    //            print("Error adding review to movie: \(error)")
-    //        }
-    //    }
     func addReview(_ review: Review, to film: Movie) {
         let db = Firestore.firestore()
 
@@ -249,4 +248,58 @@ class FilmDetailViewModel: ObservableObject {
             }
         }
     }
+    
+    func addCriticism(_ criticism: FilmCriticism, to film: Movie) {
+        let db = Firestore.firestore()
+
+        guard let movieID = film.id else {
+            print("Movie ID is missing.")
+            return
+        }
+
+        for collectionName in film.collection {
+            let collectionRef = db.collection("movies").document(collectionName).collection("films")
+
+            collectionRef.document(movieID).getDocument { (documentSnapshot, error) in
+                if let error = error {
+                    print("Error fetching movie document: \(error)")
+                    return
+                }
+
+                guard let document = documentSnapshot, document.exists else {
+                    print("Movie document does not exist.")
+                    return
+                }
+
+                do {
+                    if var movie = try documentSnapshot?.data(as: Movie.self) {
+                        if var criticisms = movie.criticisms {
+                            criticisms.append(criticism)
+                            movie.criticisms = criticisms
+                        } else {
+                            movie.criticisms = [criticism]
+                        }
+
+                        // Update the movie document with the updated criticisms array
+                        do {
+                            try collectionRef.document(movieID).setData(from: movie) { error in
+                                if let error = error {
+                                    print("Error updating movie document: \(error)")
+                                } else {
+                                    print("Movie document updated successfully.")
+                                }
+                            }
+                        } catch {
+                            print("Error updating movie document: \(error)")
+                        }
+                    }
+                } catch {
+                    print("Error decoding movie document: \(error)")
+                }
+            }
+        }
+    }
+
+    
+    
 }

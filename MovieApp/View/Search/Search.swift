@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct Search: View {
     
@@ -29,7 +30,7 @@ struct Search: View {
     let itemsM: [Song] = songCollection
     
     let movieList: [MovieSelection] = movieSelectionLists
-    let musicList: [MusicSelection] = musicCollectionTopPick
+    let musicList: [MusicSelection] = []
     
     var body: some View {
         
@@ -106,7 +107,7 @@ struct Search: View {
                                                                alignment: .leading)
 
                                                     VStack(alignment: .center, spacing: 5){
-                                                        Image(selection.imageName)
+                                                        WebImage(url: URL(string: selection.imageName))
                                                             .resizable()
                                                             .aspectRatio(contentMode: .fit)
                                                             .cornerRadius(15)
@@ -195,7 +196,7 @@ struct Search: View {
                                                                alignment: .leading)
 
                                                     VStack(alignment: .center, spacing: 5){
-                                                        Image(selection.imageName)
+                                                        WebImage(url: URL(string: selection.imageName))
                                                             .resizable()
                                                             .aspectRatio(contentMode: .fit)
                                                             .cornerRadius(15)

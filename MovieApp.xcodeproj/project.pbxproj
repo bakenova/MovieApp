@@ -62,7 +62,9 @@
 		30D9350A2A1E318C00AA5984 /* NewFilmCriticismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D935092A1E318C00AA5984 /* NewFilmCriticismView.swift */; };
 		30D9350C2A1E9A2300AA5984 /* FilmCriticismView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9350B2A1E9A2300AA5984 /* FilmCriticismView.swift */; };
 		30D9350E2A1ED33700AA5984 /* FilmCriticismList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9350D2A1ED33700AA5984 /* FilmCriticismList.swift */; };
-		30D935102A20FEA700AA5984 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 30D9350F2A20FEA700AA5984 /* FirebaseFirestoreSwift */; };
+		30D935122A2526DC00AA5984 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D935112A2526DC00AA5984 /* AsyncImageView.swift */; };
+		30D935142A2533B600AA5984 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 30D935132A2533B600AA5984 /* FirebaseFirestoreSwift */; };
+		30D935162A25372A00AA5984 /* MusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D935152A25372A00AA5984 /* MusicViewModel.swift */; };
 		30DAC63D2A0E942B0016961C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30DAC63C2A0E942B0016961C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +120,8 @@
 		30D935092A1E318C00AA5984 /* NewFilmCriticismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilmCriticismView.swift; sourceTree = "<group>"; };
 		30D9350B2A1E9A2300AA5984 /* FilmCriticismView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCriticismView.swift; sourceTree = "<group>"; };
 		30D9350D2A1ED33700AA5984 /* FilmCriticismList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCriticismList.swift; sourceTree = "<group>"; };
+		30D935112A2526DC00AA5984 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		30D935152A25372A00AA5984 /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
 		30DAC63C2A0E942B0016961C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,7 +135,7 @@
 				307043042A10FE7D00A15CD5 /* FirebaseFirestore in Frameworks */,
 				3016947A29FDB72D00D2CF84 /* ExpandableText in Frameworks */,
 				307042F62A0F9E3D00A15CD5 /* FirebaseAuth in Frameworks */,
-				30D935102A20FEA700AA5984 /* FirebaseFirestoreSwift in Frameworks */,
+				30D935142A2533B600AA5984 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +148,7 @@
 				309D3B2E2A0A6D1C00D41D37 /* ReviewsViewModel.swift */,
 				309D3B302A0B92D100D41D37 /* FilmDetailViewModel.swift */,
 				307042FC2A10B7C700A15CD5 /* UserManger.swift */,
+				30D935152A25372A00AA5984 /* MusicViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				3052684929AE3FBD00DA7678 /* Music */,
 				3052685429AF48AF00DA7678 /* Profile */,
 				302F224429F9E7A900D07FED /* Search */,
+				30D935112A2526DC00AA5984 /* AsyncImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,7 +352,7 @@
 				307042F72A0F9E3D00A15CD5 /* FirebaseDatabase */,
 				307043032A10FE7D00A15CD5 /* FirebaseFirestore */,
 				3070430C2A125F8D00A15CD5 /* SDWebImageSwiftUI */,
-				30D9350F2A20FEA700AA5984 /* FirebaseFirestoreSwift */,
+				30D935132A2533B600AA5984 /* FirebaseFirestoreSwift */,
 			);
 			productName = MovieApp;
 			productReference = 3052682829AA1D9100DA7678 /* MovieApp.app */;
@@ -438,6 +444,7 @@
 				30BC7F7E29FF5A340067436B /* ReviewView.swift in Sources */,
 				3022DC562A00B01400933C03 /* Privacy.swift in Sources */,
 				30D935062A1E30D000AA5984 /* DetailPlotView.swift in Sources */,
+				30D935162A25372A00AA5984 /* MusicViewModel.swift in Sources */,
 				30BC7F7F29FF5A340067436B /* Music.swift in Sources */,
 				30BC7F8029FF5A340067436B /* SongDetailView.swift in Sources */,
 				307042FD2A10B7C700A15CD5 /* UserManger.swift in Sources */,
@@ -449,6 +456,7 @@
 				30BC7F8429FF5A340067436B /* SubscriptionInfo.swift in Sources */,
 				30BC7F8529FF5A340067436B /* PaymentInfo.swift in Sources */,
 				30BC7F8629FF5A340067436B /* DeleteAccount.swift in Sources */,
+				30D935122A2526DC00AA5984 /* AsyncImageView.swift in Sources */,
 				30D9350A2A1E318C00AA5984 /* NewFilmCriticismView.swift in Sources */,
 				30BC7F9529FFC84D0067436B /* PlaylistDetailView.swift in Sources */,
 				30BC7F8729FF5A340067436B /* Search.swift in Sources */,
@@ -587,6 +595,7 @@
 				DEVELOPMENT_TEAM = R5539S8Y27;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -617,6 +626,7 @@
 				DEVELOPMENT_TEAM = R5539S8Y27;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -712,7 +722,7 @@
 			package = 3070430B2A125F8D00A15CD5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
-		30D9350F2A20FEA700AA5984 /* FirebaseFirestoreSwift */ = {
+		30D935132A2533B600AA5984 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 307042F42A0F9E3D00A15CD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;

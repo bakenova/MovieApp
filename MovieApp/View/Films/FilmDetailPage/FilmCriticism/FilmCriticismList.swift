@@ -19,20 +19,20 @@ struct FilmCriticismList: View {
             ScrollView{
                 VStack(spacing: 20){
                     NavigationLink {
-                        NewFilmCriticismView()
+                        NewFilmCriticismView(viewModel: viewModel, film: film)
                     } label: {
                         ButtonView(title: "Add review", imageName: "pencil.line", color: .blue, cornerRadius: 25, width: size.width/2, height: 48, fontSize: 18)
                     }
                     .foregroundColor(.white)
                     .padding()
 
-                    ForEach(film.criticisms!){ crit in
+                    ForEach(film.criticisms!.filter({ $0.approved })){ crit in
                         NavigationLink(destination: FilmCriticismView(criticism: crit)) {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 15)
                                     .fill(.thinMaterial)
                                     .frame(width: size.width - 20,
-                                           height: 200,
+                                           height: 220,
                                            alignment: .leading)
                                 
                                 VStack(alignment: .leading, spacing: 5){
@@ -95,7 +95,7 @@ struct FilmCriticismList: View {
                                         }
                                     }
                                     .padding(.top, 16)
-                                    .padding(.horizontal)
+                                    .padding(.horizontal, 10)
 
                                     Text(crit.criticismTitle)
                                         .lineLimit(1)
@@ -159,8 +159,8 @@ struct FilmCriticismList_Previews: PreviewProvider {
                                    reviewRate: "neutral")
                          ],
                          criticisms: [
-                            FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7),
-                            FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7)
+                            FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7, approved: true),
+                            FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7, approved: true)
                          ],
                          videoURL: "https://www.kapwing.com/videos/644d19ef7288c4001879b98f")
         

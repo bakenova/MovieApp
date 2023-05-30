@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DetailPlotView: View {
     
@@ -24,7 +25,7 @@ struct DetailPlotView: View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false){
                 VStack{
-                    Image(movie.imageName)
+                    WebImage(url: URL(string: movie.imageName))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: currentCardSize.width, height: currentCardSize.height, alignment: .center)

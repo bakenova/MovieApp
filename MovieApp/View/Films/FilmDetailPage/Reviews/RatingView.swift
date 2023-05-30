@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct RatingView: View {
     @ObservedObject private var viewModel = FilmDetailViewModel()
@@ -22,7 +23,7 @@ struct RatingView: View {
                 .font(.largeTitle.bold())
                 .frame(width: proxy.size.width - 30, alignment: .leading)
                 
-                Image(film.imageName)
+                WebImage(url: URL(string: film.imageName))
                     .resizable()
                     .frame(width: 250, height: 350, alignment: .center)
                     .padding(.bottom, 20)

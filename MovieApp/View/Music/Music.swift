@@ -6,25 +6,26 @@
 //
 
 import SwiftUI
+import Firebase
+import SDWebImageSwiftUI
 
 struct Music: View {
     @State var currentTab: String = "Music"
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
     
-    let musicPlaylist: [MusicSelection] = musicCollectionTopPick
+    @StateObject var viewModel = MusicViewModel()
     
     let artistAlbum: [ArtistPlaylist] = playlistArtist
     let artist = artistSample
-
     
     var body: some View {
         NavigationView{
             ScrollView{
-                VStack{
-                    //Top Picks
-                    VStack{
-                        HStack(alignment: .top){
+                VStack {
+                    // Top Picks
+                    VStack {
+                        HStack(alignment: .top) {
                             Text("Top Picks")
                                 .font(.title.bold())
                             Spacer()
@@ -33,34 +34,34 @@ struct Music: View {
                         .padding(.horizontal, 20)
                         
                         ScrollView(.horizontal) {
-                            HStack{
-                                ForEach(musicPlaylist){ music in
+                            HStack {
+                                ForEach(viewModel.musicSelections, id: \.id) { music in
                                     NavigationLink(destination: PlaylistView(playlist: music)) {
-                                        VStack(alignment: .leading){
+                                        VStack(alignment: .leading) {
                                             Text(music.title)
                                                 .font(.system(size: 14, weight: .semibold))
                                                 .multilineTextAlignment(.leading)
                                                 .frame(width: 180, height: 25, alignment: .topLeading)
                                                 .foregroundColor(Color.gray)
-                                            Image(music.imageName)
+                                            WebImage(url: URL(string: music.imageName))
                                                 .resizable()
                                                 .frame(width: 200, height: 250)
                                                 .aspectRatio(contentMode: .fit)
                                                 .cornerRadius(15)
-                                            
                                         }
                                         .padding(.horizontal, 2)
                                     }
                                 }
                             }
                             .padding(.leading, 16)
-                        }.scrollIndicators(.hidden)
+                        }
+                        .scrollIndicators(.hidden)
                     }
                     
-                    //Recently Played
-                    VStack{
-                        HStack(alignment: .top){
-                            Text("Recently played")
+                    // Popular
+                    VStack {
+                        HStack(alignment: .top) {
+                            Text("Popular")
                                 .font(.title.bold())
                             Image(systemName: "chevron.forward")
                                 .foregroundColor(.blue)
@@ -71,11 +72,11 @@ struct Music: View {
                         .padding(.horizontal, 20)
                         
                         ScrollView(.horizontal) {
-                            HStack{
-                                ForEach(artistAlbum.prefix(4)){ album in
+                            HStack {
+                                ForEach(viewModel.artistPlaylists.prefix(4)) { album in
                                     NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
-                                        VStack(alignment: .leading){
-                                            Image(album.imageName)
+                                        VStack(alignment: .leading) {
+                                            WebImage(url: URL(string: album.imageName))
                                                 .resizable()
                                                 .frame(width: 150, height: 150)
                                                 .aspectRatio(contentMode: .fit)
@@ -96,13 +97,14 @@ struct Music: View {
                                 }
                             }
                             .padding(.leading, 16)
-                        }.scrollIndicators(.hidden)
+                        }
+                        .scrollIndicators(.hidden)
                     }
                     
                     //More from Artist
                     VStack{
                         HStack(alignment: .top, spacing: 8){
-                            Image(artist.imageName)
+                            WebImage(url: URL(string: artist.imageName))
                                 .resizable()
                                 .frame(width: 60, height: 60, alignment: .leading)
                                 .aspectRatio(contentMode: .fit)
@@ -134,9 +136,9 @@ struct Music: View {
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(artist.albums.prefix(4)){ artist in
-                                    NavigationLink(destination: SongDetailView(song:Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185))) {
+                                    NavigationLink(destination: SongDetailView(song:Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185, audioURL: ""))) {
                                         VStack(alignment: .leading){
-                                            Image(artist.imageName)
+                                            WebImage(url: URL(string: artist.imageName))
                                                 .resizable()
                                                 .frame(width: 150, height: 150)
                                                 .aspectRatio(contentMode: .fit)
@@ -178,7 +180,7 @@ struct Music: View {
                                 ForEach(artistAlbum.prefix(4)){ album in
                                     NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
                                         VStack(alignment: .leading){
-                                            Image(album.imageName)
+                                            WebImage(url: URL(string: album.imageName))
                                                 .resizable()
                                                 .frame(width: 150, height: 150)
                                                 .aspectRatio(contentMode: .fit)
@@ -206,8 +208,8 @@ struct Music: View {
                     let categories = categoriesSample
                     
                     let columns = [
-                            GridItem(.flexible()),
-                            GridItem(.flexible())
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
                     ]
                     VStack(alignment:.leading){
                         HStack(alignment: .top){
@@ -243,6 +245,13 @@ struct Music: View {
                     }
                 }
             }
+            .onAppear {
+                viewModel.fetchData()
+                viewModel.fetchArtistPlaylists()
+            }
+            .onDisappear {
+                viewModel.stopListening()
+            }
         }
     }
 }
@@ -253,3 +262,4 @@ struct Music_Previews: PreviewProvider {
             .preferredColorScheme(.light)
     }
 }
+

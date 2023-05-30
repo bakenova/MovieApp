@@ -8,11 +8,11 @@
 import SwiftUI
 import AVKit
 import ExpandableText
-import AVKit
+import SDWebImageSwiftUI
 
 struct FilmDetails: View {
     @State private var isPlaying = false
-    @ObservedObject var viewModel: FilmDetailViewModel
+    @ObservedObject var viewModel = FilmDetailViewModel()
     @Environment(\.colorScheme) var scheme
     @State private var isRatingFormPresented = false
     
@@ -34,7 +34,7 @@ struct FilmDetails: View {
                 ZStack{
                     // MARK: - Background
                     if let film = viewModel.film {
-                        Image(film.imageName)
+                        WebImage(url: URL(string: film.imageName))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .cornerRadius(15)
@@ -48,7 +48,7 @@ struct FilmDetails: View {
                             VStack(spacing: 20) {
                                 // MARK: - Image and rating
                                 ZStack(alignment: .trailing) {
-                                    Image(film.imageName)
+                                    WebImage(url: URL(string: film.imageName))
                                         .resizable()
                                         .cornerRadius(15)
                                         .aspectRatio(contentMode: .fill)
@@ -299,7 +299,7 @@ struct FilmDetails: View {
                                                                             .font(.system(size: 16, weight: .bold))
                                                                             .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                                                             .padding(.top, 15)
-                                                                            .padding(.horizontal, 10)
+                                                                            .padding(.horizontal, 20)
                                                                         Text(review.reviewDescription)
                                                                             .lineLimit(3)
                                                                             .frame(width: size.width - 150)
@@ -307,7 +307,7 @@ struct FilmDetails: View {
                                                                             .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                                                             .multilineTextAlignment(.leading)
                                                                             .padding(.bottom, 10)
-                                                                            .padding(.horizontal, 10)
+                                                                            .padding(.horizontal, 20)
                                                                     }
                                                                 }
                                                             }
@@ -336,13 +336,13 @@ struct FilmDetails: View {
                                             
                                             ScrollView(.horizontal, showsIndicators: false){
                                                 HStack(alignment: .top, spacing: 12){
-                                                    ForEach(film.criticisms?.prefix(3) ?? [FilmCriticism(criticismTitle: "", criticismAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""), criticismDescription: "", actorRate: 0, directingRate: 0, soundRate: 0, scriptRate: 0)]){ crit in
+                                                    ForEach(film.criticisms?.filter { $0.approved }.prefix(3) ?? [FilmCriticism(criticismTitle: "", criticismAuthor: User(uid: "", username: "", email: "", firstName: "", lastName: "", phoneNumber: ""), criticismDescription: "", actorRate: 0, directingRate: 0, soundRate: 0, scriptRate: 0, approved: false )]){ crit in
                                                             NavigationLink(destination: FilmCriticismView(criticism: crit)) {
                                                                 ZStack{
                                                                     RoundedRectangle(cornerRadius: 15)
                                                                         .fill(self.scheme == .dark ? .thinMaterial : .thickMaterial)
-                                                                        .frame(width: size.width - 100,
-                                                                               height: 200,
+                                                                        .frame(width: 350,
+                                                                               height: 220,
                                                                                alignment: .leading)
 
                                                                     VStack(alignment: .leading, spacing: 5){
@@ -352,18 +352,18 @@ struct FilmDetails: View {
                                                                                 .aspectRatio(contentMode: .fit)
                                                                                 .frame(width: 20, height: 20)
                                                                                 .padding(.leading, 10)
-
+                                                                            
                                                                             Text(crit.criticismAuthor.username ?? "")
                                                                                 .bold()
                                                                                 .font(.system(size: 16))
                                                                                 .fontWeight(.bold)
                                                                                 .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
-
+                                                                            
                                                                             Spacer()
                                                                         }
-                                                                        .padding(.top, 10)
+                                                                        .padding(.top, 20)
                                                                         .padding(.horizontal, 8)
-
+                                                                        
                                                                         HStack{
                                                                             VStack(alignment: .leading){
                                                                                 HStack{
@@ -385,7 +385,7 @@ struct FilmDetails: View {
                                                                                         .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                                                                 }
                                                                             }
-
+                                                                            
                                                                             VStack(alignment: .leading){
                                                                                 HStack{
                                                                                     Text("Sound Engineering:")
@@ -396,7 +396,7 @@ struct FilmDetails: View {
                                                                                         .font(.system(size: 14))
                                                                                         .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
                                                                                 }
-
+                                                                                
                                                                                 HStack{
                                                                                     Text("Literecy of the script:")
                                                                                         .fontWeight(.semibold)
@@ -409,23 +409,25 @@ struct FilmDetails: View {
                                                                             }
                                                                         }
                                                                         .padding(.top, 16)
-                                                                        .padding(.horizontal)
-
-                                                                        Text(crit.criticismTitle)
-                                                                            .lineLimit(1)
-                                                                            .frame(width: size.width - 150)
-                                                                            .font(.system(size: 16, weight: .bold))
-                                                                            .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
-                                                                            .padding(.top, 15)
-                                                                            .padding(.horizontal, 10)
-                                                                        Text(crit.criticismDescription)
-                                                                            .lineLimit(3)
-                                                                            .frame(width: size.width - 150)
-                                                                            .font(.system(size: 14, weight: .regular))
-                                                                            .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
-                                                                            .multilineTextAlignment(.leading)
-                                                                            .padding(.bottom, 10)
-                                                                            .padding(.horizontal, 10)
+                                                                        .padding(.horizontal, 20)
+                                                                        
+                                                                        VStack(alignment: .leading){
+                                                                            Text(crit.criticismTitle)
+                                                                                .lineLimit(1)
+                                                                                .frame(width: 300)
+                                                                                .font(.system(size: 16, weight: .bold))
+                                                                                .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                .padding(.top, 15)
+                                                                                .padding(.leading, 20)
+                                                                            Text(crit.criticismDescription)
+                                                                                .lineLimit(3)
+                                                                                .frame(width: 300)
+                                                                                .font(.system(size: 14, weight: .regular))
+                                                                                .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                                                .multilineTextAlignment(.leading)
+                                                                                .padding(.bottom, 20)
+                                                                                .padding(.horizontal, 20)
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -515,8 +517,8 @@ struct FilmDetails_Previews: PreviewProvider {
                        reviewRate: "neutral")
               ],
               criticisms: [
-                 FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7),
-                 FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7)
+                 FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7, approved: true),
+                 FilmCriticism(criticismTitle: "The title example", criticismAuthor: User(uid: "", username: "kairatov", email: "kairatovk@mail.ru", firstName: "Kairat", lastName: "Kairatov", phoneNumber: "77777777777"), criticismDescription: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.", actorRate: 4, directingRate: 5, soundRate: 6, scriptRate: 7, approved: true)
               ],
               videoURL: "https://www.dropbox.com/s/60ogynxyne5eyig/ZXhATkf7.mp4?raw=1")
         

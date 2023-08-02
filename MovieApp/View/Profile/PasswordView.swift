@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct PasswordView: View {
+    @Namespace var animation
+    @Environment(\.colorScheme) var scheme
+    @ObservedObject private var vm = UserManager()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image("ready")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
     }
 }
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView()
+        PasswordView().preferredColorScheme(.dark)
     }
 }

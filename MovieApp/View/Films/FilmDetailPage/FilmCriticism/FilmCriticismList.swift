@@ -119,10 +119,11 @@ struct FilmCriticismList: View {
                 }
                 .padding(.leading, 8)
             }
-        }.navigationTitle(film.movieTitle)
             .onAppear {
                 viewModel.fetchCriticisms(for: film)
             }
+        }
+        .navigationTitle(film.movieTitle)
     }
 }
 

@@ -1,3 +1,10 @@
+//
+//  SongDetailView.swift
+//  MovieApp
+//
+//  Created by Арайлым Бакенова on 28.02.2023.
+//
+
 import SwiftUI
 import SDWebImageSwiftUI
 import AVFoundation
@@ -9,9 +16,11 @@ struct SongDetailView: View {
     
     let song: Song
     @State private var progress: Float = 0.0
-    @State private var player: AVAudioPlayer?
+    @State private var player: AVAudioPlayer? = nil
     @State private var isPlaying = false
-    
+    @State private var currentTime: TimeInterval = 0.0
+    private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+
     private let audioPlayerDelegate = AudioPlayerDelegate()
     
     var body: some View {
@@ -55,8 +64,17 @@ struct SongDetailView: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                     
-                    Slider(value: $progress, in: 0...Float(song.duration), step: 1.0, onEditingChanged: sliderEditingChanged)
-                        .accentColor(.blue)
+                    Slider(value: Binding(get: {
+                                Float(currentTime)
+                            }, set: { newValue in
+                                let time = Double(newValue)
+                                seekToTime(time)
+                            }), in: 0...Float(song.duration), step: 1.0)
+                            .accentColor(.blue)
+                            .onReceive(timer) { _ in
+                                currentTime = player?.currentTime ?? 0.0
+                                progress = Float(currentTime)
+                            }
                     
                     Text(timeString(time: Double(song.duration)))
                         .font(.caption)
@@ -93,7 +111,10 @@ struct SongDetailView: View {
             }
             .navigationBarBackButtonHidden(true)
             .ignoresSafeArea()
-            .onAppear(perform: prepareAudioPlayer)
+            .onAppear {
+                prepareAudioPlayer()
+            }
+
         }
     }
     
@@ -114,20 +135,21 @@ struct SongDetailView: View {
     }
     
     func seekToTime(_ time: Double) {
-        player?.currentTime = time
+        self.player?.currentTime = time
     }
-    
+
     func startPlayback() {
+        player?.currentTime = TimeInterval(progress)
         player?.play()
         isPlaying = true
     }
-    
+
+
     func stopPlayback() {
-        player?.stop()
-        player = nil
+        self.player?.stop()
         isPlaying = false
     }
-    
+
     func togglePlayback() {
         if isPlaying {
             stopPlayback()
@@ -143,45 +165,48 @@ struct SongDetailView: View {
     func nextSong() {
         // Implement logic for playing the next song
     }
-    
+
     func prepareAudioPlayer() {
         guard let audioURL = URL(string: song.audioURL) else {
             print("Invalid audio URL")
             return
         }
-        
-        let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let destinationURL = documentsDirectoryURL.appendingPathComponent("audio.mp3")
-        
-        let sessionConfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: sessionConfig)
-        let request = URLRequest(url: audioURL)
-        
-        let task = session.downloadTask(with: request) { (tempLocalURL, response, error) in
-            if let tempLocalURL = tempLocalURL, error == nil {
-                do {
-                    try FileManager.default.moveItem(at: tempLocalURL, to: destinationURL)
-                    
-                    DispatchQueue.main.async {
-                        do {
-                            self.player = try AVAudioPlayer(contentsOf: destinationURL)
-                            self.player?.prepareToPlay()
-                            self.player?.delegate = self.audioPlayerDelegate
-                            self.audioPlayerDelegate.songDetailView = self
-                        } catch let error {
-                            print("Failed to create AVAudioPlayer: \(error)")
-                        }
+
+        URLSession.shared.dataTask(with: audioURL) { [self] data, _, error in
+            if let data = data {
+                DispatchQueue.main.async {
+                    do {
+                        self.player = try AVAudioPlayer(data: data)
+                        self.player?.prepareToPlay()
+                        self.player?.delegate = audioPlayerDelegate
+                        audioPlayerDelegate.songDetailView = self
+                        startPlayback() // Start the playback here
+                    } catch let error {
+                        print("Failed to create AVAudioPlayer: \(error)")
                     }
-                } catch let error {
-                    print("Failed to move downloaded file: \(error)")
                 }
-            } else {
-                print("Failed to download audio file: \(error?.localizedDescription ?? "")")
+            } else if let error = error {
+                print("Failed to load audio data: \(error)")
             }
-        }
-        task.resume()
+        }.resume()
     }
 
+    func prepareAudioPlayer1() {
+        guard let audioURL = URL(string: song.audioURL) else {
+            print("Invalid audio URL")
+            return
+        }
+        
+        do {
+            let audioData = try Data(contentsOf: audioURL)
+            self.player = try AVAudioPlayer(data: audioData)
+            self.player?.prepareToPlay()
+            self.player?.delegate = audioPlayerDelegate
+            audioPlayerDelegate.songDetailView = self
+        } catch let error {
+            print("Failed to create AVAudioPlayer: \(error)")
+        }
+    }
 }
 
 class AudioPlayerDelegate: NSObject, AVAudioPlayerDelegate {
@@ -194,7 +219,8 @@ class AudioPlayerDelegate: NSObject, AVAudioPlayerDelegate {
 
 struct SongDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SongDetailView(song: Song(name: "Следуй за мной", artist: "Jah Khalib", imageName: "JahKhalib", releaseDate: "2021", album: "Desert Eagle", duration: 154, audioURL: "https://dl.dropboxusercontent.com/s/djx3f5nrkqis671/Shiza%20-%20Shym.mp3")
+        SongDetailView(song:
+                        Song(name: "Моя любов", artist: "Akha", imageName: "https://dl.dropboxusercontent.com/s/81a8oehq1xqkase/ab67616d00001e024742e348aa66a4c0b4aa31ff.jpg", releaseDate: "2022", album: "Моя любовь", duration: 151, audioURL: "https://dl.dropboxusercontent.com/s/e3pmlzxmqk0wvs0/Akha%20-%20%D0%9C%D0%BE%D1%8F%20%D0%9B%D1%8E%D0%B1%D0%BE%D0%B2%D1%8C.mp3")
         ).preferredColorScheme(.dark)
     }
 }

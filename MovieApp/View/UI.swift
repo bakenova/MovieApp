@@ -10,6 +10,14 @@ import SwiftUI
 import ExpandableText
 import SDWebImageSwiftUI
 
+extension View {
+    func dismissKeyboardOnDisappear() -> some View {
+        self.onDisappear {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+    }
+}
+
 struct ButtonView: View {
     
     var title: String

@@ -13,8 +13,8 @@ import FirebaseFirestore
 struct LoginRegister: View {
      
     @State var isLoginMode = false
-    @State var email = ""
-    @State var password = ""
+    @State var email = "arailym@gmail.com"
+    @State var password = "fcrfhfcrfh"
     @State var fname = ""
     @State var lname = ""
     @State var phoneNumber = ""

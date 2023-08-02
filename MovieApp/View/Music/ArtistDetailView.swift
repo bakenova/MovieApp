@@ -9,49 +9,83 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ArtistDetailView: View {
-    var artist: Artist
+    @Namespace var animation
+    @Environment(\.colorScheme) var scheme
+    
+    @StateObject var viewModel = MusicViewModel()
+    
+    let artistAlbum: [ArtistPlaylist] = playlistArtist
+    var artist = artistSample
     
     var body: some View {
         GeometryReader { proxy in
-            VStack(alignment: .leading){
-                ZStack{
-                    WebImage(url: URL(string: artist.imageName))
-                        .resizable()
-                        .frame(width: proxy.size.width, height: 400, alignment: .center)
-                        .ignoresSafeArea()
-                    VStack(alignment: .leading){
-                        HStack(alignment: .center){
-                            Text(artist.artistName)
-                                .font(.system(size: 50, weight: .black))
+            ScrollView{
+                VStack(alignment: .leading){
+                    ZStack{
+                        WebImage(url: URL(string: artist.imageName))
+                            .resizable()
+                            .frame(width: proxy.size.width, height: 400, alignment: .center)
+                            .ignoresSafeArea()
+                        VStack(alignment: .leading){
+                            HStack(alignment: .center){
+                                Text(artist.artistName)
+                                    .font(.system(size: 50, weight: .black))
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 24)
+                                Spacer()
+                            }
+                        }
+                        .padding(.top, 300)
+                    }
+                    
+                    Button {
+                        print("")
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("Add to Favorites")
                                 .foregroundColor(.white)
-                                .padding(.leading, 24)
+                                .padding(.vertical, 15)
+                                .font(.system(size: 18, weight: .semibold))
                             Spacer()
                         }
+                        .background(Color.blue)
                     }
-                    .padding(.top, 300)
-                }
-                
-                Button {
-                    print("")
-                } label: {
-                    HStack {
-                        Spacer()
-                        Text("Add to Favorites")
-                            .foregroundColor(.white)
-                            .padding(.vertical, 15)
-                            .font(.system(size: 18, weight: .semibold))
-                        Spacer()
+                    .cornerRadius(15)
+                    .padding(.horizontal, 15)
+                    
+                    
+                    HStack(spacing: 16){
+                        ForEach(artist.albums.prefix(4)){ artist in
+                            HStack{
+                                NavigationLink(destination: SongDetailView(song:Song(name: "Зымыран", artist: "Miras Zhugunusov ", imageName: "Зымыран", releaseDate: "2021", album: "Зымыран", duration: 185, audioURL: ""))) {
+                                    VStack(alignment: .leading){
+                                        WebImage(url: URL(string: artist.imageName))
+                                            .resizable()
+                                            .frame(width: 150, height: 150)
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(15)
+                                        Text(artist.albumName)
+                                            .font(.system(size: 16, weight: .bold))
+                                            .multilineTextAlignment(.leading)
+                                            .frame(width: 130, height: 20, alignment: .topLeading)
+                                            .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                        Text(artist.artistName)
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .multilineTextAlignment(.leading)
+                                            .frame(width: 130, height: 20, alignment: .topLeading)
+                                            .foregroundColor(Color.gray)
+                                    }
+                                    
+                                }
+                            }
+                        }
                     }
-                    .background(Color.blue)
+                    .padding(.horizontal, 24)
                 }
-                .cornerRadius(15)
-                .padding(.horizontal, 15)
-                
-                Text("Popular songs")
+                .ignoresSafeArea()
             }
-            .ignoresSafeArea()
         }
-        .background(.black)
     }
 }
 
@@ -99,6 +133,6 @@ struct ArtistDetailView_Previews: PreviewProvider {
                 Song(name: "Пепел", artist: "Dose", imageName: "Солнце золотое", releaseDate: "2021", album:  "Пока", duration: 185, audioURL: "")
             ],
             imageName: "Пока",
-            runtime: "24"))
+            runtime: "24")).preferredColorScheme(.dark)
     }
 }

@@ -42,40 +42,46 @@ struct MyAccount: View {
                 
                 Section(header: Text("Appearance").foregroundColor(self.scheme == .dark ? .white : .black)) {
                     HStack{
-                        ZStack{
+                        ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(selectedMode == .system ? Color.blue : (self.scheme == .dark ? .clear : .white))
-                                .frame(width: proxy.size.width/3, height: 100, alignment: .leading)
+                                .frame(width: proxy.size.width / 3, height: 100)
                             Text("System")
                                 .foregroundColor(selectedMode == .system ? .white : (self.scheme == .dark ? .white : .black))
-                                .onTapGesture {
-                                    self.selectedMode = .system
-                                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .unspecified
-                                }
+                        }
+                        .onTapGesture {
+                            if selectedMode != .system {
+                                self.selectedMode = .system
+                                UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .unspecified
+                            }
                         }
                         
-                        ZStack{
+                        ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(selectedMode == .dark ? Color.blue : (self.scheme == .dark ? .blue : .white))
-                                .frame(width: proxy.size.width/3 - 50, height: 100, alignment: .leading)
+                                .frame(width: proxy.size.width / 3 - 50, height: 100)
                             Text("Dark")
                                 .foregroundColor(self.scheme == .dark ? .white : .black)
-                                .onTapGesture {
-                                    self.selectedMode = .dark
-                                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
-                                }
+                        }
+                        .onTapGesture {
+                            if selectedMode != .dark {
+                                self.selectedMode = .dark
+                                UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
+                            }
                         }
                         
-                        ZStack{
+                        ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(selectedMode == .light ? Color.blue : (self.scheme == .dark ? .clear : .white))
-                                .frame(width: proxy.size.width/3 - 50, height: 100, alignment: .leading)
+                                .frame(width: proxy.size.width / 3 - 50, height: 100)
                             Text("Light")
                                 .foregroundColor(selectedMode == .light ? .white : (self.scheme == .dark ? .white : .black))
-                                .onTapGesture {
-                                    self.selectedMode = .light
-                                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
-                                }
+                        }
+                        .onTapGesture {
+                            if selectedMode != .light {
+                                self.selectedMode = .light
+                                UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
+                            }
                         }
                     }
                 }
@@ -87,6 +93,13 @@ struct MyAccount: View {
                     email = user.email ?? ""
                     phoneNumber = user.phoneNumber ?? ""
                 }
+            }
+            .onDisappear {
+                vm.user?.firstName = firstName
+                vm.user?.lastName = lastName
+                vm.user?.email = email
+                vm.user?.phoneNumber = phoneNumber
+                vm.updateUserInformation()
             }
         }
     }

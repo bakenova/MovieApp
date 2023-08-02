@@ -57,7 +57,7 @@ struct FilmDetails: View {
                                     
                                     ZStack (alignment: .center){
                                         RoundedRectangle(cornerRadius: 15)
-                                            .frame(width: size.width/6, height: size.height/18, alignment: .trailing)
+                                            .frame(width: 70, height: 50, alignment: .trailing)
                                             .padding(.trailing, 24)
                                         //.blur(radius: 4)
                                             .foregroundColor(.white)
@@ -77,6 +77,8 @@ struct FilmDetails: View {
                                                 .padding(.trailing, 24)
                                         }
                                     }
+                                    .padding(.top, 50)
+                                    .padding(.trailing, 24)
                                     
                                     //                            VideoPalyer(player: $player)
                                     //                                .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -88,7 +90,6 @@ struct FilmDetails: View {
                                         .fill(self.scheme == .dark ? .black : .white.opacity(1))
                                         .opacity(self.scheme == .dark ? 0.9 : 1)
                                         .ignoresSafeArea()
-                                        .padding(.top, -150)
                                     
                                     VStack(alignment: .leading) {
                                         VStack(alignment: .leading) {
@@ -96,8 +97,10 @@ struct FilmDetails: View {
                                                 .frame(alignment: .leading)
                                                 .font(.largeTitle)
                                                 .fontWeight(.bold)
-                                                .padding(.top, -120)
-                                                .padding(.bottom, 30)
+                                                .multilineTextAlignment(.leading)
+                                                .lineLimit(nil) // Allow unlimited lines
+                                                .fixedSize(horizontal: false, vertical: true)
+                                                .padding(.top, 30)
                                                 .padding(.leading, 24)
                                                 .ignoresSafeArea()
                                             
@@ -106,39 +109,34 @@ struct FilmDetails: View {
                                                     .frame(alignment: .leading)
                                                     .font(.subheadline)
                                                     .fontWeight(.bold)
-                                                    .padding(.top, -100)
                                                     .padding(.leading, 24)
                                                 
                                                 Text("|")
                                                     .frame(alignment: .leading)
                                                     .font(.subheadline)
                                                     .fontWeight(.bold)
-                                                    .padding(.top, -100)
                                                 
                                                 ZStack(alignment: .center){
                                                     RoundedRectangle(cornerRadius: 15)
                                                         .frame(width: 36, height: 24, alignment: .trailing)
-                                                        .padding(.top, -100)
                                                         .foregroundColor(.white)
                                                     Image(film.ageLimit)
                                                         .resizable()
                                                         .frame(width: 20, height: 20)
                                                         .aspectRatio(contentMode: .fit)
-                                                        .padding(.top, -98)
                                                 }
                                                 
                                                 Text("|")
                                                     .frame(alignment: .leading)
                                                     .font(.subheadline)
                                                     .fontWeight(.bold)
-                                                    .padding(.top, -100)
                                                 
                                                 Text(film.runtime + " mins")
                                                     .frame(alignment: .leading)
                                                     .font(.subheadline)
                                                     .fontWeight(.bold)
-                                                    .padding(.top, -100)
                                             }
+                                            .padding(.top, 10)
                                             
                                             // MARK: - Play and Watch Later buttons
                                             Button {
@@ -148,12 +146,12 @@ struct FilmDetails: View {
                                                 ButtonView(title: "Play", imageName: "play.fill", color: .blue, cornerRadius: 10, width: size.width-24, height: 40, fontSize: 20)
                                             }
                                             .foregroundColor(.white)
-                                            .padding(.top, -60)
+                                            .padding(.top, 20)
                                             .padding(.leading, 12)
                                             // }
                                             
                                             ButtonView(title: "Watch later", imageName: "bookmark.fill", color: .gray, cornerRadius: 10, width: size.width-24, height: 38, fontSize: 16)
-                                                .padding(.top, -20)
+                                                .padding(.top, 8)
                                                 .padding(.leading, 12)
                                             
                                             // MARK: - Film Plot, Cast, Director
@@ -441,6 +439,7 @@ struct FilmDetails: View {
                                         //.opacity(reviewed ? 0 : 1)
                                     }
                                 }
+                                .padding(.top, -150)
                             }
                         }
                         .toolbarBackground(.hidden, for: .navigationBar)
@@ -480,8 +479,8 @@ struct Blur: UIViewRepresentable {
 struct FilmDetails_Previews: PreviewProvider {
     static var previews: some View {
         let film =
-        Movie(movieTitle: "Zhau zhurek myn bala",
-              imageName: "Movie1",
+        Movie(movieTitle: "Sweetie, you won't believe it",
+              imageName: "https://dl.dropboxusercontent.com/s/4lgkge69fgkpjra/download.jpg",
               genre: "Drama, Adventure, War, Historical",
               collection: ["2010-2019"],
               description: "This film tells how kazakh ancestors fought against the Dzungars in the first half of the 18th century, and how the heroism of kazakhs became a decisive force for us to gain freedom.",

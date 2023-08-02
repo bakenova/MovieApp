@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 class MusicViewModel: ObservableObject {
     @Published var musicSelections: [MusicSelection] = []
     @Published var artistPlaylists: [ArtistPlaylist] = []
-        
+    
     private var listener: ListenerRegistration?
     let db = Firestore.firestore()
     
@@ -112,6 +112,56 @@ class MusicViewModel: ObservableObject {
             }
         } catch {
             print("Error encoding artist playlist: \(error.localizedDescription)")
+        }
+    }
+    
+    func addSong(_ song: Song, completion: @escaping (Bool) -> Void) {
+        let songData: [String: Any] = [
+            "name": song.name,
+            "artist": song.artist,
+            "imageName": song.imageName,
+            "releaseDate": song.releaseDate,
+            "album": song.album,
+            "duration": song.duration,
+            "audioURL": song.audioURL
+        ]
+        
+        db.collection("music").document("generalList").collection("songs").addDocument(data: songData) { error in
+            if let error = error {
+                print("Error adding song: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    
+    func fetchSongs(completion: @escaping ([Song]?) -> Void) {
+        db.collection("music").document("generalList").collection("songs").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching songs: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            let songs = snapshot?.documents.compactMap { document -> Song? in
+                let data = document.data()
+                guard
+                    let name = data["name"] as? String,
+                    let artist = data["artist"] as? String,
+                    let imageName = data["imageName"] as? String,
+                    let releaseDate = data["releaseDate"] as? String,
+                    let album = data["album"] as? String,
+                    let duration = data["duration"] as? Double,
+                    let audioURL = data["audioURL"] as? String
+                else {
+                    return nil
+                }
+                
+                return Song(name: name, artist: artist, imageName: imageName, releaseDate: releaseDate, album: album, duration: duration, audioURL: audioURL)
+            }
+            
+            completion(songs)
         }
     }
 }

@@ -63,9 +63,7 @@ struct Music: View {
                         HStack(alignment: .top) {
                             Text("Popular")
                                 .font(.title.bold())
-                            Image(systemName: "chevron.forward")
-                                .foregroundColor(.blue)
-                                .padding(.top, 10)
+                            
                             Spacer()
                         }
                         .padding(.top, 20)
@@ -177,30 +175,31 @@ struct Music: View {
                         
                         ScrollView(.horizontal) {
                             HStack{
-                                ForEach(artistAlbum.prefix(4)){ album in
-                                    NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
-                                        VStack(alignment: .leading){
-                                            WebImage(url: URL(string: album.imageName))
-                                                .resizable()
-                                                .frame(width: 150, height: 150)
-                                                .aspectRatio(contentMode: .fit)
-                                                .cornerRadius(15)
-                                            Text(album.albumName)
-                                                .font(.system(size: 16, weight: .bold))
-                                                .multilineTextAlignment(.leading)
-                                                .frame(width: 130, height: 20, alignment: .topLeading)
-                                                .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
-                                            Text(album.artistName)
-                                                .font(.system(size: 14, weight: .semibold))
-                                                .multilineTextAlignment(.leading)
-                                                .frame(width: 130, height: 20, alignment: .topLeading)
-                                                .foregroundColor(Color.gray)
+                                if let specificMusicSelection = viewModel.musicSelections.first(where: { $0.title == "Made For You" }) {
+                                    ForEach(specificMusicSelection.playlists) { playlist in
+                                        NavigationLink(destination: PlaylistDetailView(playlistDetail: playlist)) {
+                                            VStack(alignment: .leading){
+                                                WebImage(url: URL(string: playlist.imageName))
+                                                    .resizable()
+                                                    .frame(width: 150, height: 150)
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .cornerRadius(15)
+                                                Text(playlist.albumName)
+                                                    .font(.system(size: 16, weight: .bold))
+                                                    .multilineTextAlignment(.leading)
+                                                    .frame(width: 130, height: 20, alignment: .topLeading)
+                                                    .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                Text(playlist.artistName)
+                                                    .font(.system(size: 14, weight: .semibold))
+                                                    .multilineTextAlignment(.leading)
+                                                    .frame(width: 130, height: 20, alignment: .topLeading)
+                                                    .foregroundColor(Color.gray)
+                                            }
+                                            .padding(.horizontal, 2)
                                         }
-                                        .padding(.horizontal, 2)
-                                    }
+                                    }.padding(.leading, 16)
                                 }
                             }
-                            .padding(.leading, 16)
                         }.scrollIndicators(.hidden)
                     }
                     

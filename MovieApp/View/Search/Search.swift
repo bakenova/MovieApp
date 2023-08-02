@@ -9,12 +9,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct Search: View {
-    
     @StateObject var viewModel = FilmDetailViewModel()
+    @StateObject var musicViewModel = MusicViewModel()
     @State var currentTab: String = "Search"
     @State private var searchText = ""
     @State private var selectedTab = 0
     @State private var isEditing = false
+    @State private var songs: [Song] = []
     @State var categoryList: [[CategoryData]] = [
         [
             CategoryData(categoryName: "Genres"),
@@ -26,14 +27,13 @@ struct Search: View {
     
     @Environment(\.colorScheme) var scheme
     
-    let items: [Movie] = movies
+    
     let itemsM: [Song] = songCollection
     
     let movieList: [MovieSelection] = movieSelectionLists
     let musicList: [MusicSelection] = []
     
     var body: some View {
-        
         NavigationView {
             GeometryReader{ proxy in
                 VStack {
@@ -47,6 +47,7 @@ struct Search: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(width: proxy.size.width - 90, height: 56, alignment: .leading)
                         .padding(.leading, 3)
+                        .dismissKeyboardOnDisappear()
                         
                         
                         Button(action: {
@@ -59,6 +60,7 @@ struct Search: View {
                         }
                         .padding(.trailing, 10)
                     }
+                    
                     if isEditing {
                         Picker(selection: $selectedTab, label: Text("Select a list")) {
                             Text("Films").tag(0)
@@ -67,13 +69,13 @@ struct Search: View {
                             .padding(.horizontal, 10)
                         
                         if selectedTab == 0 {
-                            List(items.filter({ searchText.isEmpty ? true : $0.movieTitle.localizedCaseInsensitiveContains(searchText) })) { item in
+                            List(viewModel.generalList.filter({ searchText.isEmpty ? true : $0.movieTitle.localizedCaseInsensitiveContains(searchText) })) { item in
                                 NavigationLink(destination: FilmDetails(viewModel: viewModel, film: item, collectionName: "General")) {
                                     MovieListView(item: item)
                                 }
                             }
                         } else {
-                            List(itemsM.filter({ searchText.isEmpty ? true : $0.name.localizedCaseInsensitiveContains(searchText) })) { item in
+                            List(songs.filter({ searchText.isEmpty ? true : $0.name.localizedCaseInsensitiveContains(searchText) })) { item in
                                 NavigationLink(destination: SongDetailView(song: item)) {
                                     MusicHListView(item: item)
                                 }
@@ -83,143 +85,122 @@ struct Search: View {
                     }
                     else {
                         ScrollView {
-                            VStack{
-                                HStack(){
-                                    Text("Recommended to Watch")
-                                        .font(.title3.bold())
+                                customBlock(collectionName: "Popular", movies: viewModel.popularFilms)
+                            
+                            VStack {
+                                HStack(alignment: .top) {
+                                    Text("Popular Music")
+                                        .font(.title.bold())
                                     Spacer()
                                     Button("See More"){}
                                         .font(.system(size: 16, weight: .semibold))
                                         .foregroundColor(.blue)
                                 }
-                                .padding(.top, 20)
+                                .padding(.top, 10)
                                 .padding(.horizontal, 20)
-
-                                ScrollView(.horizontal, showsIndicators: false){
-                                    HStack(alignment: .top, spacing: 12){
-                                        ForEach(movieList.prefix(3)){ selection in
-                                            NavigationLink(destination: FilmListView()) {
-                                                ZStack{
-                                                    RoundedRectangle(cornerRadius: 15)
-                                                        .fill(.ultraThinMaterial)
-                                                        .frame(width: proxy.size.width - 220,
-                                                               height: 180,
-                                                               alignment: .leading)
-
-                                                    VStack(alignment: .center, spacing: 5){
-                                                        WebImage(url: URL(string: selection.imageName))
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .cornerRadius(15)
-                                                            .frame(width: proxy.size.width - 200, height: 100)
-
-                                                        Text(selection.title)
-                                                            .font(.system(size: 16))
-                                                            .fontWeight(.bold)
-                                                            .foregroundColor(self.scheme == .dark ? .white : .black)
-                                                            .frame(width: proxy.size.width - 250, height: 40)
-                                                            .padding(.top, 8)
-                                                    }
+                                
+                                ScrollView(.horizontal) {
+                                    HStack {
+                                        ForEach(musicViewModel.artistPlaylists.prefix(4)) { album in
+                                            NavigationLink(destination: PlaylistDetailView(playlistDetail: album)) {
+                                                VStack(alignment: .leading) {
+                                                    WebImage(url: URL(string: album.imageName))
+                                                        .resizable()
+                                                        .frame(width: 150, height: 150)
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .cornerRadius(15)
+                                                    Text(album.albumName)
+                                                        .font(.system(size: 16, weight: .bold))
+                                                        .multilineTextAlignment(.leading)
+                                                        .frame(width: 130, height: 20, alignment: .topLeading)
+                                                        .foregroundColor(self.scheme == .dark ? .white.opacity(1) : .black)
+                                                    Text(album.artistName)
+                                                        .font(.system(size: 14, weight: .semibold))
+                                                        .multilineTextAlignment(.leading)
+                                                        .frame(width: 130, height: 20, alignment: .topLeading)
+                                                        .foregroundColor(Color.gray)
                                                 }
+                                                .padding(.horizontal, 2)
                                             }
                                         }
                                     }
-                                    .padding(.top, 0)
-                                    .padding(.horizontal, 20)
-                                    .padding(.bottom, 20)
+                                    .padding(.leading, 16)
                                 }
-                            }
-
-//                            VStack(alignment: .leading, spacing: 10){
-//                                HStack(){
-//                                    Text("Categories")
-//                                        .font(.title3.bold())
-//                                    Spacer()
-//                                    Button("See More"){}
-//                                        .font(.system(size: 16, weight: .semibold))
-//                                        .foregroundColor(.orange)
-//                                }
-//                                .padding(.top, 20)
-//                                //.padding(.horizontal, 20)
-//
-//                                ForEach(categoryList.indices, id: \.self) { index in
-//                                    HStack {
-//                                        ForEach(categoryList[index].indices, id: \.self) { categoryIndex in
-//                                            Text(categoryList[index][categoryIndex].categoryName)
-//                                                .lineLimit(1)
-//                                                .fontWeight(.semibold)
-//                                                .padding(.vertical, 10)
-//                                                .padding(.horizontal)
-//                                                .background(Capsule().stroke(Color.orange))
-//                                                .overlay(
-//                                                    GeometryReader { reader -> Color in
-//                                                        let maxX = reader.frame(in: .global).maxX
-//
-//                                                        if maxX > UIScreen.main.bounds.width - 50 && !categoryList[index][categoryIndex].isExceeded {
-//                                                            DispatchQueue.main.async {
-//                                                                categoryList[index][categoryIndex].isExceeded = true
-//                                                                let lastItem = categoryList[index][categoryIndex]
-//                                                                categoryList[index].remove(at: categoryIndex)
-//                                                                categoryList.append([lastItem])
-//                                                            }
-//                                                        }
-//                                                        return Color.clear
-//                                                    }, alignment: .trailing
-//                                                )
-//                                                .clipShape(Capsule())
-//                                        }
-//                                    }
-//                                }
-//                            }.padding()
-
-                            VStack{
-                                HStack(){
-                                    Text("Recommended to Listen")
-                                        .font(.title3.bold())
-                                    Spacer()
-                                    Button("See More"){}
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(.orange)
-                                }
-                                .padding(.top, 20)
-                                .padding(.horizontal, 20)
-
-                                ScrollView(.horizontal, showsIndicators: false){
-                                    HStack(alignment: .top, spacing: 12){
-                                        ForEach(musicList.prefix(3)){ selection in
-                                            NavigationLink(destination: PlaylistView(playlist: selection)) {
-                                                ZStack{
-                                                    RoundedRectangle(cornerRadius: 15)
-                                                        .fill(.ultraThinMaterial)
-                                                        .frame(width: proxy.size.width - 220,
-                                                               height: 180,
-                                                               alignment: .leading)
-
-                                                    VStack(alignment: .center, spacing: 5){
-                                                        WebImage(url: URL(string: selection.imageName))
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .cornerRadius(15)
-                                                            .frame(width: proxy.size.width - 200, height: 100)
-
-                                                        Text(selection.title)
-                                                            .font(.system(size: 16))
-                                                            .fontWeight(.bold)
-                                                            .foregroundColor(self.scheme == .dark ? .white : .black)
-                                                            .frame(width: proxy.size.width - 250, height: 40)
-                                                            .padding(.top, 8)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .padding(.horizontal, 20)
-                                }
+                                .scrollIndicators(.hidden)
                             }
                         }
                     }
                 }
             }
+        }
+        .onAppear{
+            musicViewModel.fetchData()
+            musicViewModel.fetchArtistPlaylists()
+            viewModel.fetchMovies()
+            musicViewModel.fetchSongs { fetchedSongs in
+                if let fetchedSongs = fetchedSongs {
+                    songs = fetchedSongs
+                }
+            }
+        }
+        .onDisappear {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+    }
+    
+    //MARK: - Custom Blocks
+    @ViewBuilder
+    func customBlock(collectionName: String, movies: [Movie]) -> some View{
+        ZStack{
+            Rectangle()
+                .fill(.white)
+                .opacity(self.scheme == .dark ? 0.1 : 1)
+                //.frame(height: 280)
+                .cornerRadius(15)
+                .padding(.bottom, 10)
+            
+            VStack{
+                HStack(alignment: .top) {
+                    Text("Popular Films")
+                        .font(.title.bold())
+                    Spacer()
+                    Button("See More"){}
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.blue)
+                }
+                .padding(.top, 10)
+                .padding(.horizontal, 20)
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(alignment: .top, spacing: 15){
+                        ForEach(movies){ movie in
+                            NavigationLink(destination: FilmDetails(viewModel: viewModel, film: movie, collectionName: collectionName, reviewed: !(movie.reviews?.isEmpty ?? true) ? false : true)) {
+                                VStack(alignment: .leading){
+                                    ZStack{
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .fill(.black)
+                                            .frame(width: 100, height: 150)
+                                        WebImage(url: URL(string: movie.imageName))
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(15)
+                                            .frame(width: 100, height: 150)
+                                    }
+                                    Text(movie.movieTitle)
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 100, height: 40, alignment: .topLeading)
+                                        .foregroundColor(self.scheme == .dark ? .white : .black)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.top, 0)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                }
+            }
+            .padding(.vertical, 20)
         }
     }
 }
